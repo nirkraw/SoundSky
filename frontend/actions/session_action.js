@@ -2,11 +2,11 @@ import { login, logout, signUp } from '../utils/session';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
-export const INVALID_LOGIN_INFO = "INVALID_LOGIN_INFO";
+export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 
-export const receiveCurrentUser = user => ({
+export const receiveCurrentUser = currentUser => ({
     type: RECEIVE_CURRENT_USER,
-    user
+    currentUser
 });
 
 export const logoutCurrentUser = () => ({
@@ -14,7 +14,7 @@ export const logoutCurrentUser = () => ({
 });
 
 export const errorHandler = (errors) => ({
-    type: INVALID_LOGIN_INFO,
+    type: RECEIVE_SESSION_ERRORS,
     errors
 })
 
@@ -31,9 +31,8 @@ export const loginUser = form_user => dispatch => login(form_user)
     );
 
 
-
 export const logoutUser = () => dispatch => logout()
     .then(
-        (user) => dispatch(receiveCurrentUser(null)),
+        () => dispatch(logoutCurrentUser()),
         errors => dispatch(errorHandler(errors.responseJSON))
     );

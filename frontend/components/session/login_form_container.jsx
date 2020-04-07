@@ -5,15 +5,14 @@ import React from 'react';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state) => ({
-    formType: "login",
-    errors: state.errors.session
+    formType: "Sign into your SoundSky account",
+    button: "Sign In",
+    errors: state.errors.session,
+    currentUser: state.session.currentUser
 })
 
 const mapDispatchToProps = (dispatch) => ({
     processForm: user => dispatch(loginUser(user)),
-    otherForm: (
-        <button onClick={() => dispatch(openModal('signup'))}>Signup</button>
-    ),
     closeModal: () => dispatch(closeModal())
 })
 

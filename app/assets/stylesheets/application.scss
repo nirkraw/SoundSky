@@ -1,0 +1,196 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+body {
+  background-image: url(asset_path("sky.jpg")); 
+  background-size: cover;
+}
+
+
+ .signedout-header {
+   display: flex;
+   justify-content: space-between;
+   margin: 5px 10px 5px 10px;
+   padding: 5px 10px 5px 10px;
+   align-items: center;
+ }
+
+ .signedin-header {
+   background-color: transparentize($color: #61afee, $amount: .3);
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   padding: 5px 10px 5px 10px;
+   align-items: center;
+   border: 1px solid white;
+ }
+
+ .soundsky {
+   font-family: sans-serif;
+   font-weight: bold;
+   font-size: 20px;
+   background-color: transparent;
+   color: white;
+   margin-left: 15px;
+   text-decoration: none;
+ }
+
+ .session-form-container {
+   display: flex;
+   justify-content: center;
+ }
+
+ .login-form {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   text-align: center;
+
+ }
+
+ .login-form > h3 {
+   margin: 10px;
+   font-size: 32px;
+   font-family: 'Montserrat', sans-serif;
+ }
+
+ .login-form > input {
+   width: 70%;
+   height: 25px;
+   margin: 10px;
+   border: 1px solid rgb(190, 190, 190);
+ }
+
+ .login-input {
+   margin-left: 20px;
+   size: 25px;
+   font-size: 15px;
+   text-align: center;
+ }
+
+ .signin-button, .signup-button, .logout-button {
+   margin: 10px;
+   padding: 5px 15px 5px 15px;
+   font-size: 15px;
+   font-weight: bold;
+   font-family: 'Montserrat', sans-serif;
+ }
+
+ .signin-button {
+   border: 2px solid white;
+   border-radius: 3px;
+   background-color: transparent;
+   color: white;
+ }
+
+ .signup-button {
+   background-color: orange;
+   color: white
+ }
+
+ .logout-button {
+   border: 2px solid white;
+   border-radius: 3px;
+   background-color: white;
+   color: rgba(21, 44, 121, 0.849);
+ }
+
+button:hover {
+  cursor: pointer;
+}
+
+ .login-form-box {
+   outline: 1px solid white;
+   border-color: white;
+   border-radius: 2px;
+   height: auto;
+   width: 450px;
+   padding: 20px;
+   background: rgb(255, 255, 255);
+   position: relative;
+ }
+
+ .header-link {
+   text-decoration: none;
+   color: black;
+ }
+
+
+ .session-submit {
+   text-transform: capitalize;
+   background-color: orange;
+   height: 35px;
+   font-size: 15px;
+   width: 71%;
+   font-size: 17px;
+   font-family: 'Montserrat', sans-serif;
+ }
+
+ .session-labels {
+   font-size: 25px;
+ }
+
+ .modal-background {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   background: rgba(189, 181, 181, 0.7);
+   z-index: 10;
+ }
+
+ .modal-child {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+ }
+
+ .close-x {
+   position: absolute;
+   top: 5px;
+   right: 5px;
+   cursor: pointer;
+ }
+
+ .session-errors {
+   list-style: none;
+   font-family: 'Montserrat', sans-serif;
+   color: rgb(245, 7, 7);
+ }
+
+ .user-show-link {
+   font-family: sans-serif;
+   font-weight: bold;
+   font-size: 20px;
+   background-color: transparent;
+   color: rgb(244, 241, 255);
+   margin: 10px;
+   text-decoration: none;
+   
+ }
+
+ .user-show-link:hover {
+   color: white;
+ }
+
+ .right-banner {
+   margin-right: 15px;
+ }
+
+ 

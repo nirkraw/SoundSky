@@ -1,11 +1,14 @@
-import { RECEIVE_CURRENT_USER, INVALID_LOGIN_INFO } from "../actions/session_action";
+import { RECEIVE_CURRENT_USER, RECEIVE_SESSION_ERRORS } from "../actions/session_action";
+import { CLOSE_MODAL } from '../actions/modal_actions';
 
 const sessionErrorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch(action.type){
-        case INVALID_LOGIN_INFO:
+        case RECEIVE_SESSION_ERRORS:
             return action.errors; 
         case RECEIVE_CURRENT_USER:
+            return [];
+        case CLOSE_MODAL:
             return [];
         default:
             return state;

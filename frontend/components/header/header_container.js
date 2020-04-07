@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/session_action';
-import Greeting from './greeting';
+import Header from './header';
 import { openModal } from '../../actions/modal_actions';
 
-const mapStateToProps = (state) => ({
-    currentUser: state.entities.users[state.session.id]
-
-
-})
+const mapStateToProps = (state) => {
+    return {
+    currentUser: state.session.currentUser
+}}
 
 const mapDispatchToProps = (dispatch) => ({
     logout: () => dispatch(logoutUser()),
@@ -15,8 +14,6 @@ const mapDispatchToProps = (dispatch) => ({
     
 })
 
+const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
 
-
-const GreetingContainer = connect(mapStateToProps, mapDispatchToProps)(Greeting);
-
-export default GreetingContainer; 
+export default HeaderContainer; 
