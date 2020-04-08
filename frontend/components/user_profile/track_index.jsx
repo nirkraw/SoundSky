@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'; 
-import TrackShow from '../tracks/track_show';
+import TrackIndexItem from './track_index_item';
 
-class UserProfile extends React.Component {
+class TrackIndex extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -17,11 +17,12 @@ class UserProfile extends React.Component {
                 <h3>Recent</h3>
                 <ul>
                     {this.props.tracks.map(track => (
-                        <TrackShow 
+                        <TrackIndexItem
+                            artist = {this.props.artist}
                             track={track}
                             deleteTrack={this.props.deleteTrack}
                             editTrack = {this.props.editTrack}
-                            fetchTrack = {this.props.fetchTrack}
+                            currentUser = {this.props.currentUser}
                         />
                     ))}
                 </ul>
@@ -31,4 +32,4 @@ class UserProfile extends React.Component {
     }
 }
 
-export default UserProfile; 
+export default TrackIndex; 

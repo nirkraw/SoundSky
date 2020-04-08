@@ -1,10 +1,11 @@
 import * as TrackUtil from "../../utils/track_util";
 import { connect } from "react-redux";
-import UserProfile from "./user_profile";
+import TrackIndex from "./track_index";
 
-const mapStateToProps = (state, ownProps) =({
+const mapStateToProps = (state, ownProps) => ({
     tracks: state.entities.tracks,
-    artist: state.entities.users[ownProps.match.params.userId]
+    artist: state.entities.users[ownProps.match.params.userId],
+    currentUser: state.session.currentUser
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -15,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(TrackIndex);

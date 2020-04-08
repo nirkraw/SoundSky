@@ -278,15 +278,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _header_header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header/header_container */ "./frontend/components/header/header_container.js");
-/* harmony import */ var _utils_route_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/route_util */ "./frontend/utils/route_util.jsx");
-/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var _user_profile_track_index_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user_profile/track_index_container */ "./frontend/components/user_profile/track_index_container.js");
+/* harmony import */ var _utils_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/route_util */ "./frontend/utils/route_util.jsx");
+/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
 
 
 
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
+    exact: true,
+    path: "/users/:userId",
+    component: _user_profile_track_index_container__WEBPACK_IMPORTED_MODULE_2__["default"]
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -731,6 +739,204 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 var SignupFormContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_session_form__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (SignupFormContainer);
+
+/***/ }),
+
+/***/ "./frontend/components/user_profile/track_index.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/user_profile/track_index.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _track_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_index_item */ "./frontend/components/user_profile/track_index_item.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var TrackIndex = /*#__PURE__*/function (_React$Component) {
+  _inherits(TrackIndex, _React$Component);
+
+  var _super = _createSuper(TrackIndex);
+
+  function TrackIndex(props) {
+    _classCallCheck(this, TrackIndex);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(TrackIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchTracks(this.props.match.params.userId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, this.props.artist.username), /*#__PURE__*/React.createElement("h3", null, "Recent"), /*#__PURE__*/React.createElement("ul", null, this.props.tracks.map(function (track) {
+        return /*#__PURE__*/React.createElement(_track_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          artist: _this.props.artist,
+          track: track,
+          deleteTrack: _this.props.deleteTrack,
+          editTrack: _this.props.editTrack,
+          currentUser: _this.props.currentUser
+        });
+      })));
+    }
+  }]);
+
+  return TrackIndex;
+}(React.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (TrackIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/user_profile/track_index_container.js":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/user_profile/track_index_container.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils_track_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/track_util */ "./frontend/utils/track_util.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _track_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./track_index */ "./frontend/components/user_profile/track_index.jsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    tracks: state.entities.tracks,
+    artist: state.entities.users[ownProps.match.params.userId],
+    currentUser: state.session.currentUser
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    editTrack: function editTrack(userId, track) {
+      return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["updateTrack"](userId, track));
+    },
+    fetchTracks: function fetchTracks(userId) {
+      return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"](userId));
+    },
+    deleteTrack: function deleteTrack(userId, trackId) {
+      return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrack"](userId, trackId));
+    },
+    fetchTrack: function fetchTrack(userId, trackId) {
+      return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTrack"](userId, trackId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_track_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/user_profile/track_index_item.jsx":
+/*!***************************************************************!*\
+  !*** ./frontend/components/user_profile/track_index_item.jsx ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
+  _inherits(TrackIndexItem, _React$Component);
+
+  var _super = _createSuper(TrackIndexItem);
+
+  function TrackIndexItem(props) {
+    _classCallCheck(this, TrackIndexItem);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(TrackIndexItem, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          track = _this$props.track,
+          artist = _this$props.artist,
+          editTrack = _this$props.editTrack,
+          deleteTrack = _this$props.deleteTrack;
+      var trackInfo = /*#__PURE__*/React.createElement("div", {
+        className: "track-info"
+      }, /*#__PURE__*/React.createElement("p", null, artist), /*#__PURE__*/React.createElement("p", null, track.title), /*#__PURE__*/React.createElement("p", null, track.genre));
+
+      if (this.props.currentUser.id = artist.id) {
+        return /*#__PURE__*/React.createElement("li", null, trackInfo, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+          onClick: function onClick() {
+            return editTrack(artist.id, track);
+          }
+        }, "Edit"), /*#__PURE__*/React.createElement("button", {
+          onClick: function onClick() {
+            return deleteTrack(artist.id, track.id);
+          }
+        }, "Delete")));
+      } else {
+        return /*#__PURE__*/React.createElement("li", null, trackInfo);
+      }
+    }
+  }]);
+
+  return TrackIndexItem;
+}(React.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (TrackIndexItem);
 
 /***/ }),
 
