@@ -4,13 +4,16 @@ import { NavLink } from 'react-router-dom';
 const Header = ({ currentUser, logout, openModal }) => {
   const soundSkyLogo = <NavLink to="/" className="soundsky">SOUNDSKY</NavLink>   
   const sessionButtons = () => {
-    return (<header className="signedout-header">
-      {soundSkyLogo}
-        <div className ="session-buttons">
-          <button className = "signin-button" onClick={() => openModal('login')}>Sign In</button>
-          <button className= "signup-button" onClick={() => openModal('signup')}>Create Account</button>
-        </div>
-    </header>)
+    return (
+      <div className="top-banner">
+        <header className="signedout-header">
+          {soundSkyLogo}
+          <div className ="session-buttons">
+            <button className = "signin-button" onClick={() => openModal('login')}>Sign in</button>
+            <button className= "signup-button" onClick={() => openModal('signup')}>Create account</button>
+          </div>
+        </header>
+      </div>)
   };
   const signinHeader = (currentUser, logout) => {
     return(<header className= "signedin-header" >

@@ -5,11 +5,12 @@ import Modal from './modal/modal';
 
 const App = () => {
   
-    return(<div>
-        <Modal />
-            <HeaderContainer />
-        
-    </div>)
+    return(
+    <div>
+     <Modal />
+     <HeaderContainer />
+    </div>
+    )
 };
 
 export default App; 

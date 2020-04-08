@@ -237,7 +237,9 @@ var Header = function Header(_ref) {
   }, "SOUNDSKY");
 
   var sessionButtons = function sessionButtons() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "top-banner"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
       className: "signedout-header"
     }, soundSkyLogo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "session-buttons"
@@ -246,12 +248,12 @@ var Header = function Header(_ref) {
       onClick: function onClick() {
         return openModal('login');
       }
-    }, "Sign In"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, "Sign in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "signup-button",
       onClick: function onClick() {
         return openModal('signup');
       }
-    }, "Create Account")));
+    }, "Create account"))));
   };
 
   var signinHeader = function signinHeader(currentUser, logout) {
@@ -520,6 +522,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       password: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.createDemoUser = _this.createDemoUser.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -550,9 +553,17 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "createDemoUser",
+    value: function createDemoUser(e) {
+      e.preventDefault();
+      this.props.processForm({
+        username: "demoUser",
+        password: "demopassword"
+      }).then(this.props.closeModal);
+    }
+  }, {
     key: "render",
     value: function render() {
-      debugger;
       var errorsLi = this.props.errors.map(function (error) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "session-errors"
@@ -577,12 +588,16 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
-        placeholder: "password",
+        placeholder: "your password",
         onChange: this.handleInput('password'),
         className: "login-input"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "session-submit"
-      }, this.props.button))));
+      }, this.props.button), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "demo-user",
+        onClick: this.createDemoUser,
+        type: "submit"
+      }, "Demo User"))));
     }
   }]);
 
