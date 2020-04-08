@@ -7,7 +7,7 @@ class Api::TracksController < ApplicationController
         @track.artist_id = params[:user_id]
         
         if @track.save!
-            # render 'api/users/show'
+            render 'api/users/show'
         else
             flash[:errors] = @track.errors.full_messages 
         end
@@ -16,21 +16,20 @@ class Api::TracksController < ApplicationController
     def update
        @track = Track.find(params[:id])
        @track.artist_id = params[:user_id]
-       flash[:errors]= @track.errors.full_messages unless @track.update(track_params)
-       #READ READ READ READ READ -- add @track.artist = current_user && before @track.update 
-    #    render 'api/users/show'
+       flash[:errors]= @track.errors.full_messages unless @track.artist = current_user && @track.update(track_params)
+       render 'api/users/show'
     end
 
 
     def show
         @track = Track.find(params[:id])
-        # render 'api/users/tracks/show'
+        render 'api/tracks/show'
     end
     
     def destroy
         @track = current_user.tracks.find_by(id: params[:id])
         if @track && @track.delete 
-            # render 'api/users/show'
+            render 'api/users/show'
         end
     end
 
