@@ -185,6 +185,87 @@ var logoutUser = function logoutUser() {
 
 /***/ }),
 
+/***/ "./frontend/actions/track_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/track_actions.js ***!
+  \*******************************************/
+/*! exports provided: RECEIVE_TRACKS, RECEIVE_TRACK, REMOVE_TRACK, receiveTracks, receiveTrack, removeTrack, fetchTracks, fetchTrack, createTrack, updateTrack, deleteTrack */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TRACKS", function() { return RECEIVE_TRACKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TRACK", function() { return RECEIVE_TRACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_TRACK", function() { return REMOVE_TRACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTracks", function() { return receiveTracks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTrack", function() { return receiveTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTrack", function() { return removeTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTracks", function() { return fetchTracks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTrack", function() { return fetchTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTrack", function() { return createTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrack", function() { return updateTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrack", function() { return deleteTrack; });
+/* harmony import */ var _utils_track_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/track_util */ "./frontend/utils/track_util.js");
+
+var RECEIVE_TRACKS = "RECEIVE_TRACKS";
+var RECEIVE_TRACK = "RECEIVE_TRACK";
+var REMOVE_TRACK = "REMOVE_TRACK";
+var receiveTracks = function receiveTracks(tracks) {
+  return {
+    type: RECEIVE_TRACK,
+    tracks: tracks
+  };
+};
+var receiveTrack = function receiveTrack(track) {
+  return {
+    type: RECEIVE_TRACK,
+    track: track
+  };
+};
+var removeTrack = function removeTrack(trackId) {
+  return {
+    type: REMOVE_TRACK,
+    trackId: trackId
+  };
+};
+var fetchTracks = function fetchTracks(userId) {
+  return function (dispatch) {
+    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"](userId)).then(function (tracks) {
+      return receiveTracks(tracks);
+    });
+  };
+};
+var fetchTrack = function fetchTrack(userId, trackId) {
+  return function (dispatch) {
+    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTrack"](userId, trackId)).then(function (track) {
+      return receiveTracks(track);
+    });
+  };
+};
+var createTrack = function createTrack(userId, form_track) {
+  return function (dispatch) {
+    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["createTrack"](userId, form_track)).then(function (track) {
+      return receiveTrack(track);
+    });
+  };
+};
+var updateTrack = function updateTrack(userId, form_track) {
+  return function (dispatch) {
+    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["updateTrack"](userId, form_track)).then(function (track) {
+      return receiveTrack(track);
+    });
+  };
+};
+var deleteTrack = function deleteTrack(userId, trackId) {
+  return function (dispatch) {
+    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrack"](userId, trackId)).then(function () {
+      return receiveTrack(trackId);
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/components/app.jsx":
 /*!*************************************!*\
   !*** ./frontend/components/app.jsx ***!
@@ -663,11 +744,14 @@ var SignupFormContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["conne
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tracks_reducer */ "./frontend/reducers/tracks_reducer.js");
+/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  tracks: _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -829,6 +913,48 @@ var sessionReducer = function sessionReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sessionReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/tracks_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/tracks_reducer.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/track_actions */ "./frontend/actions/track_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var tracksReducer = function tracksReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState = {};
+
+  switch (action.type) {
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRACKS"]:
+      return action.tracks;
+
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRACK"]:
+      newState = _defineProperty({}, action.track.id, action.track);
+      return Object.assign({}, state, newState);
+
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_TRACK"]:
+      newState = Object.assign({}, state);
+      delete newState[action.trackId];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tracksReducer);
 
 /***/ }),
 
@@ -1031,6 +1157,57 @@ var logout = function logout() {
   return $.ajax({
     url: "api/session",
     method: "DELETE"
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/utils/track_util.js":
+/*!**************************************!*\
+  !*** ./frontend/utils/track_util.js ***!
+  \**************************************/
+/*! exports provided: fetchTracks, fetchTrack, createTrack, updateTrack, deleteTrack */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTracks", function() { return fetchTracks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTrack", function() { return fetchTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTrack", function() { return createTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrack", function() { return updateTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrack", function() { return deleteTrack; });
+var fetchTracks = function fetchTracks(userId) {
+  return $.ajax({
+    url: "api/users/".concat(userId, "/tracks")
+  });
+};
+var fetchTrack = function fetchTrack(userId, trackId) {
+  return $.ajax({
+    url: "api/users/".concat(userId, "/tracks/").concat(trackId)
+  });
+};
+var createTrack = function createTrack(userId, track) {
+  return $.ajax({
+    method: 'POST',
+    url: "api/users/".concat(userId, "/tracks"),
+    data: {
+      track: track
+    }
+  });
+};
+var updateTrack = function updateTrack(userId, track) {
+  return $.ajax({
+    method: 'PATCH',
+    url: "api/users/".concat(userId, "/tracks/").concat(track.id),
+    data: {
+      track: track
+    }
+  });
+};
+var deleteTrack = function deleteTrack(userId, trackId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "api/users/".concat(userId, "/tracks/").concat(trackId)
   });
 };
 
