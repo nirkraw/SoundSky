@@ -15,15 +15,15 @@ class Api::TracksController < ApplicationController
 
     def update
        @track = Track.find(params[:id])
-       @track.user_id = params[:user_id]
-       flash[:errors]= @track.errors.full_messages unless @track.user = current_user && @track.update(track_params)
+       @track.artist_id = params[:user_id]
+       flash[:errors]= @track.errors.full_messages unless @track.artist = current_user && @track.update(track_params)
        render 'api/users/show'
     end
 
 
     def show
         @track = Track.find(params[:id])
-        render 'api/users/tracks/show'
+        render 'api/tracks/show'
     end
     
     def destroy
