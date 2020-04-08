@@ -6,6 +6,10 @@ validates :password, length: {minimum: 6 }, allow_nil: true
 after_initialize :ensure_session_token
 attr_reader :password
 
+has_many :tracks,
+foreign_key: :artist_id,
+class_name: :Track
+
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)
         return nil unless user && user.is_password?(password)
