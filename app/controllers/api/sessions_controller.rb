@@ -4,7 +4,7 @@ skip_before_action :verify_authenticity_token
         @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
         if @user
             log_in(@user)
-            # render "api/users/show"
+            render "api/users/show"
         else
             render json: ["Username or password is invalid"], status: 401
         end
