@@ -20,7 +20,7 @@ export const errorHandler = (errors) => ({
 
 export const signUpUser = form_user => dispatch => signUp(form_user)
     .then(
-        user => dispatch(receiveCurrentUser(user)),
+        currentUser => dispatch(receiveCurrentUser(currentUser)),
         errors => dispatch(errorHandler(errors.responseJSON))
     );
 

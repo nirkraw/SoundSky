@@ -157,8 +157,8 @@ var errorHandler = function errorHandler(errors) {
 };
 var signUpUser = function signUpUser(form_user) {
   return function (dispatch) {
-    return Object(_utils_session__WEBPACK_IMPORTED_MODULE_0__["signUp"])(form_user).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
+    return Object(_utils_session__WEBPACK_IMPORTED_MODULE_0__["signUp"])(form_user).then(function (currentUser) {
+      return dispatch(receiveCurrentUser(currentUser));
     }, function (errors) {
       return dispatch(errorHandler(errors.responseJSON));
     });
