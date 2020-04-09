@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/session_action';
+import { logoutUser } from '../../actions/session_actions';
 import Header from './header';
 import { openModal } from '../../actions/modal_actions';
 

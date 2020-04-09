@@ -12,7 +12,7 @@ const App = () => {
      <Modal />
      <HeaderContainer />
             <Switch>
-                <Route exact path="/users/:userId" component={TrackIndexContainer} />
+                <Route path="/users/:userId" component={TrackIndexContainer} />
             </Switch>
     </div>
     )

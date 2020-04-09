@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'; 
 import TrackIndexItem from './track_index_item';
+import React from 'react';
 
 class TrackIndex extends React.Component {
     constructor(props) {
