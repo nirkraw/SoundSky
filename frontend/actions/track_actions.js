@@ -4,10 +4,12 @@ export const RECEIVE_TRACKS = "RECEIVE_TRACKS";
 export const RECEIVE_TRACK = "RECEIVE_TRACK";
 export const REMOVE_TRACK = "REMOVE_TRACK";
 
-export const receiveTracks = (tracks) => ({
-    type: RECEIVE_TRACK,
-    tracks
-})
+export const receiveTracks = ({tracks}) => {
+    return ({
+        type: RECEIVE_TRACKS,
+        tracks
+    })   
+}
 
 export const receiveTrack = (track) => ({
     type: RECEIVE_TRACK,
@@ -20,26 +22,28 @@ export const removeTrack = (trackId) => ({
 })
 
 export const fetchTracks = (userId) => dispatch => (
-    dispatch(TrackUtil.fetchTracks(userId))
-    .then(tracks=> receiveTracks(tracks))
+    (TrackUtil.fetchTracks(userId))
+    .then(tracks=> {
+       return dispatch(receiveTracks(tracks))
+    }) 
 )
 
 export const fetchTrack = (userId, trackId) => dispatch => (
-    dispatch(TrackUtil.fetchTrack(userId,trackId))
-        .then(track => receiveTracks(track))
+    TrackUtil.fetchTrack(userId,trackId))
+    .then(track => dispatch(receiveTracks(track))
 )
 
 export const createTrack = (userId, form_track) => dispatch => (
-    dispatch(TrackUtil.createTrack(userId, form_track))
-    .then(track => receiveTrack(track))
+    (TrackUtil.createTrack(userId, form_track))
+    .then(track => dispatch(receiveTrack(track)))
 )
 export const updateTrack = (userId, form_track) => dispatch => (
-    dispatch(TrackUtil.updateTrack(userId, form_track))
-        .then(track => receiveTrack(track))
+    (TrackUtil.updateTrack(userId, form_track))
+        .then(track => dispatch(receiveTrack(track)))
 )
 
 export const deleteTrack = (userId, trackId) => dispatch => (
-    dispatch(TrackUtil.deleteTrack(userId, trackId))
-        .then(() => receiveTrack(trackId))
+    (TrackUtil.deleteTrack(userId, trackId))
+        .then(() => dispatch(receiveTrack(trackId)))
 )
 

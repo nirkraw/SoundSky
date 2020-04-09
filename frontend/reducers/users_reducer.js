@@ -1,8 +1,7 @@
 import { RECEIVE_CURRENT_USER } from "../actions/session_actions";
-import {RECEIVE_USERS} from "../actions/users_actions";
+import {RECEIVE_USERS} from "../actions/user_actions";
 
 const usersReducer = (state = {}, action) => {
-    debugger 
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_USERS:

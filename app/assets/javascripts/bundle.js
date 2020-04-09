@@ -210,9 +210,10 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_TRACKS = "RECEIVE_TRACKS";
 var RECEIVE_TRACK = "RECEIVE_TRACK";
 var REMOVE_TRACK = "REMOVE_TRACK";
-var receiveTracks = function receiveTracks(tracks) {
+var receiveTracks = function receiveTracks(_ref) {
+  var tracks = _ref.tracks;
   return {
-    type: RECEIVE_TRACK,
+    type: RECEIVE_TRACKS,
     tracks: tracks
   };
 };
@@ -230,46 +231,46 @@ var removeTrack = function removeTrack(trackId) {
 };
 var fetchTracks = function fetchTracks(userId) {
   return function (dispatch) {
-    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"](userId)).then(function (tracks) {
-      return receiveTracks(tracks);
+    return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"](userId).then(function (tracks) {
+      return dispatch(receiveTracks(tracks));
     });
   };
 };
 var fetchTrack = function fetchTrack(userId, trackId) {
   return function (dispatch) {
-    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTrack"](userId, trackId)).then(function (track) {
-      return receiveTracks(track);
+    return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTrack"](userId, trackId).then(function (track) {
+      return dispatch(receiveTracks(track));
     });
   };
 };
 var createTrack = function createTrack(userId, form_track) {
   return function (dispatch) {
-    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["createTrack"](userId, form_track)).then(function (track) {
-      return receiveTrack(track);
+    return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["createTrack"](userId, form_track).then(function (track) {
+      return dispatch(receiveTrack(track));
     });
   };
 };
 var updateTrack = function updateTrack(userId, form_track) {
   return function (dispatch) {
-    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["updateTrack"](userId, form_track)).then(function (track) {
-      return receiveTrack(track);
+    return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["updateTrack"](userId, form_track).then(function (track) {
+      return dispatch(receiveTrack(track));
     });
   };
 };
 var deleteTrack = function deleteTrack(userId, trackId) {
   return function (dispatch) {
-    return dispatch(_utils_track_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrack"](userId, trackId)).then(function () {
-      return receiveTrack(trackId);
+    return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrack"](userId, trackId).then(function () {
+      return dispatch(receiveTrack(trackId));
     });
   };
 };
 
 /***/ }),
 
-/***/ "./frontend/actions/users_actions.js":
-/*!*******************************************!*\
-  !*** ./frontend/actions/users_actions.js ***!
-  \*******************************************/
+/***/ "./frontend/actions/user_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/user_actions.js ***!
+  \******************************************/
 /*! exports provided: RECEIVE_USERS, receiveUsers, fetchAllUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -289,8 +290,8 @@ var receiveUsers = function receiveUsers(users) {
 };
 var fetchAllUsers = function fetchAllUsers() {
   return function (dispatch) {
-    return dispatch(Object(_utils_user_util__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"])()).then(function (users) {
-      return receiveUsers(users);
+    return Object(_utils_user_util__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"])().then(function (users) {
+      return dispatch(receiveUsers(users));
     });
   };
 };
@@ -833,15 +834,19 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, this.props.artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h3", null, "Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, this.props.tracks.map(function (track) {
+      if (!this.props.artist) return null;
+      if (!this.props.tracks) return null;
+      var tracksMap = this.props.tracks.map(function (track) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_track_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: track.id,
           artist: _this.props.artist,
           track: track,
           deleteTrack: _this.props.deleteTrack,
           editTrack: _this.props.editTrack,
           currentUser: _this.props.currentUser
         });
-      })));
+      });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, this.props.artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h3", null, "Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, tracksMap));
     }
   }]);
 
@@ -862,7 +867,7 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
-/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _track_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./track_index */ "./frontend/components/user_profile/track_index.jsx");
 
@@ -871,10 +876,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  debugger;
   return {
-    tracks: state.entities.tracks,
-    artist: Object.values(state.entities.users)[ownProps.match.params.userId],
+    tracks: Object.values(state.entities.tracks),
+    artist: state.entities.users[ownProps.match.params.userId],
     currentUser: state.session.currentUser
   };
 };
@@ -893,8 +897,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchTrack: function fetchTrack(userId, trackId) {
       return dispatch(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["fetchTrack"](userId, trackId));
     },
-    fetchUsers: function fetchUsers() {
-      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAllUsers"])());
+    fetchAllUsers: function fetchAllUsers() {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAllUsers"])());
     }
   };
 };
@@ -952,6 +956,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackIndexItem, [{
     key: "render",
     value: function render() {
+      debugger;
       var _this$props = this.props,
           track = _this$props.track,
           artist = _this$props.artist,
@@ -959,7 +964,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           deleteTrack = _this$props.deleteTrack;
       var trackInfo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, artist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.genre));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.genre));
 
       if (this.props.currentUser.id = artist.id) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, trackInfo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1237,7 +1242,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1246,11 +1251,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USERS"]:
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USERS"]:
       return action.users;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
@@ -1281,13 +1285,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _utils_user_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/user_util */ "./frontend/utils/user_util.js");
+/* harmony import */ var _utils_track_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/track_util */ "./frontend/utils/track_util.js");
+
 
 
 
 
  //TEST
 
-window.fetchUsers = Object(_utils_user_util__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"])(); //TEST
+window.fetchUsers = _utils_user_util__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"];
+window.fetchTracks = _utils_track_util__WEBPACK_IMPORTED_MODULE_5__["fetchTracks"]; //TEST
 
 document.addEventListener('DOMContentLoaded', function () {
   var store;
@@ -1398,7 +1405,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 var signUp = function signUp(user) {
   return $.ajax({
-    url: "api/users",
+    url: "/api/users",
     method: "POST",
     data: {
       user: user
@@ -1407,7 +1414,7 @@ var signUp = function signUp(user) {
 };
 var login = function login(user) {
   return $.ajax({
-    url: "api/session",
+    url: "/api/session",
     method: "POST",
     data: {
       user: user
@@ -1416,7 +1423,7 @@ var login = function login(user) {
 };
 var logout = function logout() {
   return $.ajax({
-    url: "api/session",
+    url: "/api/session",
     method: "DELETE"
   });
 };
@@ -1439,18 +1446,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrack", function() { return deleteTrack; });
 var fetchTracks = function fetchTracks(userId) {
   return $.ajax({
-    url: "api/users/".concat(userId, "/tracks")
+    url: "/api/users/".concat(userId, "/tracks")
   });
 };
 var fetchTrack = function fetchTrack(userId, trackId) {
   return $.ajax({
-    url: "api/users/".concat(userId, "/tracks/").concat(trackId)
+    url: "/api/users/".concat(userId, "/tracks/").concat(trackId)
   });
 };
 var createTrack = function createTrack(userId, track) {
   return $.ajax({
     method: 'POST',
-    url: "api/users/".concat(userId, "/tracks"),
+    url: "/api/users/".concat(userId, "/tracks"),
     data: {
       track: track
     }
@@ -1459,7 +1466,7 @@ var createTrack = function createTrack(userId, track) {
 var updateTrack = function updateTrack(userId, track) {
   return $.ajax({
     method: 'PATCH',
-    url: "api/users/".concat(userId, "/tracks/").concat(track.id),
+    url: "/api/users/".concat(userId, "/tracks/").concat(track.id),
     data: {
       track: track
     }
@@ -1468,7 +1475,7 @@ var updateTrack = function updateTrack(userId, track) {
 var deleteTrack = function deleteTrack(userId, trackId) {
   return $.ajax({
     method: 'DELETE',
-    url: "api/users/".concat(userId, "/tracks/").concat(trackId)
+    url: "/api/users/".concat(userId, "/tracks/").concat(trackId)
   });
 };
 
@@ -1487,12 +1494,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 var fetchUsers = function fetchUsers() {
   return $.ajax({
-    url: "api/users"
+    url: "/api/users"
   });
 };
 var fetchUser = function fetchUser(userId) {
   return $.ajax({
-    url: "api/users/".concat(userId)
+    url: "/api/users/".concat(userId)
   });
 };
 
