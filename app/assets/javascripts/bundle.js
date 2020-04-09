@@ -826,6 +826,7 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchTracks(this.props.match.params.userId);
+      this.props.fetchAllUsers();
     }
   }, {
     key: "render",
@@ -861,13 +862,16 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _track_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./track_index */ "./frontend/components/user_profile/track_index.jsx");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _track_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./track_index */ "./frontend/components/user_profile/track_index.jsx");
+
 
 
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  debugger;
   return {
     tracks: state.entities.tracks,
     artist: Object.values(state.entities.users)[ownProps.match.params.userId],
@@ -878,21 +882,24 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     editTrack: function editTrack(userId, track) {
-      return dispatch(TrackUtil.updateTrack(userId, track));
+      return dispatch(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["updateTrack"](userId, track));
     },
     fetchTracks: function fetchTracks(userId) {
-      return dispatch(TrackUtil.fetchTracks(userId));
+      return dispatch(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"](userId));
     },
     deleteTrack: function deleteTrack(userId, trackId) {
-      return dispatch(TrackUtil.deleteTrack(userId, trackId));
+      return dispatch(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["deleteTrack"](userId, trackId));
     },
     fetchTrack: function fetchTrack(userId, trackId) {
-      return dispatch(TrackUtil.fetchTrack(userId, trackId));
+      return dispatch(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["fetchTrack"](userId, trackId));
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAllUsers"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_track_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(_track_index__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -1239,6 +1246,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -1253,7 +1261,7 @@ var usersReducer = function usersReducer() {
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (usersReducer); //DO YOU NEED THIS?
+/* harmony default export */ __webpack_exports__["default"] = (usersReducer);
 
 /***/ }),
 
@@ -1272,9 +1280,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
+/* harmony import */ var _utils_user_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/user_util */ "./frontend/utils/user_util.js");
 
 
 
+
+ //TEST
+
+window.fetchUsers = Object(_utils_user_util__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"])(); //TEST
 
 document.addEventListener('DOMContentLoaded', function () {
   var store;
@@ -1474,7 +1487,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 var fetchUsers = function fetchUsers() {
   return $.ajax({
-    url: "api/users/"
+    url: "api/users"
   });
 };
 var fetchUser = function fetchUser(userId) {

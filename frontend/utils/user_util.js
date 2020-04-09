@@ -1,6 +1,6 @@
 export const fetchUsers = () => (
     $.ajax({
-        url: `api/users/`
+        url: `api/users`
     })
 )
 

@@ -8,7 +8,8 @@ class TrackIndex extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchTracks(this.props.match.params.userId)
+        this.props.fetchTracks(this.props.match.params.userId);
+        this.props.fetchAllUsers();
     }
 
     render() {

@@ -2,7 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from './store/store';
 import Root from './components/root';
+import {fetchUsers} from "./utils/user_util";
 
+
+//TEST
+window.fetchUsers = fetchUsers()
+//TEST
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
