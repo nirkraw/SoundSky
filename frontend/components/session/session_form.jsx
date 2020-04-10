@@ -15,8 +15,8 @@ class SessionForm extends React.Component {
     }
 
     componentDidMount() {   
-        // if (this.props.currentUser) {<Redirect to="/" />}
-    }
+         if (this.props.currentUser) {<Redirect to="/" />}
+     }
 
     handleSubmit(e) {
         e.preventDefault();
