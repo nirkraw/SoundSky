@@ -1,15 +1,23 @@
 import React from 'react';
 import HeaderContainer from "./header/header_container";
+import TrackIndexContainer from "./user_profile/track_index_container";
 import { AuthRoute } from '../utils/route_util';
 import Modal from './modal/modal';
+import {Switch, Route} from 'react-router-dom'; 
+import Splash from "./splash/splash";
 
 const App = () => {
   
-    return(<div>
-        <Modal />
-            <HeaderContainer />
-        
-    </div>)
+    return(
+    <div>
+     <Modal />
+     <HeaderContainer />
+            <Switch>
+                <Route path="/users/:userId" component={TrackIndexContainer} />
+                <Route path="/" component={Splash} />
+            </Switch>
+    </div>
+    )
 };
 
 export default App; 

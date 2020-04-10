@@ -11,10 +11,11 @@ class SessionForm extends React.Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.createDemoUser = this.createDemoUser.bind(this);
     }
 
     componentDidMount() {   
-        if (this.props.currentUser) {<Redirect to="/" />}
+        // if (this.props.currentUser) {<Redirect to="/" />}
     }
 
     handleSubmit(e) {
@@ -27,10 +28,17 @@ class SessionForm extends React.Component {
         return e => this.setState({ [type]: e.target.value })
     }
 
+    createDemoUser(e) {
+        e.preventDefault();
+        this.props.processForm({ username: "demoUser", password: "demopassword" }).then(this.props.closeModal);
+    }
+
     render() {
-        debugger
         const errorsLi = this.props.errors.map(
-            error => <li className = "session-errors">{error}</li>
+            error => <li 
+            className = "session-errors"
+            key ={error}
+            >{error}</li>
             )
      
         return (
@@ -50,11 +58,15 @@ class SessionForm extends React.Component {
                             />
                         <input type="password"
                                 value={this.state.password}
-                                placeholder="password"
+                                placeholder="your password"
                                 onChange={this.handleInput('password')}
                                 className="login-input"
                             />
                          <button className = "session-submit">{this.props.button}</button>
+                         <button className="demo-user"
+                                 onClick ={this.createDemoUser} 
+                                 type="submit" 
+                                 >Demo User</button>
                     </div>
                 </form>
             </div>

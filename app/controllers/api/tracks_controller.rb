@@ -20,6 +20,12 @@ class Api::TracksController < ApplicationController
        render 'api/users/show'
     end
 
+    def index
+        @user = User.find(params[:user_id])
+        @tracks = Track.all 
+        render 'api/users/show'
+    end
+
 
     def show
         @track = Track.find(params[:id])
