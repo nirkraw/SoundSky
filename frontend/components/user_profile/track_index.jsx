@@ -31,6 +31,12 @@ class TrackIndex extends React.Component {
         return (
             <div>
                 <h1>{this.props.artist.username}</h1>
+                <img className = "artist-profile-pic" 
+                src={this.props.artist.profilePhotoUrl} 
+                alt="ArtistProfilePic"/>
+                <img className="artist-cover-pic"
+                    src={this.props.artist.coverPhotoUrl}
+                    alt="ArtistCoverPic" />
                 <h3>Recent</h3>
                 <ul>{tracksMap}</ul>
                 {/* <NavLink to="upload" className="user-show-upload">Upload</NavLink>    */}

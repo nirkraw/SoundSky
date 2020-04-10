@@ -846,7 +846,15 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
           currentUser: _this.props.currentUser
         });
       });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, this.props.artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h3", null, "Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, tracksMap));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, this.props.artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+        className: "artist-profile-pic",
+        src: this.props.artist.profilePhotoUrl,
+        alt: "ArtistProfilePic"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+        className: "artist-cover-pic",
+        src: this.props.artist.coverPhotoUrl,
+        alt: "ArtistCoverPic"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h3", null, "Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, tracksMap));
     }
   }]);
 
@@ -1294,7 +1302,8 @@ __webpack_require__.r(__webpack_exports__);
  //TEST
 
 window.fetchUsers = _utils_user_util__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"];
-window.fetchTracks = _utils_track_util__WEBPACK_IMPORTED_MODULE_5__["fetchTracks"]; //TEST
+window.fetchTracks = _utils_track_util__WEBPACK_IMPORTED_MODULE_5__["fetchTracks"];
+window.fetchUser = _utils_user_util__WEBPACK_IMPORTED_MODULE_4__["fetchUser"]; //TEST
 
 document.addEventListener('DOMContentLoaded', function () {
   var store;

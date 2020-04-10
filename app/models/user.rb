@@ -10,8 +10,22 @@ has_many :tracks,
 foreign_key: :artist_id,
 class_name: :Track 
 
-has_one_attached :photo
+has_one_attached :profile_picture
+has_one_attached :cover_picture 
 
+before_create :set_default_profile_picture
+before_create :set_default_cover_picture
+
+    
+    def set_default_profile_picture 
+        file = open('https://soundsky-avatars.s3.amazonaws.com/avatar.png')
+        self.profile_picture.attach(io: file, filename: 'avatar.jpg')
+    end
+
+    def set_default_cover_picture 
+        file = open('https://soundsky-avatars.s3.amazonaws.com/coverpicture.jpg')
+        self.cover_picture.attach(io: file, filename: 'avatar.jpg')
+    end
 
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)
