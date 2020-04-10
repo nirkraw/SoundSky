@@ -1412,7 +1412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 var signUp = function signUp(user) {
   return $.ajax({
-    url: "/api/users",
+    url: "api/users",
     method: "POST",
     data: {
       user: user
@@ -1421,7 +1421,7 @@ var signUp = function signUp(user) {
 };
 var login = function login(user) {
   return $.ajax({
-    url: "/api/session",
+    url: "api/session",
     method: "POST",
     data: {
       user: user
@@ -1430,7 +1430,7 @@ var login = function login(user) {
 };
 var logout = function logout() {
   return $.ajax({
-    url: "/api/session",
+    url: "api/session",
     method: "DELETE"
   });
 };
