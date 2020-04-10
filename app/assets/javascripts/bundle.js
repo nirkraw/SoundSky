@@ -358,14 +358,14 @@ var Header = function Header(_ref) {
       logout = _ref.logout,
       openModal = _ref.openModal;
   var soundSkyLogo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-    to: "/api/users/:userId",
+    to: "/",
     className: "soundsky"
   }, "SOUNDSKY");
 
   var sessionButtons = function sessionButtons() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "top-banner"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    }, "git", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
       className: "signedout-header"
     }, soundSkyLogo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "session-buttons"

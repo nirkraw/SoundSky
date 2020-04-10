@@ -2,10 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = ({ currentUser, logout, openModal }) => {
-  const soundSkyLogo = <NavLink to="/api/users/:userId" className="soundsky">SOUNDSKY</NavLink>   
+  const soundSkyLogo = <NavLink to="/" className="soundsky">SOUNDSKY</NavLink>   
   const sessionButtons = () => {
     return (
-      <div className="top-banner">
+      <div className="top-banner">git 
         <header className="signedout-header">
           {soundSkyLogo}
           <div className ="session-buttons">
@@ -24,7 +24,7 @@ const Header = ({ currentUser, logout, openModal }) => {
       </div>
     </header>)
   };
-  
+
   return (currentUser ? signinHeader(currentUser, logout) : sessionButtons() )
 };
 
