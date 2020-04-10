@@ -6,8 +6,8 @@ class TrackIndexItem extends React.Component {
     }
 
     render() {
-        debugger
-       const { track, artist, editTrack, deleteTrack } = this.props 
+       debugger
+       const { track, artist, editTrack, deleteTrack, currentUser} = this.props 
        const trackInfo = ( 
            <div className = "track-info">
                 <p>{artist.username}</p>
@@ -15,7 +15,7 @@ class TrackIndexItem extends React.Component {
                 <p>{track.genre}</p>
            </div>
         )
-        if (this.props.currentUser.id = artist.id) {
+        if (currentUser=== artist && track) {
             return (
                 <li>
                     {trackInfo}

@@ -140,7 +140,6 @@ var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 var receiveCurrentUser = function receiveCurrentUser(_ref) {
   var user = _ref.user;
-  debugger;
   return {
     type: RECEIVE_CURRENT_USER,
     user: user
@@ -384,7 +383,6 @@ var Header = function Header(_ref) {
   };
 
   var signinHeader = function signinHeader(currentUser, logout) {
-    debugger;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
       className: "signedin-header"
     }, soundSkyLogo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -398,7 +396,6 @@ var Header = function Header(_ref) {
     }, "Log Out")));
   };
 
-  debugger;
   return currentUser ? signinHeader(currentUser, logout) : sessionButtons();
 };
 
@@ -425,7 +422,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
     currentUser: state.entities.users[state.session.currentUserId]
   };
@@ -658,7 +654,13 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
 
   _createClass(SessionForm, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// if (this.props.currentUser) {<Redirect to="/" />}
+    value: function componentDidMount() {
+      if (this.props.currentUser) {
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: "/"
+        });
+      }
     }
   }, {
     key: "handleSubmit",
@@ -688,6 +690,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       var errorsLi = this.props.errors.map(function (error) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "session-errors",
@@ -1035,12 +1038,13 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           track = _this$props.track,
           artist = _this$props.artist,
           editTrack = _this$props.editTrack,
-          deleteTrack = _this$props.deleteTrack;
+          deleteTrack = _this$props.deleteTrack,
+          currentUser = _this$props.currentUser;
       var trackInfo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.genre));
 
-      if (this.props.currentUser.id = artist.id) {
+      if (currentUser === artist && track) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, trackInfo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             return editTrack(artist.id, track);
@@ -1187,8 +1191,9 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SESSION_ERRORS"]:
       return action.errors;
-    // case RECEIVE_CURRENT_USER:
-    //     return [];
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
+      return [];
 
     case _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__["CLOSE_MODAL"]:
       return [];
@@ -1221,7 +1226,7 @@ var _null_session = {
 var sessionReducer = function sessionReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _null_session;
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state); // debugger 
+  Object.freeze(state);
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
@@ -1320,7 +1325,6 @@ __webpack_require__.r(__webpack_exports__);
 var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(state);
   var newState = Object.assign({}, state);
 

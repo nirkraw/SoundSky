@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import TrackIndex from "./track_index";
 
 const mapStateToProps = (state, ownProps) => {
-    debugger 
+    debugger
     return({
         tracks: Object.values(state.entities.tracks),
         artist: state.entities.users[ownProps.match.params.userId],

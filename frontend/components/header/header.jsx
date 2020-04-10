@@ -16,7 +16,6 @@ const Header = ({ currentUser, logout, openModal }) => {
       </div>)
   };
   const signinHeader = (currentUser, logout) => {
-    debugger 
     return(<header className= "signedin-header" >
       {soundSkyLogo}
       <div className= "right-banner">
@@ -25,7 +24,7 @@ const Header = ({ currentUser, logout, openModal }) => {
       </div>
     </header>)
   };
-  debugger 
+  
   return (currentUser ? signinHeader(currentUser, logout) : sessionButtons() )
 };
 

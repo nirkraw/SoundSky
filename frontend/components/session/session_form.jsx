@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -34,6 +34,7 @@ class SessionForm extends React.Component {
     }
 
     render() {
+        debugger 
         const errorsLi = this.props.errors.map(
             error => <li 
             className = "session-errors"
