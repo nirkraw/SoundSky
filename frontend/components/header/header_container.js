@@ -4,8 +4,9 @@ import Header from './header';
 import { openModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state) => {
+    debugger
     return {
-    currentUser: state.session.currentUser
+        currentUser: state.entities.users[state.session.currentUserId]
 }}
 
 const mapDispatchToProps = (dispatch) => ({

@@ -15,7 +15,7 @@ class SessionForm extends React.Component {
     }
 
     componentDidMount() {   
-        if (this.props.currentUser) {<Redirect to="/" />}
+        // if (this.props.currentUser) {<Redirect to="/" />}
     }
 
     handleSubmit(e) {
@@ -35,7 +35,10 @@ class SessionForm extends React.Component {
 
     render() {
         const errorsLi = this.props.errors.map(
-            error => <li className = "session-errors">{error}</li>
+            error => <li 
+            className = "session-errors"
+            key ={error}
+            >{error}</li>
             )
      
         return (

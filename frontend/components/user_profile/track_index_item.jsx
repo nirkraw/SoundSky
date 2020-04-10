@@ -6,7 +6,7 @@ class TrackIndexItem extends React.Component {
     }
 
     render() {
-        debugger 
+        debugger
        const { track, artist, editTrack, deleteTrack } = this.props 
        const trackInfo = ( 
            <div className = "track-info">
