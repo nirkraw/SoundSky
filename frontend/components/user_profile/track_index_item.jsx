@@ -6,16 +6,16 @@ class TrackIndexItem extends React.Component {
     }
 
     render() {
-        debugger
-       const { track, artist, editTrack, deleteTrack } = this.props 
+       const { track, artist, editTrack, deleteTrack, currentUser } = this.props 
        const trackInfo = ( 
            <div className = "track-info">
                 <p>{artist.username}</p>
                 <p>{track.title}</p>
                 <p>{track.genre}</p>
+                <audio src={track.trackUrl}></audio>
            </div>
         )
-        if (this.props.currentUser.id = artist.id) {
+        if (currentUser === artist) {
             return (
                 <li>
                     {trackInfo}

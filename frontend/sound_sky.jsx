@@ -13,14 +13,20 @@ window.fetchUser = fetchUser;
 //TEST
 
 document.addEventListener('DOMContentLoaded', () => {
-    let store;
+    let preLoadedState = undefined;
     if (window.currentUser) {
-        const preloadedState = { session: { currentUser: window.currentUser } };
-        store = configureStore(preloadedState);
-        delete window.currentUser;
-    } else {
-        store = configureStore();
+        preLoadedState = {
+            entities: {
+                users: {
+                    [window.currentUser.id]: window.currentUser
+                }
+            },
+            session: {
+                currentUserId: window.currentUser.id
+            }
+        };
     }
+    let store = configureStore(preLoadedState);
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={store} />, root);
 });

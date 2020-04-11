@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ currentUser, logout, openModal }) => {
-  const soundSkyLogo = <NavLink to="/api/users/:userId" className="soundsky">SOUNDSKY</NavLink>   
+const Header = ({logout, openModal, currentUser }) => {
+  const soundSkyLogo = <NavLink to="/" className="soundsky">SOUNDSKY</NavLink>   
   const sessionButtons = () => {
     return (
       <div className="top-banner">
@@ -16,7 +16,6 @@ const Header = ({ currentUser, logout, openModal }) => {
       </div>)
   };
   const signinHeader = (currentUser, logout) => {
-    debugger 
     return(<header className= "signedin-header" >
       {soundSkyLogo}
       <div className= "right-banner">
@@ -25,8 +24,11 @@ const Header = ({ currentUser, logout, openModal }) => {
       </div>
     </header>)
   };
-  debugger 
-  return (currentUser ? signinHeader(currentUser, logout) : sessionButtons() )
+  if (currentUser) {
+    return signinHeader(currentUser, logout);
+  } else {
+    return sessionButtons(); 
+  }
 };
 
 export default Header;

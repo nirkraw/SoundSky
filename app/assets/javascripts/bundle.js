@@ -140,7 +140,6 @@ var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 var receiveCurrentUser = function receiveCurrentUser(_ref) {
   var user = _ref.user;
-  debugger;
   return {
     type: RECEIVE_CURRENT_USER,
     user: user
@@ -350,11 +349,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Header = function Header(_ref) {
-  var currentUser = _ref.currentUser,
-      logout = _ref.logout,
-      openModal = _ref.openModal;
+  var logout = _ref.logout,
+      openModal = _ref.openModal,
+      currentUser = _ref.currentUser;
   var soundSkyLogo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-    to: "/api/users/:userId",
+    to: "/",
     className: "soundsky"
   }, "SOUNDSKY");
 
@@ -379,7 +378,6 @@ var Header = function Header(_ref) {
   };
 
   var signinHeader = function signinHeader(currentUser, logout) {
-    debugger;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
       className: "signedin-header"
     }, soundSkyLogo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -393,8 +391,11 @@ var Header = function Header(_ref) {
     }, "Log Out")));
   };
 
-  debugger;
-  return currentUser ? signinHeader(currentUser, logout) : sessionButtons();
+  if (currentUser) {
+    return signinHeader(currentUser, logout);
+  } else {
+    return sessionButtons();
+  }
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
@@ -420,7 +421,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
     currentUser: state.entities.users[state.session.currentUserId]
   };
@@ -884,7 +884,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  debugger;
   return {
     tracks: Object.values(state.entities.tracks),
     artist: state.entities.users[ownProps.match.params.userId],
@@ -965,17 +964,19 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackIndexItem, [{
     key: "render",
     value: function render() {
-      debugger;
       var _this$props = this.props,
           track = _this$props.track,
           artist = _this$props.artist,
           editTrack = _this$props.editTrack,
-          deleteTrack = _this$props.deleteTrack;
+          deleteTrack = _this$props.deleteTrack,
+          currentUser = _this$props.currentUser;
       var trackInfo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.genre));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, track.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
+        src: track.trackUrl
+      }));
 
-      if (this.props.currentUser.id = artist.id) {
+      if (currentUser === artist) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, trackInfo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             return editTrack(artist.id, track);
@@ -1156,7 +1157,7 @@ var _null_session = {
 var sessionReducer = function sessionReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _null_session;
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state); // debugger 
+  Object.freeze(state);
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
@@ -1292,6 +1293,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _utils_user_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/user_util */ "./frontend/utils/user_util.js");
 /* harmony import */ var _utils_track_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/track_util */ "./frontend/utils/track_util.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1304,20 +1307,20 @@ window.fetchTracks = _utils_track_util__WEBPACK_IMPORTED_MODULE_5__["fetchTracks
 window.fetchUser = _utils_user_util__WEBPACK_IMPORTED_MODULE_4__["fetchUser"]; //TEST
 
 document.addEventListener('DOMContentLoaded', function () {
-  var store;
+  var preLoadedState = undefined;
 
   if (window.currentUser) {
-    var preloadedState = {
+    preLoadedState = {
+      entities: {
+        users: _defineProperty({}, window.currentUser.id, window.currentUser)
+      },
       session: {
-        currentUser: window.currentUser
+        currentUserId: window.currentUser.id
       }
     };
-    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
-    delete window.currentUser;
-  } else {
-    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])();
   }
 
+  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preLoadedState);
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
@@ -1412,7 +1415,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 var signUp = function signUp(user) {
   return $.ajax({
-    url: "api/users",
+    url: "/api/users",
     method: "POST",
     data: {
       user: user
@@ -1421,7 +1424,7 @@ var signUp = function signUp(user) {
 };
 var login = function login(user) {
   return $.ajax({
-    url: "api/session",
+    url: "/api/session",
     method: "POST",
     data: {
       user: user
@@ -1430,7 +1433,7 @@ var login = function login(user) {
 };
 var logout = function logout() {
   return $.ajax({
-    url: "api/session",
+    url: "/api/session",
     method: "DELETE"
   });
 };
