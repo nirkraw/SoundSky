@@ -3,9 +3,11 @@ import AudioPlayer from './audio_player';
 import {fetchTracks} from "../../actions/track_actions";
 
 
-const mapStateToProps = (state) => {
-    debugger
-    return ({ track: state.entities.tracks[state.ui.player.trackId]}) 
+const mapStateToProps = (state) => { 
+    return (
+        { track: state.entities.tracks[state.ui.player.trackId],
+          playing: state.ui.player.playing  
+        }) 
 }
 
 const mapDispatchToProps = (dispatch) => ({

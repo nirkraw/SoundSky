@@ -119,18 +119,34 @@ var closeModal = function closeModal() {
 /*!********************************************!*\
   !*** ./frontend/actions/player_actions.js ***!
   \********************************************/
-/*! exports provided: UPDATE_PLAYER_TRACK, updatePlayerTrack */
+/*! exports provided: UPDATE_PLAYER_TRACK, PLAY_TRACK, PAUSE_TRACK, updatePlayerTrack, playTrack, pauseTrack */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PLAYER_TRACK", function() { return UPDATE_PLAYER_TRACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLAY_TRACK", function() { return PLAY_TRACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAUSE_TRACK", function() { return PAUSE_TRACK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePlayerTrack", function() { return updatePlayerTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playTrack", function() { return playTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseTrack", function() { return pauseTrack; });
 var UPDATE_PLAYER_TRACK = "UPDATE_PLAYER_TRACK";
+var PLAY_TRACK = "PLAY_TRACK";
+var PAUSE_TRACK = "PAUSE_TRACK";
 var updatePlayerTrack = function updatePlayerTrack(track) {
   return {
     type: UPDATE_PLAYER_TRACK,
     track: track
+  };
+};
+var playTrack = function playTrack() {
+  return {
+    type: PLAY_TRACK
+  };
+};
+var pauseTrack = function pauseTrack() {
+  return {
+    type: PAUSE_TRACK
   };
 };
 
@@ -348,7 +364,7 @@ var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
     path: "/users/:userId",
     component: _user_profile_track_index_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_track_audio_player_container__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_track_audio_player_container__WEBPACK_IMPORTED_MODULE_6__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -840,21 +856,30 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   _createClass(AudioPlayer, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       this.props.fetchTracks();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var audio = document.getElementById("audio");
+      audio.src = this.props.track.trackUrl;
+
+      if (this.props.playing) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
     }
   }, {
     key: "render",
     value: function render() {
       var track = this.props.track;
       if (!track) return null;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
         id: "audio",
         controls: true,
         controlsList: "nodownload"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-        src: track.trackUrl,
         type: "audio/mp3"
       })));
     }
@@ -884,9 +909,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
-    track: state.entities.tracks[state.ui.player.trackId]
+    track: state.entities.tracks[state.ui.player.trackId],
+    playing: state.ui.player.playing
   };
 };
 
@@ -973,7 +998,9 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
           deleteTrack: _this.props.deleteTrack,
           editTrack: _this.props.editTrack,
           currentUser: _this.props.currentUser,
-          updatePlayerTrack: _this.props.updatePlayerTrack
+          updatePlayerTrack: _this.props.updatePlayerTrack,
+          playTrack: _this.props.playTrack,
+          pauseTrack: _this.props.pauseTrack
         });
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, this.props.artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
@@ -1042,6 +1069,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updatePlayerTrack: function updatePlayerTrack(track) {
       return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["updatePlayerTrack"])(track));
+    },
+    playTrack: function playTrack() {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["playTrack"])());
+    },
+    pauseTrack: function pauseTrack() {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["pauseTrack"])());
     }
   };
 };
@@ -1100,12 +1133,12 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "playTrack",
     value: function playTrack() {
       this.props.updatePlayerTrack(this.props.track);
-      document.getElementById("audio").play();
+      this.props.playTrack();
     }
   }, {
     key: "pauseTrack",
     value: function pauseTrack() {
-      document.getElementById("audio").pause();
+      this.props.pauseTrack();
     }
   }, {
     key: "render",
@@ -1238,7 +1271,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/player_actions */ "./frontend/actions/player_actions.js");
 
 var defaultState = {
-  trackId: 1
+  trackId: 1,
+  playing: false
 };
 
 var playerReducer = function playerReducer() {
@@ -1249,7 +1283,16 @@ var playerReducer = function playerReducer() {
 
   switch (action.type) {
     case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_PLAYER_TRACK"]:
-      return newState.trackId = action.track.id;
+      newState.trackId = action.track.id;
+      return newState;
+
+    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__["PLAY_TRACK"]:
+      newState.playing = true;
+      return newState;
+
+    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__["PAUSE_TRACK"]:
+      newState.playing = false;
+      return newState;
 
     default:
       return state;

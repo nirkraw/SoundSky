@@ -26,6 +26,8 @@ class TrackIndex extends React.Component {
                     editTrack={this.props.editTrack}
                     currentUser={this.props.currentUser}
                     updatePlayerTrack = {this.props.updatePlayerTrack}
+                    playTrack = {this.props.playTrack}
+                    pauseTrack = {this.props.pauseTrack}
                 />
             ))
         )

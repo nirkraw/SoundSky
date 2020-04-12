@@ -2,7 +2,7 @@ import * as TrackActions from "../../actions/track_actions";
 import {fetchAllUsers} from "../../actions/user_actions"; 
 import { connect } from "react-redux";
 import TrackIndex from "./track_index";
-import {updatePlayerTrack} from "../../actions/player_actions";
+import {updatePlayerTrack, playTrack, pauseTrack} from "../../actions/player_actions";
 
 const mapStateToProps = (state, ownProps) => {
     return({
@@ -18,7 +18,9 @@ const mapDispatchToProps = dispatch => ({
     deleteTrack: (userId, trackId) => dispatch(TrackActions.deleteTrack(userId, trackId)),
     fetchTrack: (userId, trackId) => dispatch(TrackActions.fetchTrack(userId, trackId)),
     fetchAllUsers: ()=>dispatch(fetchAllUsers()),
-    updatePlayerTrack:(track) => dispatch(updatePlayerTrack(track))
+    updatePlayerTrack:(track) => dispatch(updatePlayerTrack(track)),
+    playTrack: () => dispatch(playTrack()),
+    pauseTrack: () => dispatch(pauseTrack()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackIndex);

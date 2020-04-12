@@ -7,11 +7,12 @@ class TrackIndexItem extends React.Component {
 
     playTrack() {
         this.props.updatePlayerTrack(this.props.track)
-        document.getElementById("audio").play();
+        this.props.playTrack()
+        
     }
 
     pauseTrack() {
-        document.getElementById("audio").pause();
+        this.props.pauseTrack();
     }
 
     render() {

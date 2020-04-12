@@ -15,9 +15,8 @@ const App = () => {
             <Switch>
                 <Route path="/users/:userId" component={TrackIndexContainer} />
             </Switch>
-            <div>
-                <AudioPlayerContainer />
-            </div>
+     <AudioPlayerContainer />
+
     </div>
     )
 };

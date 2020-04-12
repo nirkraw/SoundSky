@@ -6,20 +6,29 @@ class AudioPlayer extends React.Component {
     }
 
     componentDidMount() {
-        debugger 
         this.props.fetchTracks();
     }
 
+    componentDidUpdate() {
+        const audio = document.getElementById("audio")
+        audio.src = this.props.track.trackUrl
+            if (this.props.playing) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+    }
 
     render() {
-        const {track} = this.props 
-        if (!track) return null; 
-        debugger 
-       return( <div>
-            <audio id="audio" controls controlsList="nodownload">
-                <source src={track.trackUrl} type="audio/mp3" />
+       const {track} = this.props 
+       if (!track) return null; 
+       return( 
+       <div>
+            <audio id="audio" 
+                controls controlsList="nodownload">
+                <source type="audio/mp3" />
             </audio>
-        </div>
+       </div>
        )
     }
 }
