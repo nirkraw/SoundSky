@@ -14,9 +14,7 @@ class SessionForm extends React.Component {
         this.createDemoUser = this.createDemoUser.bind(this);
     }
 
-    componentDidMount() {   
-        // if (this.props.currentUser) {<Redirect to="/" />}
-    }
+
 
     handleSubmit(e) {
         e.preventDefault();

@@ -21,9 +21,8 @@ class Api::TracksController < ApplicationController
     end
 
     def index
-        @user = User.find(params[:user_id])
         @tracks = Track.all 
-        render 'api/users/show'
+        render 'api/tracks/index'
     end
 
 

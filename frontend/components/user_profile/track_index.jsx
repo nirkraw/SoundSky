@@ -8,7 +8,7 @@ class TrackIndex extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchTracks(this.props.match.params.userId);
+        this.props.fetchTracks();
         this.props.fetchAllUsers();
     }
 
@@ -25,6 +25,7 @@ class TrackIndex extends React.Component {
                     deleteTrack={this.props.deleteTrack}
                     editTrack={this.props.editTrack}
                     currentUser={this.props.currentUser}
+                    updatePlayerTrack = {this.props.updatePlayerTrack}
                 />
             ))
         )
@@ -32,8 +33,8 @@ class TrackIndex extends React.Component {
             <div>
                 <h1>{this.props.artist.username}</h1>
                 <img className = "artist-profile-pic" 
-                src={this.props.artist.profilePhotoUrl} 
-                alt="ArtistProfilePic"/>
+                    src={this.props.artist.profilePhotoUrl} 
+                    alt="ArtistProfilePic"/>
                 <img className="artist-cover-pic"
                     src={this.props.artist.coverPhotoUrl}
                     alt="ArtistCoverPic" />

@@ -5,6 +5,15 @@ class TrackIndexItem extends React.Component {
         super(props)
     }
 
+    playTrack() {
+        this.props.updatePlayerTrack(this.props.track)
+        document.getElementById("audio").play();
+    }
+
+    pauseTrack() {
+        document.getElementById("audio").pause();
+    }
+
     render() {
        const { track, artist, editTrack, deleteTrack, currentUser } = this.props 
        const trackInfo = ( 
@@ -12,7 +21,8 @@ class TrackIndexItem extends React.Component {
                 <p>{artist.username}</p>
                 <p>{track.title}</p>
                 <p>{track.genre}</p>
-                <audio src={track.trackUrl}></audio>
+               <button onClick={() => this.playTrack()}>Play</button>
+               <button onClick={() => this.pauseTrack()}>Pause</button>  
            </div>
         )
         if (currentUser === artist) {

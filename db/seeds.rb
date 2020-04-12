@@ -18,9 +18,6 @@ User.create!(id: 1, username: "John Mayer", password_digest: "$2a$12$FrjouNu9TSa
 
 
 Track.delete_all
-track1 = Track.create!(id: 1, title: "Slow Dancing In A Burning Room", genre: "pop", artist_id: 1)
-track2 = Track.create!(id: 2, title: "Stop This Train", genre: "pop", artist_id: 1)
-track3 = Track.create!(id: 3, title: "Bold As Love", genre: "pop", artist_id: 1)
 
 track4= Track.create!(id:4, title: "Talk At All", genre: "pop", artist_id: 14)
     track4_audio = open("https://soundsky-audio.s3.amazonaws.com/TalkAtAll.mp3")

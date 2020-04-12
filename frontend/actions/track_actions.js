@@ -4,7 +4,7 @@ export const RECEIVE_TRACKS = "RECEIVE_TRACKS";
 export const RECEIVE_TRACK = "RECEIVE_TRACK";
 export const REMOVE_TRACK = "REMOVE_TRACK";
 
-export const receiveTracks = ({tracks}) => {
+export const receiveTracks = (tracks) => {
     return ({
         type: RECEIVE_TRACKS,
         tracks
@@ -21,8 +21,8 @@ export const removeTrack = (trackId) => ({
     trackId
 })
 
-export const fetchTracks = (userId) => dispatch => (
-    (TrackUtil.fetchTracks(userId))
+export const fetchTracks = () => dispatch => (
+    (TrackUtil.fetchTracks())
     .then(tracks=> {
        return dispatch(receiveTracks(tracks))
     }) 
