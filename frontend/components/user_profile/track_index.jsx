@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'; 
-import TrackIndexItem from './track_index_item';
+import TrackIndexItemContainer from './track_index_item_container';
 import React from 'react';
 
 class TrackIndex extends React.Component {
@@ -18,16 +18,10 @@ class TrackIndex extends React.Component {
 
         const tracksMap = (
             this.props.tracks.map(track => (
-                <TrackIndexItem
+                <TrackIndexItemContainer 
                     key ={track.id}
                     artist={this.props.artist}
                     track={track}
-                    deleteTrack={this.props.deleteTrack}
-                    editTrack={this.props.editTrack}
-                    currentUser={this.props.currentUser}
-                    updatePlayerTrack = {this.props.updatePlayerTrack}
-                    playTrack = {this.props.playTrack}
-                    pauseTrack = {this.props.pauseTrack}
                 />
             ))
         )

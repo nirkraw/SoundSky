@@ -6,7 +6,9 @@ class TrackIndexItem extends React.Component {
     }
 
     playTrack() {
+        debugger 
         this.props.updatePlayerTrack(this.props.track)
+        this.props.updatePlayerArtist(this.props.artist)
         this.props.playTrack()
         
     }

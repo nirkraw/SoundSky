@@ -1,7 +1,13 @@
-import { UPDATE_PLAYER_TRACK, PLAY_TRACK, PAUSE_TRACK } from '../actions/player_actions';
+import { 
+    UPDATE_PLAYER_TRACK,
+    PLAY_TRACK, 
+    PAUSE_TRACK,
+    UPDATE_PLAYER_ARTIST } 
+from '../actions/player_actions';
 
 let defaultState = {
-     trackId: 1,
+     trackId: 4,
+     artistId: 14,
      playing: false  
     }
 
@@ -11,6 +17,9 @@ const playerReducer = (state = defaultState, action) => {
     switch(action.type) {
         case UPDATE_PLAYER_TRACK:
             newState.trackId = action.track.id;
+            return newState; 
+        case UPDATE_PLAYER_ARTIST:
+            newState.artistId = action.artist.id;
             return newState; 
         case PLAY_TRACK:
             newState.playing = true 

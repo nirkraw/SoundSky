@@ -1,3 +1,8 @@
+.top-banner {
+  background-image: url(asset_path("crowd2.jpg")); 
+  background-size: cover;
+  height: 360px;
+}
 .signedout-header {
   display: flex;
   justify-content: space-between;
