@@ -18,17 +18,21 @@ User.create!(id: 1, username: "John Mayer", password_digest: "$2a$12$FrjouNu9TSa
 
 
 Track.delete_all
-
 track4= Track.create!(id:4, title: "Talk At All", genre: "pop", artist_id: 14)
     track4_audio = open("https://soundsky-audio.s3.amazonaws.com/TalkAtAll.mp3")
     track4.audio.attach(io: track4_audio, filename: "Talk_At_All.mp3")
+    track4_photo = open("https://soundsky-photos.s3.amazonaws.com/CanYouLoveCover.jpg")
+    track4.photo.attach(io: track4_photo, filename: "Talk_At_All_Cover")
+
 
 track5= Track.create!(id:5, title: "Same Insane Love", genre: "pop", artist_id: 14)
     track5_audio = open("https://soundsky-audio.s3.amazonaws.com/SameInsaneLove.mp3")
     track5.audio.attach(io: track5_audio, filename: "Same_Insane_Love.mp3")
+    track5_photo = open("https://soundsky-photos.s3.amazonaws.com/ISawItComingAlbum.jpg")
+    track5.photo.attach(io: track5_photo, filename: "Same_Insane_Love_Cover")
 
 track6= Track.create!(id:6, title: "I Saw It Coming", genre: "pop", artist_id: 14)
     track6_audio = open("https://soundsky-audio.s3.amazonaws.com/I+Saw+It+Coming.mp3")
     track6.audio.attach(io: track6_audio, filename: "I_Saw_It_Coming.mp3")
-
-
+    track6_photo = open("https://soundsky-photos.s3.amazonaws.com/I+Saw+it+Coming+Cover(Single).jpg")
+    track6.photo.attach(io: track6_photo, filename: "I_Saw_It_Coming_Cover")

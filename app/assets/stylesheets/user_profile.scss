@@ -1,0 +1,57 @@
+.artist-profile-pic {
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+}
+
+.profile-header {
+    position: relative;
+}
+
+.cover-picture {
+    width: 100%;
+    height: 210px;
+}
+
+.profile-picture-and-name {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    display: flex;
+    flex-direction: left;
+}
+
+.artist-cover-pic {
+    width: 100%;
+    height: 100%;
+}
+
+.profile-username {
+    margin-left: 15px;
+    margin-top: 5px;
+    color: white;
+    background-color: transparentize($color: #000000, $amount: .4);
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: 200;
+    height: 22px;
+    padding: 5px;
+}
+
+.recent-tracks {
+    margin-left: 10px;
+    margin-top: 15px;
+    width: 60%;
+}
+
+.recent-header {
+    font-size: 20px;
+    font-family: "interstate";
+    color: rgb(53, 51, 51);
+}
+
+.tracks {
+    width: 100%;
+    border: 2px solid black;
+    margin-top: 15px;
+}

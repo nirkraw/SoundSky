@@ -5,6 +5,7 @@ export const RECEIVE_TRACK = "RECEIVE_TRACK";
 export const REMOVE_TRACK = "REMOVE_TRACK";
 
 export const receiveTracks = (tracks) => {
+    debugger
     return ({
         type: RECEIVE_TRACKS,
         tracks
@@ -24,6 +25,7 @@ export const removeTrack = (trackId) => ({
 export const fetchTracks = () => dispatch => (
     (TrackUtil.fetchTracks())
     .then(tracks=> {
+        debugger 
        return dispatch(receiveTracks(tracks))
     }) 
 )

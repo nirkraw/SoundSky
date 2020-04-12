@@ -143,7 +143,6 @@ var updatePlayerTrack = function updatePlayerTrack(track) {
   };
 };
 var updatePlayerArtist = function updatePlayerArtist(artist) {
-  debugger;
   return {
     type: UPDATE_PLAYER_ARTIST,
     artist: artist
@@ -259,6 +258,7 @@ var RECEIVE_TRACKS = "RECEIVE_TRACKS";
 var RECEIVE_TRACK = "RECEIVE_TRACK";
 var REMOVE_TRACK = "REMOVE_TRACK";
 var receiveTracks = function receiveTracks(tracks) {
+  debugger;
   return {
     type: RECEIVE_TRACKS,
     tracks: tracks
@@ -279,6 +279,7 @@ var removeTrack = function removeTrack(trackId) {
 var fetchTracks = function fetchTracks() {
   return function (dispatch) {
     return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"]().then(function (tracks) {
+      debugger;
       return dispatch(receiveTracks(tracks));
     });
   };
@@ -868,28 +869,34 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   _createClass(AudioPlayer, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
       this.props.fetchTracks();
       this.props.fetchUsers();
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      debugger;
       var audio = document.getElementById("audio");
-      audio.src = this.props.track.trackUrl;
 
-      if (this.props.playing) {
-        audio.play();
-      } else {
-        audio.pause();
+      if (audio) {
+        audio.src = this.props.track.trackUrl;
+
+        if (this.props.playing) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
       }
     }
   }, {
     key: "render",
     value: function render() {
+      debugger;
       var _this$props = this.props,
           track = _this$props.track,
           artist = _this$props.artist;
-      if (!track) return null;
+      if (!track || !artist) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
         className: "audio-player-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1038,15 +1045,29 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
           track: track
         });
       });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, this.props.artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
-        className: "artist-profile-pic",
-        src: this.props.artist.profilePhotoUrl,
-        alt: "ArtistProfilePic"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "profile-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "cover-picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
         className: "artist-cover-pic",
         src: this.props.artist.coverPhotoUrl,
         alt: "ArtistCoverPic"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h3", null, "Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, tracksMap));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "profile-picture-and-name"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+        className: "artist-profile-pic",
+        src: this.props.artist.profilePhotoUrl,
+        alt: "ArtistProfilePic"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", {
+        className: "profile-username"
+      }, this.props.artist.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "recent-tracks"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h3", {
+        className: "recent-header"
+      }, "Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "tracks"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, tracksMap))));
     }
   }]);
 
@@ -1147,7 +1168,6 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackIndexItem, [{
     key: "playTrack",
     value: function playTrack() {
-      debugger;
       this.props.updatePlayerTrack(this.props.track);
       this.props.updatePlayerArtist(this.props.artist);
       this.props.playTrack();
@@ -1501,6 +1521,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var tracksReducer = function tracksReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  debugger;
   Object.freeze(state);
   var newState = {};
 

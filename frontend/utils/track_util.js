@@ -1,6 +1,6 @@
 export const fetchTracks = ()=> {
     return $.ajax({
-        url: `/api/tracks`
+        url: "/api/tracks"
     })
 }
 

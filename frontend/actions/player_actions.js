@@ -11,7 +11,6 @@ export const updatePlayerTrack = (track) => {
 }
 
 export const updatePlayerArtist = (artist) => {
-    debugger 
     return({
         type: UPDATE_PLAYER_ARTIST,
         artist 

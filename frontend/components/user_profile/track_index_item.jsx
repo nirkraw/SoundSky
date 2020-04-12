@@ -6,7 +6,6 @@ class TrackIndexItem extends React.Component {
     }
 
     playTrack() {
-        debugger 
         this.props.updatePlayerTrack(this.props.track)
         this.props.updatePlayerArtist(this.props.artist)
         this.props.playTrack()
@@ -24,6 +23,7 @@ class TrackIndexItem extends React.Component {
                 <p>{artist.username}</p>
                 <p>{track.title}</p>
                 <p>{track.genre}</p>
+               {/* <img src={track.photoUrl} alt="track_picture"/> */}
                <button onClick={() => this.playTrack()}>Play</button>
                <button onClick={() => this.pauseTrack()}>Pause</button>  
            </div>
