@@ -1,16 +1,17 @@
-.artist-profile-pic {
-    height: 160px;
-    width: 160px;
-    border-radius: 50%;
-}
-
 .profile-header {
     position: relative;
 }
 
-.cover-picture {
-    width: 100%;
+.artist-cover-pic {
+    width: 98%;
     height: 210px;
+    padding-left: 10px;
+}
+
+.artist-profile-pic {
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
 }
 
 .profile-picture-and-name {
@@ -19,12 +20,6 @@
     left: 20px;
     display: flex;
     flex-direction: left;
-}
-
-.artist-cover-pic {
-    width: 98%;
-    height: 100%;
-    padding-left: 10px;
 }
 
 .profile-username {
@@ -50,111 +45,36 @@
     font-family: "interstate";
     color: rgb(53, 51, 51);
 }
-.track-index-item-container {
-    display: flex;
-    justify-content: left;
-    // border: 5px solid red;
-}
+
 .tracks {
     width: 100%;
     margin-top: 15px;
 }
 
-.track-image {
-    width: 128px;
-    height: 128px; 
-}
-
-.play-button, .pause-button {
-    height: 25px;
-    width: 25px;
-}
-
-.play-button:hover, .pause-button:hover {
-    cursor: pointer;
-}
-
-.play-pause-buttons-container {
+.upload-container {
+    height: 50px;
+    margin-bottom: 100px;
     display: flex;
-    justify-content: left;
-    padding-left: 10px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgb(226, 223, 223); 
 }
 
-.track-artist-name {
+.user-show-upload {
+    display: block;
+    background-color:#FF5500;
+    width: 75px;
     text-decoration: none;
-}
-
-.track-info {
-    padding-left: 5px;
-}
-
-.track-artist-name {
-    font-size: 13px;
-    color: grey;
-}
-
-.track-artist-name:hover {
-    color: rgb(59, 59, 59)
-}
-
-.track-title {
-    font-size: 15px;
-    color: rgb(59, 59, 59);
-}
-
-.track-genre {
-    display: flex;
-    flex-direction: column; 
-    background-color: grey;
     color: white;
+    border: 1px thin rgb(149, 147, 147);
+    border-radius: 7%;
+    padding: 4px 6px 4px 6px;
+    font-size: 14px;
+}
+
+.upload-phrase {
     font-size: 12px;
-    padding: 1px 4px 1px 4px;
-    height: 15%;
-    border-radius: 30%;
-}
-
-.track-info-container {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-}
-
-.edit-delete-buttons-container {
-    margin-left: 140px;
-    display: flex;
-    justify-content: left;
-}
-
-.edit-button, .delete-button {
-    margin-right: 10px;
-    margin-top: 5px;
-    font-size: 9px; 
-    width: 10%;
-    display:flex; 
-    justify-content: center; 
-    align-items:center;
-    font-size: 11px;
-    border: 1px solid rgb(149, 144, 144); 
-    padding: 1px;
-}
-
-.track-index-with-buttons{
-    margin-bottom: 30px;
-}
-
-.edit-button:hover, .delete-button:hover {
-    border: 1px solid rgb(56, 56, 56); 
-    cursor: pointer;
-}
-
-.pencil-icon {
-    height: 18px;
-    width: 18px;
-    margin-right: 3px;
-} 
-
-.trash-icon {
-    height: 13px;
-    width: 13px;
-    margin-right: 3px; 
+    margin-bottom: 15px; 
+    margin-top: 20px; 
 }

@@ -1,0 +1,100 @@
+.track-index-with-buttons{
+    margin-bottom: 30px;
+}
+
+.track-index-item-container {
+    display: flex;
+    justify-content: left;
+}
+
+.track-image {
+    width: 128px;
+    height: 128px; 
+}
+
+.play-pause-buttons-container {
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+}
+
+.play-button, .pause-button {
+    height: 25px;
+    width: 25px;
+}
+
+.play-button:hover, .pause-button:hover {
+    cursor: pointer;
+}
+
+.track-info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.track-info {
+    padding-left: 5px;
+}
+
+.track-artist-name {
+    text-decoration: none;
+    font-size: 13px;
+    color: grey;
+}
+
+.track-artist-name:hover {
+    color: rgb(59, 59, 59)
+}
+
+.track-title {
+    font-size: 15px;
+    color: rgb(59, 59, 59);
+}
+
+.track-genre {
+    display: flex;
+    flex-direction: column; 
+    background-color: grey;
+    color: white;
+    font-size: 12px;
+    padding: 1px 4px 1px 4px;
+    height: 15%;
+    border-radius: 30%;
+}
+
+.edit-delete-buttons-container {
+    margin-left: 140px;
+    display: flex;
+    justify-content: left;
+}
+
+.edit-button, .delete-button {
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 9px; 
+    width: 10%;
+    display:flex; 
+    justify-content: center; 
+    align-items:center;
+    font-size: 11px;
+    border: 1px solid rgb(149, 144, 144); 
+    padding: 1px;
+}
+
+.edit-button:hover, .delete-button:hover {
+    border: 1px solid rgb(56, 56, 56); 
+    cursor: pointer;
+}
+
+.pencil-icon {
+    height: 18px;
+    width: 18px;
+    margin-right: 3px;
+} 
+
+.trash-icon {
+    height: 13px;
+    width: 13px;
+    margin-right: 3px; 
+}

@@ -22,25 +22,23 @@ class TrackIndexItem extends React.Component {
        return ( 
            <li className="track-index-with-buttons"> 
                 <div className = "track-index-item-container">
-                    <div className="image-container">
-                            <img className="track-image" src={track.photoUrl} alt="track_picture"/>
+                    <img className="track-image" src={track.photoUrl} alt="track_picture"/>
+                    <div className="play-pause-buttons-container">
+                        {playing && track.id === currentTrack.id ?
+                            <img onClick={() => this.pauseTrack()} className="pause-button" src="/assets/pause-button.png" alt="pause-button" />
+                            :
+                            <img onClick={() => this.playTrack()} className="play-button" src="/assets/play-button.png" alt="play-button" />
+                        }
                     </div>
-                        <div className="play-pause-buttons-container">
-                            {playing && track.id === currentTrack.id ?
-                                <img onClick={() => this.pauseTrack()} className="pause-button" src="/assets/pause-button.png" alt="pause-button" />
-                                :
-                                <img onClick={() => this.playTrack()} className="play-button" src="/assets/play-button.png" alt="play-button" />
-                            }
-                        </div>
-                        <div className="track-info-container"> 
-                                <div className ="track-info">
-                                    <NavLink to={`/users/${artist.id}`} className="track-artist-name">{artist.username}</NavLink>   
-                                    <p className="track-title">{track.title}</p>
-                                </div>
-                                <div className="track-genre">
-                                    <p>#{track.genre}</p>
-                                </div>
-                        </div>
+                    <div className="track-info-container"> 
+                            <div className ="track-info">
+                                <NavLink to={`/users/${artist.id}`} className="track-artist-name">{artist.username}</NavLink>   
+                                <p className="track-title">{track.title}</p>
+                            </div>
+                            <div className="track-genre">
+                                <p>#{track.genre}</p>
+                            </div>
+                    </div>
                 </div>
                 {currentUser === artist ?
                 <div className="edit-delete-buttons-container"> 
@@ -54,7 +52,7 @@ class TrackIndexItem extends React.Component {
                     </div>
                 </div>
                 :
-                <p> Like </p>
+                <div className="edit-delete-buttons-container"></div> 
                 }
             </li>
         )

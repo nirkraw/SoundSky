@@ -28,11 +28,9 @@ class TrackIndex extends React.Component {
         return (
             <div>
                 <div className="profile-header">
-                    <div className="cover-picture">
-                        <img className="artist-cover-pic"
-                            src={this.props.artist.coverPhotoUrl}
-                            alt="ArtistCoverPic" />
-                    </div>
+                    <img className="artist-cover-pic"
+                        src={this.props.artist.coverPhotoUrl}
+                        alt="ArtistCoverPic" />
                     <div className="profile-picture-and-name">
                         <img className="artist-profile-pic"
                             src={this.props.artist.profilePhotoUrl}
@@ -43,10 +41,13 @@ class TrackIndex extends React.Component {
                
                <div className="recent-tracks"> 
                     <h3 className="recent-header">Recent</h3>
-                        <div className="tracks">
+                    <div className="tracks">
                         <ul>{tracksMap}</ul>
-                        </div>
-                    {/* <NavLink to="upload" className="user-show-upload">Upload</NavLink>    */}
+                    </div>
+                    <div className="upload-container">
+                        <p className="upload-phrase">More uploads means more listeners.</p>
+                        <NavLink to="/upload" className="user-show-upload">Upload more</NavLink>   
+                    </div>
                </div>
             </div>
         )
