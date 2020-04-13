@@ -26,9 +26,9 @@ class TrackIndexItem extends React.Component {
                     <img className="track-image" src={track.photoUrl} alt="track_picture"/>
                     <div className="play-pause-buttons-container">
                         {playing && track.id === currentTrack.id ?
-                            <img onClick={() => this.pauseTrack()} className="pause-button" src="/assets/pause-button.png" alt="pause-button" />
+                            <img onClick={() => this.pauseTrack()} className="pause-button" src="/assets/pause-button-2.png" alt="pause-button" />
                             :
-                            <img onClick={() => this.playTrack()} className="play-button" src="/assets/play-button.png" alt="play-button" />
+                            <img onClick={() => this.playTrack()} className="play-button" src="/assets/play-button-2.png" alt="play-button" />
                         }
                     </div>
                     <div className="track-info-container"> 

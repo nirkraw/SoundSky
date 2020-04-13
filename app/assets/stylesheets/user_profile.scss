@@ -6,12 +6,15 @@
     width: 98%;
     height: 210px;
     padding-left: 10px;
+    object-fit: cover;
 }
 
 .artist-profile-pic {
     height: 160px;
     width: 160px;
     border-radius: 50%;
+    object-fit: cover;
+    z-index: 5;
 }
 
 .profile-picture-and-name {
@@ -26,7 +29,7 @@
     margin-left: 15px;
     margin-top: 5px;
     color: white;
-    background-color: transparentize($color: #000000, $amount: .4);
+    background-color: transparentize($color: #000000, $amount: .3);
     font-size: 20px;
     font-family: sans-serif;
     font-weight: 200;

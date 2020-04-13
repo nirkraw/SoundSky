@@ -720,7 +720,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     value: function createDemoUser(e) {
       e.preventDefault();
       this.props.processForm({
-        username: "demoUser",
+        username: "Nir Kay",
         password: "demopassword"
       }).then(this.props.closeModal);
     }
@@ -1209,14 +1209,14 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           return _this.pauseTrack();
         },
         className: "pause-button",
-        src: "/assets/pause-button.png",
+        src: "/assets/pause-button-2.png",
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
           return _this.playTrack();
         },
         className: "play-button",
-        src: "/assets/play-button.png",
+        src: "/assets/play-button-2.png",
         alt: "play-button"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-info-container"
@@ -1818,69 +1818,22 @@ var logout = function logout() {
 /*!********************************************!*\
   !*** ./frontend/utils/time_format_util.js ***!
   \********************************************/
-/*! exports provided: formatTrackTime, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatTrackTime", function() { return formatTrackTime; });
-var formatUploadTime = function formatUploadTime(sqlTime) {
-  var timeOfCreation = new Date(sqlTime);
+var formatUploadTime = function formatUploadTime(created_at) {
+  var timeCreatedAt = new Date(created_at);
   var currentTime = new Date();
-  var yearsAgo = currentTime.getFullYear() - timeOfCreation.getFullYear();
-  var monthsAgo = currentTime.getMonth() - timeOfCreation.getMonth();
-  var weeksAgo = Math.floor(currentTime.getDate() / 7 - timeOfCreation.getDate() / 7);
-  var daysAgo = currentTime.getDate() - timeOfCreation.getDate();
-  var hoursAgo = currentTime.getHours() - timeOfCreation.getHours();
-  var minutesAgo = currentTime.getMinutes() - timeOfCreation.getMinutes();
-  var secondsAgo = currentTime.getSeconds() - timeOfCreation.getSeconds();
-
-  if (yearsAgo > 1) {
-    return "".concat(yearsAgo, " years ago");
-  } else if (yearsAgo === 1) {
-    return "1 year ago";
-  } else if (monthsAgo > 1) {
-    return "".concat(monthsAgo, " months ago");
-  } else if (monthsAgo === 1) {
-    return "1 month ago";
-  } else if (weeksAgo > 1) {
-    return "".concat(weeksAgo, " weeks ago");
-  } else if (weeksAgo === 1) {
-    return "1 week ago";
-  } else if (daysAgo > 1) {
-    return "".concat(daysAgo, " days ago");
-  } else if (daysAgo === 1) {
-    return "1 day ago";
-  } else if (hoursAgo > 1) {
-    return "".concat(hoursAgo, " hours ago");
-  } else if (hoursAgo === 1) {
-    return "1 hour ago";
-  } else if (minutesAgo > 1) {
-    return "".concat(minutesAgo, " minutes ago");
-  } else if (minutesAgo === 1) {
-    return "1 minute ago";
-  } else {
-    return "".concat(secondsAgo, " seconds ago");
-  }
+  var years = currentTime.getFullYear() - timeCreatedAt.getFullYear();
+  var months = currentTime.getMonth() - timeCreatedAt.getMonth();
+  var days = currentTime.getDate() - timeCreatedAt.getDate();
+  var hours = currentTime.getHours() - timeCreatedAt.getHours();
+  var minutes = currentTime.getMinutes() - timeCreatedAt.getMinutes();
+  if (years > 1) return "".concat(years, " years ago");else if (years === 1) return "1 year ago";else if (months > 1) return "".concat(months, " months ago");else if (months === 1) return "1 month ago";else if (days > 1) return "".concat(days, " days ago");else if (days === 1) return "1 day ago";else if (hours > 1) return "".concat(hours, " hours ago");else if (hours === 1) return "1 hour ago";else if (minutes > 1) return "".concat(minutes, " minutes ago");else return "1 minute ago";
 };
 
-var formatTrackTime = function formatTrackTime(seconds) {
-  if (!seconds && seconds !== 0) {
-    return "";
-  }
-
-  var secs = Math.ceil(parseFloat(seconds));
-  var mins = Math.floor(secs / 60);
-  secs -= mins * 60;
-
-  if (secs < 10) {
-    secs = "0".concat(secs);
-  } else {
-    secs = "".concat(secs);
-  }
-
-  return "".concat(mins, ":").concat(secs);
-};
 /* harmony default export */ __webpack_exports__["default"] = (formatUploadTime);
 
 /***/ }),

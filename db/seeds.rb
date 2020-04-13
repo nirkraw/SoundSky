@@ -8,9 +8,9 @@
 require 'open-uri'
 
 User.delete_all 
-demo_user = User.create!(id: 14, username: "demoUser", password_digest: "$2a$12$tmRCrkwYbQn5Fvqouu5vFuAGDZHv7eatIREXENEO1a5A746.iHp6.")
-    pro_pic = open('https://soundsky-avatars.s3.amazonaws.com/avatar.png')
-    cov_pic = open("https://soundsky-avatars.s3.amazonaws.com/coverpicture.jpg")
+demo_user = User.create!(id: 14, username: "Nir Kay", password_digest: "$2a$12$tmRCrkwYbQn5Fvqouu5vFuAGDZHv7eatIREXENEO1a5A746.iHp6.")
+    pro_pic = open('https://soundsky-photos.s3.amazonaws.com/Nir+sitting+piano-edited.jpg')
+    cov_pic = open("https://soundsky-photos.s3.amazonaws.com/longpianoshot-edited.jpeg")
     demo_user.profile_picture.attach(io: pro_pic, filename: 'profile-avatar.jpg')
     demo_user.cover_picture.attach(io: cov_pic, filename: 'cover-avatar.jpg') 
 
