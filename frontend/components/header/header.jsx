@@ -20,7 +20,7 @@ const Header = ({logout, openModal, currentUser }) => {
       {soundSkyLogo}
       <div className= "right-banner">
         <NavLink to={`/users/${currentUser.id}`} className="user-show-link">{currentUser.username}</NavLink>
-        <button className="logout-button" onClick={logout}>Log Out</button>
+        <NavLink to="/" className="logout-button" onClick={logout}>Log Out</NavLink>
       </div>
     </header>)
   };
