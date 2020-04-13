@@ -1,23 +1,22 @@
-.session-form-container {
+.upload-form-container {
    display: flex;
    justify-content: center;
  }
 
- .login-form {
+ .upload-form {
    display: flex;
    align-items: center;
    flex-direction: column;
    text-align: center;
-
  }
 
- .login-form > h3 {
+ .upload-form > h3 {
    margin: 10px;
    font-size: 32px;
    font-family: 'Montserrat', sans-serif;
  }
 
- .login-form > input {
+ .upload-form > input {
    width: 70%;
    height: 25px;
    margin: 10px;
@@ -25,14 +24,14 @@
    border-radius: 3px;
  }
 
- .login-input {
+ .upload-input {
    margin-left: 20px;
    size: 25px;
    font-size: 15px;
    text-align: center;
  }
  
- .login-form-box {
+ .upload-form-box {
    outline: 1px solid white;
    border-color: white;
    border-radius: 2px;
@@ -43,7 +42,7 @@
    position: relative;
  }
 
- .session-submit {
+ .upload-submit {
    text-transform: capitalize;
    background-color: orange;
    height: 35px;
@@ -53,19 +52,7 @@
    font-family: 'Montserrat', sans-serif;
  }
 
- .demo-user {
-   margin-top: 5px;
-   text-transform: capitalize;
-   background-color: rgb(181, 181, 216);
-   height: 35px;
-   font-size: 15px;
-   width: 71%;
-   font-size: 17px;
-   font-family: 'Montserrat', sans-serif;
- }
-
-
- .session-errors {
+ .upload-errors {
    list-style: none;
    font-family: 'Montserrat', sans-serif;
    color: rgb(245, 7, 7);

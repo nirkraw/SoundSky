@@ -20,7 +20,7 @@ class TrackIndexItem extends React.Component {
     render() {
        const { track, artist, editTrack, deleteTrack, currentUser, playing, currentTrack } = this.props 
        return ( 
-           <li className="track-index-with-buttons"> 
+           <li className="track-index-with-buttons" key={track.title}> 
                 <div className = "track-index-item-container">
                     <img className="track-image" src={track.photoUrl} alt="track_picture"/>
                     <div className="play-pause-buttons-container">

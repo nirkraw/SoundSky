@@ -4,31 +4,34 @@ export const fetchTracks = ()=> {
     })
 }
 
-export const fetchTrack = (userId, trackId) => (
+export const fetchTrack = trackId => (
     $.ajax({
-        url: `/api/users/${userId}/tracks/${trackId}`
+        url: `/api/tracks/${trackId}`
     })
 )
 
-export const createTrack = (userId, track) => (
-    $.ajax({
+export const createTrack = track => {
+    debugger 
+   return( $.ajax({
         method: 'POST',
-        url: `/api/users/${userId}/tracks`,
-        data: {track}
-    })
-)
+        url: `/api/tracks`,
+        data: track,
+        contentType: false,
+        processData: false 
+    }))
+}
 
-export const updateTrack = (userId, track) => (
+export const updateTrack = track => (
     $.ajax({
         method: 'PATCH',
-        url: `/api/users/${userId}/tracks/${track.id}`,
+        url: `/api/tracks/${track.id}`,
         data: { track }
     })
 )
 
-export const deleteTrack = (userId, trackId) => (
+export const deleteTrack = trackId => (
     $.ajax({
         method: 'DELETE',
-        url: `/api/users/${userId}/tracks/${trackId}`,
+        url: `/api/tracks/${trackId}`,
     })
 )

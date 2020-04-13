@@ -18,7 +18,7 @@ class TrackIndex extends React.Component {
         const tracksMap = (
             this.props.tracks.map(track => (
                 <TrackIndexItemContainer 
-                    key ={track.id}
+                    key={track.id}
                     artist={this.props.artist}
                     track={track}
                 />

@@ -4,19 +4,16 @@ class Api::TracksController < ApplicationController
 
     def create
         @track = Track.new(track_params)
-        @track.artist_id = params[:user_id]
-        
         if @track.save!
-            render 'api/users/show'
+            render json: ["Track was successfully uploaded!"]
         else
-            flash[:errors] = @track.errors.full_messages 
+            render json: @track.errors.full_messages 
         end
     end
 
     def update
        @track = Track.find(params[:id])
-       @track.artist_id = params[:user_id]
-       flash[:errors]= @track.errors.full_messages unless @track.artist = current_user && @track.update(track_params)
+       render json: @track.errors.full_messages unless @track.artist = current_user && @track.update(track_params)
        render 'api/users/show'
     end
 
@@ -25,21 +22,20 @@ class Api::TracksController < ApplicationController
         render 'api/tracks/index'
     end
 
-
     def show
         @track = Track.find(params[:id])
         render 'api/tracks/show'
     end
     
     def destroy
-        @track = current_user.tracks.find_by(id: params[:id])
+         @track = Track.find(params[:id])
         if @track && @track.delete 
             render 'api/users/show'
         end
     end
 
-      def track_params 
-        params.require(:track).permit(:title)
+    def track_params 
+        params.require(:track).permit(:title, :artist_id, :genre, :description, :photo, :audio)
     end
     
 end
