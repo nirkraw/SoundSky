@@ -11,7 +11,6 @@ class TrackIndexItem extends React.Component {
         this.props.updatePlayerTrack(this.props.track)
         this.props.updatePlayerArtist(this.props.artist)
         this.props.playTrack()
-        
     }
 
     pauseTrack() {
@@ -37,7 +36,7 @@ class TrackIndexItem extends React.Component {
                                 <p className="track-title">{track.title}</p>
                             </div>
                             <div className="track-genre-time">
-                           <p className="uploaded-time">{formatUploadTime(track.created_at)}</p>
+                                <p className="uploaded-time">{formatUploadTime(track.created_at)}</p>
                                 <p className="track-genre">#{track.genre}</p>
                             </div>
                     </div>

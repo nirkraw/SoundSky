@@ -15,7 +15,6 @@ class TrackIndex extends React.Component {
     render() { 
         if (!this.props.artist) return null;
         if (!this.props.tracks) return null;
-
         const tracksMap = (
             this.props.tracks.map(track => (
                 <TrackIndexItemContainer 
@@ -44,10 +43,14 @@ class TrackIndex extends React.Component {
                     <div className="tracks">
                         <ul>{tracksMap}</ul>
                     </div>
+                    {this.props.currentUser === this.props.artist ?
                     <div className="upload-container">
                         <p className="upload-phrase">More uploads means more listeners.</p>
                         <NavLink to="/upload" className="user-show-upload">Upload more</NavLink>   
                     </div>
+                    :
+                    <div className="upload-container"></div>
+                    }
                </div>
             </div>
         )
