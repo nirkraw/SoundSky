@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderContainer from "../header/header";
+
 
 class Splash extends React.Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class Splash extends React.Component {
     render() {
         return(
             <div>
-                <HeaderContainer />
+         
                 <h1>hello</h1>
             </div>
         )

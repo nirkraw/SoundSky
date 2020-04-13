@@ -1,5 +1,5 @@
 import React from 'react';
-
+import HeaderContainer from "../components/header/header_container";
 import TrackIndexContainer from "./user_profile/track_index_container";
 import { AuthRoute } from '../utils/route_util';
 import Modal from './modal/modal';
@@ -13,10 +13,11 @@ const App = () => {
     return(
     <div>
         <Modal />
+            <HeaderContainer />
             <Switch>
                 <Route exact path="/" component={Splash} />
                 <Route exact path="/users/:userId" component={TrackIndexContainer} />
-                <AuthRoute exact path="/upload" component={TrackUploadContainer} />
+                <Route exact path="/upload" component={TrackUploadContainer} />
             </Switch>
         <AudioPlayerContainer />
     </div>
