@@ -43,9 +43,15 @@ class TrackIndexItem extends React.Component {
                         </div>
                 </div>
                 {currentUser === artist ?
-                <div className="edit-delete-buttons-container">
-                    <button className="edit-button" onClick={() => editTrack(artist.id, track)}>Edit</button>
-                    <button className="delete-button" onClick={() => deleteTrack(artist.id, track.id)}>Delete</button>
+                <div className="edit-delete-buttons-container"> 
+                    <div className="edit-button" onClick={() => editTrack(artist.id, track)}>
+                        <img className="pencil-icon" src="/assets/pencil.png" alt="pencil" />
+                        <p>Edit</p>
+                    </div>
+                       <div className="delete-button" onClick={() => deleteTrack(artist.id, track.id)}>
+                           <img className="trash-icon" src="/assets/trash.png" alt="pencil" />
+                           <p>Delete</p>
+                    </div>
                 </div>
                 :
                 <p> Like </p>
