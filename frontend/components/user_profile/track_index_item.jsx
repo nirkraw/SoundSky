@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 class TrackIndexItem extends React.Component {
     constructor(props) {
@@ -17,34 +18,40 @@ class TrackIndexItem extends React.Component {
     }
 
     render() {
-       const { track, artist, editTrack, deleteTrack, currentUser } = this.props 
-       const trackInfo = ( 
-           <div className = "track-info">
-                <p>{artist.username}</p>
-                <p>{track.title}</p>
-                <p>{track.genre}</p>
-               {/* <img src={track.photoUrl} alt="track_picture"/> */}
-               <button onClick={() => this.playTrack()}>Play</button>
-               <button onClick={() => this.pauseTrack()}>Pause</button>  
-           </div>
-        )
-        if (currentUser === artist) {
-            return (
-                <li>
-                    {trackInfo}
-                    <div>
-                        <button onClick={() => editTrack(artist.id, track)}>Edit</button>
-                        <button onClick={() => deleteTrack(artist.id, track.id)}>Delete</button>
+       const { track, artist, editTrack, deleteTrack, currentUser, playing, currentTrack } = this.props 
+       return ( 
+           <li className="track-index-with-buttons"> 
+                <div className = "track-index-item-container">
+                    <div className="image-container">
+                            <img className="track-image" src={track.photoUrl} alt="track_picture"/>
                     </div>
-                </li>
-            )
-        } else {
-            return (
-                <li>
-                    {trackInfo} 
-                </li>
-            ) 
-        }
+                        <div className="play-pause-buttons-container">
+                            {playing && track.id === currentTrack.id ?
+                                <img onClick={() => this.pauseTrack()} className="pause-button" src="/assets/pause-button.png" alt="pause-button" />
+                                :
+                                <img onClick={() => this.playTrack()} className="play-button" src="/assets/play-button.png" alt="play-button" />
+                            }
+                        </div>
+                        <div className="track-info-container"> 
+                                <div className ="track-info">
+                                    <NavLink to={`/users/${artist.id}`} className="track-artist-name">{artist.username}</NavLink>   
+                                    <p className="track-title">{track.title}</p>
+                                </div>
+                                <div className="track-genre">
+                                    <p>#{track.genre}</p>
+                                </div>
+                        </div>
+                </div>
+                {currentUser === artist ?
+                <div className="edit-delete-buttons-container">
+                    <button className="edit-button" onClick={() => editTrack(artist.id, track)}>Edit</button>
+                    <button className="delete-button" onClick={() => deleteTrack(artist.id, track.id)}>Delete</button>
+                </div>
+                :
+                <p> Like </p>
+                }
+            </li>
+        )
     }
 }
 

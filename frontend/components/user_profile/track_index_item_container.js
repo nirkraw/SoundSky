@@ -7,7 +7,9 @@ const mapStateToProps = (state, ownProps) => {
     return ({
         currentUser: state.entities.users[state.session.currentUserId],
         artist: ownProps.artist,
-        track: ownProps.track
+        track: ownProps.track,
+        playing: state.ui.player.playing,
+        currentTrack: (state.entities.tracks)[state.ui.player.trackId]
     })
 }
 

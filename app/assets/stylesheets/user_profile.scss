@@ -41,7 +41,7 @@
 .recent-tracks {
     margin-left: 10px;
     margin-top: 15px;
-    width: 60%;
+    width: 70%;
 }
 
 .recent-header {
@@ -49,9 +49,85 @@
     font-family: "interstate";
     color: rgb(53, 51, 51);
 }
-
+.track-index-item-container {
+    display: flex;
+    justify-content: left;
+    // border: 5px solid red;
+}
 .tracks {
     width: 100%;
-    border: 2px solid black;
     margin-top: 15px;
+}
+
+.track-image {
+    width: 128px;
+    height: 128px; 
+}
+
+.play-button, .pause-button {
+    height: 25px;
+    width: 25px;
+}
+
+.play-button:hover, .pause-button:hover {
+    cursor: pointer;
+}
+
+.play-pause-buttons-container {
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+}
+
+.track-artist-name {
+    text-decoration: none;
+}
+
+.track-info {
+    padding-left: 5px;
+}
+
+.track-artist-name {
+    font-size: 13px;
+    color: grey;
+}
+
+.track-artist-name:hover {
+    color: rgb(59, 59, 59)
+}
+
+.track-title {
+    font-size: 15px;
+    color: rgb(59, 59, 59);
+}
+
+.track-genre {
+    display: flex;
+    flex-direction: column; 
+    background-color: grey;
+    color: white;
+    font-size: 12px;
+    padding: 1px 4px 1px 4px;
+    height: 15%;
+    border-radius: 30%;
+}
+
+.track-info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    // border: 5px solid purple;
+}
+
+.edit-delete-buttons-container {
+    margin-left: 140px;
+}
+
+.edit-button, .delete-button {
+    margin-right: 10px;
+}
+
+.track-index-with-buttons{
+    margin-bottom: 30px;
+    // border: 5px solid blue;
 }
