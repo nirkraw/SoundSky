@@ -5,7 +5,6 @@ import {fetchAllUsers} from "../../actions/user_actions";
 
 
 const mapStateToProps = (state) => { 
-    debugger 
     return (
         { track: (state.entities.tracks)[state.ui.player.trackId],
           playing: state.ui.player.playing,

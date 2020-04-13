@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import formatUploadTime from "../../utils/time_format_util";
 
 class TrackIndexItem extends React.Component {
     constructor(props) {
@@ -35,8 +36,9 @@ class TrackIndexItem extends React.Component {
                                 <NavLink to={`/users/${artist.id}`} className="track-artist-name">{artist.username}</NavLink>   
                                 <p className="track-title">{track.title}</p>
                             </div>
-                            <div className="track-genre">
-                                <p>#{track.genre}</p>
+                            <div className="track-genre-time">
+                           <p className="uploaded-time">{formatUploadTime(track.created_at)}</p>
+                                <p className="track-genre">#{track.genre}</p>
                             </div>
                     </div>
                 </div>

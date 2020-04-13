@@ -7,13 +7,11 @@ class AudioPlayer extends React.Component {
     }
 
     componentDidMount() {
-        debugger 
         this.props.fetchTracks();
         this.props.fetchUsers();
     }
 
     componentDidUpdate() {
-        debugger 
         const audio = document.getElementById("audio");
         if(audio) {
         audio.src = this.props.track.trackUrl
@@ -26,7 +24,6 @@ class AudioPlayer extends React.Component {
     }
 
     render() {
-        debugger 
        const {track, artist} = this.props 
        if (!track || !artist) return null; 
 

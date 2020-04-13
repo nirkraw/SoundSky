@@ -52,15 +52,27 @@
     color: rgb(59, 59, 59);
 }
 
-.track-genre {
+.track-genre-time {
     display: flex;
     flex-direction: column; 
-    background-color: grey;
+    font-size: 12px;
+    height: 20%;
+    border-radius: 30%;
+}
+
+.track-genre{
+    background-color: rgb(185, 182, 182);
     color: white;
     font-size: 12px;
-    padding: 1px 4px 1px 4px;
-    height: 15%;
-    border-radius: 30%;
+    border-radius: 25px;
+    padding: 3px 2px 3px 2px;
+    text-align: center;
+}
+
+.uploaded-time {
+    text-align: center;
+    margin-bottom: 3px;
+    color: rgb(207, 204, 204);
 }
 
 .edit-delete-buttons-container {
@@ -80,6 +92,7 @@
     font-size: 11px;
     border: 1px solid rgb(149, 144, 144); 
     padding: 1px;
+    letter-spacing: 1px;
 }
 
 .edit-button:hover, .delete-button:hover {

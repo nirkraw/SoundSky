@@ -258,7 +258,6 @@ var RECEIVE_TRACKS = "RECEIVE_TRACKS";
 var RECEIVE_TRACK = "RECEIVE_TRACK";
 var REMOVE_TRACK = "REMOVE_TRACK";
 var receiveTracks = function receiveTracks(tracks) {
-  debugger;
   return {
     type: RECEIVE_TRACKS,
     tracks: tracks
@@ -279,7 +278,6 @@ var removeTrack = function removeTrack(trackId) {
 var fetchTracks = function fetchTracks() {
   return function (dispatch) {
     return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"]().then(function (tracks) {
-      debugger;
       return dispatch(receiveTracks(tracks));
     });
   };
@@ -869,14 +867,12 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   _createClass(AudioPlayer, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       this.props.fetchTracks();
       this.props.fetchUsers();
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      debugger;
       var audio = document.getElementById("audio");
 
       if (audio) {
@@ -892,7 +888,6 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       var _this$props = this.props,
           track = _this$props.track,
           artist = _this$props.artist;
@@ -952,7 +947,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
     track: state.entities.tracks[state.ui.player.trackId],
     playing: state.ui.player.playing,
@@ -1136,6 +1130,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _utils_time_format_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/time_format_util */ "./frontend/utils/time_format_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1157,6 +1152,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1231,8 +1227,12 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
       }, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "track-title"
       }, track.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-genre-time"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "uploaded-time"
+      }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_2__["default"])(track.created_at)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "track-genre"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "#", track.genre)))), currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "#", track.genre)))), currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-delete-buttons-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-button",
@@ -1565,7 +1565,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var tracksReducer = function tracksReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(state);
   var newState = {};
 
@@ -1811,6 +1810,77 @@ var logout = function logout() {
     method: "DELETE"
   });
 };
+
+/***/ }),
+
+/***/ "./frontend/utils/time_format_util.js":
+/*!********************************************!*\
+  !*** ./frontend/utils/time_format_util.js ***!
+  \********************************************/
+/*! exports provided: formatTrackTime, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatTrackTime", function() { return formatTrackTime; });
+var formatUploadTime = function formatUploadTime(sqlTime) {
+  var timeOfCreation = new Date(sqlTime);
+  var currentTime = new Date();
+  var yearsAgo = currentTime.getFullYear() - timeOfCreation.getFullYear();
+  var monthsAgo = currentTime.getMonth() - timeOfCreation.getMonth();
+  var weeksAgo = Math.floor(currentTime.getDate() / 7 - timeOfCreation.getDate() / 7);
+  var daysAgo = currentTime.getDate() - timeOfCreation.getDate();
+  var hoursAgo = currentTime.getHours() - timeOfCreation.getHours();
+  var minutesAgo = currentTime.getMinutes() - timeOfCreation.getMinutes();
+  var secondsAgo = currentTime.getSeconds() - timeOfCreation.getSeconds();
+
+  if (yearsAgo > 1) {
+    return "".concat(yearsAgo, " years ago");
+  } else if (yearsAgo === 1) {
+    return "1 year ago";
+  } else if (monthsAgo > 1) {
+    return "".concat(monthsAgo, " months ago");
+  } else if (monthsAgo === 1) {
+    return "1 month ago";
+  } else if (weeksAgo > 1) {
+    return "".concat(weeksAgo, " weeks ago");
+  } else if (weeksAgo === 1) {
+    return "1 week ago";
+  } else if (daysAgo > 1) {
+    return "".concat(daysAgo, " days ago");
+  } else if (daysAgo === 1) {
+    return "1 day ago";
+  } else if (hoursAgo > 1) {
+    return "".concat(hoursAgo, " hours ago");
+  } else if (hoursAgo === 1) {
+    return "1 hour ago";
+  } else if (minutesAgo > 1) {
+    return "".concat(minutesAgo, " minutes ago");
+  } else if (minutesAgo === 1) {
+    return "1 minute ago";
+  } else {
+    return "".concat(secondsAgo, " seconds ago");
+  }
+};
+
+var formatTrackTime = function formatTrackTime(seconds) {
+  if (!seconds && seconds !== 0) {
+    return "";
+  }
+
+  var secs = Math.ceil(parseFloat(seconds));
+  var mins = Math.floor(secs / 60);
+  secs -= mins * 60;
+
+  if (secs < 10) {
+    secs = "0".concat(secs);
+  } else {
+    secs = "".concat(secs);
+  }
+
+  return "".concat(mins, ":").concat(secs);
+};
+/* harmony default export */ __webpack_exports__["default"] = (formatUploadTime);
 
 /***/ }),
 

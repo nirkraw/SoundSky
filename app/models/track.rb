@@ -1,6 +1,7 @@
 class Track < ApplicationRecord
 
 validates :artist_id, :title, presence: true 
+# before_validation :change_created_at_format
 
 # before_create :ensure_audio_attached
 
@@ -20,5 +21,13 @@ has_one_attached :audio
 #         file = track.artist.profile_picture  
 #         self.photo.attach(io: file, filename: 'track_photo.jpg')
 #     end
+
+    # def change_created_at_format
+    #     debugger  
+    #     self.created_at = self.created_at.to_date 
+    # end
+     def created_at
+        attributes['created_at'].strftime("%m/%d/%Y")
+     end
 
 end

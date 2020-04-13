@@ -1,7 +1,6 @@
 import {RECEIVE_TRACKS, RECEIVE_TRACK, REMOVE_TRACK} from "../actions/track_actions";
 
 const tracksReducer = (state= {}, action) => {
-    debugger
     Object.freeze(state);
     let newState = {}
         switch(action.type) {
