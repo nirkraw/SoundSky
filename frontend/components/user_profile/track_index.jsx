@@ -10,7 +10,9 @@ class TrackIndex extends React.Component {
     componentDidMount() {
         this.props.fetchTracks();
         this.props.fetchAllUsers();
+        this.props.closeModal()
     }
+
 
     render() { 
         if (!this.props.artist) return null;

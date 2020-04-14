@@ -1,11 +1,22 @@
 import { OPEN_MODAL, CLOSE_MODAL } from '../actions/modal_actions';
 
-export default function modalReducer(state = null, action) {
+let defaultState = { 
+    name: null, 
+    trackId: 0,
+    artistId: 0
+}
+
+export default function modalReducer(state = defaultState, action) {
     switch (action.type) {
         case OPEN_MODAL:
-            return action.modal;
+            let newState = { 
+                name: action.modal, 
+                trackId: action.trackId, 
+                artistId: action.artistId 
+            };
+            return newState; 
         case CLOSE_MODAL:
-            return null;
+            return defaultState
         default:
             return state;
     }

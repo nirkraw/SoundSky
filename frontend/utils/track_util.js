@@ -11,7 +11,6 @@ export const fetchTrack = trackId => (
 )
 
 export const createTrack = track => {
-    debugger 
    return( $.ajax({
         method: 'POST',
         url: `/api/tracks`,
@@ -21,13 +20,15 @@ export const createTrack = track => {
     }))
 }
 
-export const updateTrack = track => (
-    $.ajax({
+export const updateTrack = (track, trackId) => {
+    return($.ajax({
         method: 'PATCH',
-        url: `/api/tracks/${track.id}`,
-        data: { track }
-    })
-)
+        url: `/api/tracks/${trackId}`,
+        data: track,
+        contentType: false,
+        processData: false 
+    }))
+}
 
 export const deleteTrack = trackId => (
     $.ajax({

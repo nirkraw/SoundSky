@@ -2,7 +2,6 @@ import {  RECEIVE_TRACK_ERRORS } from "../actions/track_actions";
 import { CLOSE_MODAL } from '../actions/modal_actions';
 
 const trackErrorsReducer = (state = [], action) => {
-    debugger 
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_TRACK_ERRORS:

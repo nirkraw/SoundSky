@@ -9,6 +9,7 @@ class TrackUpload extends React.Component {
             description: "",
             genre: "",
             photoFile: null,
+            photoUrl: null,
             trackFile: null,
             artist_id: this.props.currentUser.id,
             submited: false
@@ -17,6 +18,7 @@ class TrackUpload extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTrack = this.handleTrack.bind(this);
         this.handlePhoto = this.handlePhoto.bind(this);
+        
     }
 
     handleInput(type) {
@@ -28,25 +30,45 @@ class TrackUpload extends React.Component {
     }
 
     handlePhoto(e) {
-        this.setState({ photoFile: e.currentTarget.files[0] });
-    }
-
+        const file = e.currentTarget.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            this.setState({ photoFile: file, photoUrl: fileReader.result });
+        }
+        if(file) fileReader.readAsDataURL(file);
+    }   
+   
     handleSubmit(e) {
-        debugger
         e.preventDefault();
         const formData = new FormData();
         formData.append('track[title]', this.state.title);
         formData.append('track[genre]', this.state.genre);
         formData.append('track[description]', this.state.description);
         formData.append('track[artist_id]', this.state.artist_id);
-        formData.append('track[photo]', this.state.photoFile);
-        formData.append('track[audio]', this.state.trackFile);
-        this.props.createTrack(formData)
-        this.setState({submited: true})
+        if (this.state.photoFile) {
+            formData.append('track[photo]', this.state.photoFile);
+        }
+        if (this.state.trackFile) {
+            formData.append('track[audio]', this.state.trackFile);
+        }
+        this.props.createTrack(formData).then(this.setState({ submited: true }))
     }
-    
+
     render() {
         if(this.state.submited) return(<Redirect to={`users/${currentUser.id}`}/>)
+       
+        const preview = this.state.photoUrl ? <img className="image-preview" src={this.state.photoUrl} alt="TrackPhoto" /> : null;
+        
+        let buttonText;
+        let buttonClass;
+        if(preview) {
+            buttonText = "Replace image";
+            buttonClass= "replace-image"
+        } else {
+            buttonText = "Upload image";
+            buttonClass = "upload-image"
+        }
+    
         const genreSelector = (
             <select 
             value = {this.state.genre} 
@@ -94,24 +116,27 @@ class TrackUpload extends React.Component {
         )
 
 
+
         return(
                 <form onSubmit={this.handleSubmit} className="upload-form-box">
                     <div onClick={this.props.closeModal} className="close-x">X</div>
                         <div className="div1">
-                            <h3>Basic info</h3>
                             {errorsLi}
+                            <h3>Basic info</h3>
                         </div>
                         <div className="div2">
                             <div className ="div2a">
                                 <div className="photo-container">
-                                    <label>Upload photo
-                                    <   input
-                                            type="file"
-                                            onChange={this.handlePhoto} />
-                                    </label>
+                                    {preview}
+                                     <label className={buttonClass}>{buttonText}
+                                        <   input
+                                                className="photo-input"
+                                                type="file"
+                                                onChange={this.handlePhoto} />
+                                        </label>
                                 </div>
                                 <label>Upload track
-                                <   input 
+                                <   input
                                     type="file" 
                                     onChange={this.handleTrack} />
                                 </label>

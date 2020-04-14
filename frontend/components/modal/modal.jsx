@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import LoginFormContainer from '../session/login_form_container';
 import SignupFormContainer from '../session/signup_form_container';
 import TrackUploadContainer from '../track/track_upload_container';
+import TrackEditContainer from '../track/track_edit_container';
+import TrackDeleteContainer from '../track/track_delete_container';
 
-function Modal({ modal, closeModal }) {
+function Modal({ modal, closeModal, trackId, artistId }) {
     if (!modal) {
         return null;
     }
@@ -19,7 +21,13 @@ function Modal({ modal, closeModal }) {
             break;
         case 'upload':
             component = <TrackUploadContainer />;
+            break
+        case "edit" :
+            component = <TrackEditContainer trackId={trackId}/>;
             break;
+        case "delete" :
+            component= <TrackDeleteContainer trackId={trackId} artistId={artistId}/>;
+            break 
         default:
             return null;
     }
@@ -34,7 +42,9 @@ function Modal({ modal, closeModal }) {
 
 const mapStateToProps = state => {
     return {
-        modal: state.ui.modal
+        modal: state.ui.modal.name, 
+        trackId: state.ui.modal.trackId,
+        artistId: state.ui.modal.artistId 
     };
 };
 

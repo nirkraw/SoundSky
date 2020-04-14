@@ -5,6 +5,7 @@ export const RECEIVE_TRACK = "RECEIVE_TRACK";
 export const REMOVE_TRACK = "REMOVE_TRACK";
 export const RECEIVE_TRACK_ERRORS = "RECEIVE_TRACK_ERRORS";
 
+
 export const receiveTracks = (tracks) => {
     return ({
         type: RECEIVE_TRACKS,
@@ -21,6 +22,7 @@ export const removeTrack = (trackId) => ({
     type: REMOVE_TRACK,
     trackId
 })
+
 
 export const errorHandler = (errors) => ({
     type: RECEIVE_TRACK_ERRORS,
@@ -44,14 +46,13 @@ export const createTrack = (form_track) => dispatch => (
     .then(
         track => dispatch(receiveTrack(track)),
         errors => { 
-            debugger
            return dispatch(errorHandler(errors.responseJSON))
         }
     )
 )
 
-export const updateTrack = (form_track) => dispatch => (
-    (TrackUtil.updateTrack(form_track))
+export const updateTrack = (form_track, trackId) => dispatch => (
+    (TrackUtil.updateTrack(form_track, trackId))
     .then(
         track => dispatch(receiveTrack(track)),
         errors => dispatch(errorHandler(errors.responseJSON))

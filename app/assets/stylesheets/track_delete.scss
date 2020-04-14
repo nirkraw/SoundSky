@@ -1,0 +1,66 @@
+ .delete-form-box {
+   outline: 1px solid white;
+   border-color: white;
+   border-radius: 2px;
+   height: 300px;
+   width: 400px;
+   padding: 20px;
+   background: rgb(255, 255, 255);
+   position: relative;
+   display: flex;
+   flex-direction: column;
+ }
+
+ .delete-track-artist-name {
+    text-decoration: none;
+    font-size: 11px;
+    color: grey;
+ }
+
+ .delete-track-title{
+    font-size: 13px;
+    color: rgb(59, 59, 59);
+ }
+
+ .delete-track-image {
+    width: 8em;
+    height: 8em; 
+    object-fit: cover;
+    border: 1px solid black;
+ }
+
+
+ .delete-track-header{
+     border-top: 1px solid rgb(212, 208, 208);
+     padding-top: 15px;
+     margin-top: 40px;
+     font-size: 17px;
+     text-align: left;
+ }
+
+ .delete-info {
+     padding-top: 15px;
+     font-size: 12px;
+     left: 70px; 
+     margin-left: 15px;
+     width: 150px; 
+ }
+
+ .delete-buttons {
+     margin-top: 10px;
+     display: flex;
+     justify-content: left;
+     padding: 10px;
+     position: absolute;
+     right: 5px;
+     bottom: 10px;
+ }
+
+ .delete-cancel-button, .delete-forever-button {
+     margin-right: 10px;
+     font-size: 10px; 
+ }
+
+ .delete-forever-button:hover {
+     border-color: rgb(172, 168, 168);
+ }

@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import formatUploadTime from "../../utils/time_format_util";
 
+
 class TrackIndexItem extends React.Component {
     constructor(props) {
         super(props)
@@ -18,7 +19,7 @@ class TrackIndexItem extends React.Component {
     }
 
     render() {
-       const { track, artist, editTrack, deleteTrack, currentUser, playing, currentTrack } = this.props 
+       const { track, artist, currentUser, playing, currentTrack } = this.props 
        return ( 
            <li className="track-index-with-buttons" key={this.props.key}> 
                 <div className = "track-index-item-container">
@@ -47,11 +48,11 @@ class TrackIndexItem extends React.Component {
                 </div>
                 {currentUser === artist ?
                 <div className="edit-delete-buttons-container"> 
-                    <div className="edit-button" onClick={() => editTrack(artist.id, track)}>
+                       <div className="edit-button" onClick={() => this.props.openModal('edit', track.id)}>
                         <img className="pencil-icon" src="/assets/pencil.png" alt="pencil" />
                         <p>Edit</p>
                     </div>
-                       <div className="delete-button" onClick={() => deleteTrack(artist.id, track.id)}>
+                       <div className="delete-button" onClick={() => this.props.openModal('delete', track.id, artist.id)}>
                            <img className="trash-icon" src="/assets/trash.png" alt="pencil" />
                            <p>Delete</p>
                     </div>

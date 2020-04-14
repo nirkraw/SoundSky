@@ -2,6 +2,7 @@ import { fetchTracks } from "../../actions/track_actions";
 import { fetchAllUsers } from "../../actions/user_actions"; 
 import { connect } from "react-redux";
 import TrackIndex from "./track_index";
+import { closeModal } from "../../actions/modal_actions";
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
     fetchTracks: ()=> dispatch(fetchTracks()),
-    fetchAllUsers: ()=>dispatch(fetchAllUsers())
+    fetchAllUsers: ()=>dispatch(fetchAllUsers()),
+    closeModal: () => dispatch(closeModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackIndex);
