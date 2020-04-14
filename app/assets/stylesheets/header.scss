@@ -23,13 +23,10 @@
 }
 
 .user-show-link {
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  background-color: transparent;
-  color: rgb(244, 241, 255);
-  margin: 10px;
+  color: #ccc;
+  font-size: 13px;
   text-decoration: none;
+  padding: 2px;
 }
 
 .user-show-link:hover {
@@ -37,7 +34,24 @@
 }
 
 .right-banner {
+  display: flex;
+  justify-content: right;
   margin-right: 5px;
+  width: fit-content;
+  height: 33px;
+  align-items: center;
+}
+
+.nav-bar-upload {
+  color: #ccc;
+  font-size: 14px;
+  text-decoration: none;
+  padding-right: 5px;
+  line-height: 1.5;
+}
+
+.nav-bar-upload:hover {
+  color: white;
 }
 
 .header-link {

@@ -4,7 +4,8 @@ import {createTrack} from "../../actions/track_actions";
 import {closeModal} from "../../actions/modal_actions";
 
 const MapStateToProps = (state) => ({
-    currentUser: state.entities.users[state.session.currentUserId]
+    currentUser: state.entities.users[state.session.currentUserId],
+    errors: state.errors.track 
 })
 
 const mapDispatchToProps = (dispatch) => ({

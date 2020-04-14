@@ -20,7 +20,7 @@ class TrackIndexItem extends React.Component {
     render() {
        const { track, artist, editTrack, deleteTrack, currentUser, playing, currentTrack } = this.props 
        return ( 
-           <li className="track-index-with-buttons" key={track.title}> 
+           <li className="track-index-with-buttons" key={this.props.key}> 
                 <div className = "track-index-item-container">
                     <img className="track-image" src={track.photoUrl} alt="track_picture"/>
                     <div className="play-pause-buttons-container">
@@ -37,7 +37,11 @@ class TrackIndexItem extends React.Component {
                             </div>
                             <div className="track-genre-time">
                                 <p className="uploaded-time">{formatUploadTime(track.created_at)}</p>
-                                <p className="track-genre">#{track.genre}</p>
+                                {track.genre ?
+                                <p className="track-genre">{`#${track.genre}`}</p>
+                                :
+                               <p></p>
+                                }
                             </div>
                     </div>
                 </div>

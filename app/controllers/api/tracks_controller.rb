@@ -1,13 +1,19 @@
 class Api::TracksController < ApplicationController
-    #before_action :ensure_logged_in
-     skip_before_action :verify_authenticity_token
 
     def create
-        @track = Track.new(track_params)
-        if @track.save!
-            render json: ["Track was successfully uploaded!"]
-        else
-            render json: @track.errors.full_messages 
+        if params[:track][:audio] == "null"
+             render json: ["Please upload a track"], status: 422
+        elsif params[:track][:photo] == "null"
+            render json: ["Please add a picture"], status: 422
+        elsif params[:track][:title] == ""
+            render json: ["Enter a title"], status: 422
+        else 
+            @track = Track.new(track_params)
+            if @track.save!
+                render json: ["Track was successfully uploaded!"]
+            else
+                render json: @track.errors.full_messages  
+            end
         end
     end
 

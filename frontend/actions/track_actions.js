@@ -43,7 +43,10 @@ export const createTrack = (form_track) => dispatch => (
     (TrackUtil.createTrack(form_track))
     .then(
         track => dispatch(receiveTrack(track)),
-        errors => dispatch(errorHandler(errors.responseJSON))
+        errors => { 
+            debugger
+           return dispatch(errorHandler(errors.responseJSON))
+        }
     )
 )
 

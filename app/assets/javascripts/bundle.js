@@ -303,6 +303,7 @@ var createTrack = function createTrack(form_track) {
     return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["createTrack"](form_track).then(function (track) {
       return dispatch(receiveTrack(track));
     }, function (errors) {
+      debugger;
       return dispatch(errorHandler(errors.responseJSON));
     });
   };
@@ -460,6 +461,9 @@ var Header = function Header(_ref) {
     }, soundSkyLogo, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "right-banner"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+      to: "/upload",
+      className: "nav-bar-upload"
+    }, "Upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
       to: "/users/".concat(currentUser.id),
       className: "user-show-link"
     }, currentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
@@ -1079,6 +1083,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1105,6 +1110,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var TrackUpload = /*#__PURE__*/function (_React$Component) {
   _inherits(TrackUpload, _React$Component);
 
@@ -1122,7 +1128,8 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       genre: "",
       photoFile: null,
       trackFile: null,
-      artist_id: _this.props.currentUser.id
+      artist_id: _this.props.currentUser.id,
+      submited: false
     };
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -1157,8 +1164,8 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
       debugger;
+      e.preventDefault();
       var formData = new FormData();
       formData.append('track[title]', this.state.title);
       formData.append('track[genre]', this.state.genre);
@@ -1166,17 +1173,24 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       formData.append('track[artist_id]', this.state.artist_id);
       formData.append('track[photo]', this.state.photoFile);
       formData.append('track[audio]', this.state.trackFile);
-      this.props.createTrack(formData).then(this.props.closeModal);
+      this.props.createTrack(formData);
+      this.setState({
+        submited: true
+      });
     }
   }, {
     key: "render",
     value: function render() {
+      if (this.state.submited) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+        to: "users/".concat(currentUser.id)
+      });
       var genreSelector = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         value: this.state.genre,
-        onChange: this.handleInput('genre')
+        onChange: this.handleInput('genre'),
+        className: "genre-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "None"
-      }, "--None--"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }, "None"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "Alternative Rock"
       }, "Alternative Rock"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "Ambient"
@@ -1235,39 +1249,55 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       }, "Triphop"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "World"
       }, "World"));
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "upload-form-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      var errorsLi = this.props.errors.map(function (error) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "session-errors",
+          key: error
+        }, error);
+      });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "upload-form-box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.props.closeModal,
         className: "close-x"
       }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "upload-form"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basic Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload track", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "file" // value={this.state.trackFile}
-        ,
-        onChange: this.handleTrack
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload photo", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "file" // value={this.state.photoFile}
-        ,
+        className: "div1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basic info"), errorsLi), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "div2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "div2a"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "photo-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload photo", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
         onChange: this.handlePhoto
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload track", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: this.handleTrack
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "div2b"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title*", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.title,
-        placeholder: "title",
+        placeholder: "Add title here",
         onChange: this.handleInput('title'),
-        className: "upload-input"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Genre", genreSelector), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "title-input"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Genre", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), genreSelector), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.description,
         cols: "30",
         rows: "10",
-        placeholder: "Describe Your Track",
-        onChange: this.handleInput("description")
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        placeholder: "Describe your track",
+        onChange: this.handleInput("description"),
+        className: "description-input",
+        spellCheck: "true"
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "div3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "required-fields"
+      }, "* Required fields"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "upload-submit"
-      }, "Save"))));
+      }, "Save")));
     }
   }]);
 
@@ -1298,7 +1328,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var MapStateToProps = function MapStateToProps(state) {
   return {
-    currentUser: state.entities.users[state.session.currentUserId]
+    currentUser: state.entities.users[state.session.currentUserId],
+    errors: state.errors.track
   };
 };
 
@@ -1649,7 +1680,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           currentTrack = _this$props.currentTrack;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "track-index-with-buttons",
-        key: track.title
+        key: this.props.key
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-index-item-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1685,9 +1716,9 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "track-genre-time"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "uploaded-time"
-      }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_2__["default"])(track.created_at)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_2__["default"])(track.created_at)), track.genre ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "track-genre"
-      }, "#", track.genre)))), currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "#".concat(track.genre)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-delete-buttons-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-button",

@@ -25,6 +25,7 @@ const Header = ({logout, openModal, currentUser }) => {
     return(<header className= "signedin-header" >
       {soundSkyLogo}
       <div className= "right-banner">
+        <NavLink to="/upload" className="nav-bar-upload">Upload</NavLink> 
         <NavLink to={`/users/${currentUser.id}`} className="user-show-link">{currentUser.username}</NavLink>
         <NavLink to="/" className="logout-button" onClick={logout}>Log Out</NavLink>
       </div>

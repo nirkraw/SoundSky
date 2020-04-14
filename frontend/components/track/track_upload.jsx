@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
 
 class TrackUpload extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class TrackUpload extends React.Component {
             genre: "",
             photoFile: null,
             trackFile: null,
-            artist_id: this.props.currentUser.id
+            artist_id: this.props.currentUser.id,
+            submited: false
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,8 +32,8 @@ class TrackUpload extends React.Component {
     }
 
     handleSubmit(e) {
+        debugger
         e.preventDefault();
-        debugger 
         const formData = new FormData();
         formData.append('track[title]', this.state.title);
         formData.append('track[genre]', this.state.genre);
@@ -39,13 +41,19 @@ class TrackUpload extends React.Component {
         formData.append('track[artist_id]', this.state.artist_id);
         formData.append('track[photo]', this.state.photoFile);
         formData.append('track[audio]', this.state.trackFile);
-        this.props.createTrack(formData).then(this.props.closeModal);
+        this.props.createTrack(formData)
+        this.setState({submited: true})
     }
     
     render() {
+        if(this.state.submited) return(<Redirect to={`users/${currentUser.id}`}/>)
         const genreSelector = (
-            <select value = {this.state.genre} onChange={this.handleInput('genre')}>
-                <option value="None">--None--</option>
+            <select 
+            value = {this.state.genre} 
+            onChange={this.handleInput('genre')}
+            className="genre-input"
+            >
+                <option value="None">None</option>
                 <option value="Alternative Rock">Alternative Rock</option>
                 <option value="Ambient">Ambient</option>
                 <option value="Classical">Classical</option>
@@ -78,51 +86,68 @@ class TrackUpload extends React.Component {
             </select>
         )
 
+        const errorsLi = this.props.errors.map(
+            error => <li
+                className="session-errors"
+                key={error}
+            >{error}</li>
+        )
+
+
         return(
-            <div className="upload-form-container">
-                <form
-                 onSubmit={this.handleSubmit} 
-                 className="upload-form-box">
+                <form onSubmit={this.handleSubmit} className="upload-form-box">
                     <div onClick={this.props.closeModal} className="close-x">X</div>
-                    <div className="upload-form">
-                        <h3>Basic Info</h3>
-                        {/* {errorsLi} */}
-                        <label>Upload track
-                        <   input 
-                            type="file" 
-                            // value={this.state.trackFile}
-                            onChange={this.handleTrack} />
-                        </label>
-                        <label>Upload photo
-                        <   input
-                                type="file"
-                                // value={this.state.photoFile}
-                                onChange={this.handlePhoto} />
-                        </label>
-                        <label>Title
-                            <input type="text"
-                                value={this.state.title}
-                                placeholder="title"
-                                onChange={this.handleInput('title')}
-                                className="upload-input"
-                            />
-                        </label>
-                        <label>Genre
-                           {genreSelector}
-                        </label>
-                        <label>Description
-                            <textarea 
-                            value={this.state.description}
-                            cols="30" rows="10" 
-                            placeholder="Describe Your Track"
-                            onChange= {this.handleInput("description")}
-                            ></textarea>
-                        </label>
-                        <button className="upload-submit">Save</button>
-    
+                        <div className="div1">
+                            <h3>Basic info</h3>
+                            {errorsLi}
+                        </div>
+                        <div className="div2">
+                            <div className ="div2a">
+                                <div className="photo-container">
+                                    <label>Upload photo
+                                    <   input
+                                            type="file"
+                                            onChange={this.handlePhoto} />
+                                    </label>
+                                </div>
+                                <label>Upload track
+                                <   input 
+                                    type="file" 
+                                    onChange={this.handleTrack} />
+                                </label>
+                            </div>
+                            <div className="div2b">
+                                <label>Title*
+                                    <br/>
+                                    <input type="text"
+                                        value={this.state.title}
+                                        placeholder="Add title here"
+                                        onChange={this.handleInput('title')}
+                                        className="title-input"
+                                    />
+                                </label>
+                                <label>Genre
+                                    <br/>
+                                {genreSelector}
+                                </label>
+                                <label>Description
+                                    <br/>
+                                    <textarea 
+                                    value={this.state.description}
+                                    cols="30" rows="10" 
+                                    placeholder="Describe your track"
+                                    onChange= {this.handleInput("description")}
+                                    className="description-input"
+                                    spellCheck="true"
+                                    ></textarea>
+                                </label>
+                            </div>
+                        </div>
+                        <div className="div3">
+                            <p className="required-fields">* Required fields</p>
+                            <button className="upload-submit">Save</button>
                     </div>
                 </form>
-            </div>
         )
     }
 }

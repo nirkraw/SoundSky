@@ -8,8 +8,10 @@
 }
 
 .track-image {
-    width: 128px;
-    height: 128px; 
+    width: 9em;
+    height: 9em; 
+    object-fit: cover;
+    border: 1px solid black;
 }
 
 .play-pause-buttons-container {
@@ -26,6 +28,7 @@
 .play-button:hover, .pause-button:hover {
     cursor: pointer;
 }
+
 
 .track-info-container {
     display: flex;
@@ -55,7 +58,6 @@
 .track-genre-time {
     display: flex;
     flex-direction: column; 
-    font-size: 12px;
     height: 20%;
     border-radius: 30%;
 }
@@ -63,20 +65,21 @@
 .track-genre{
     background-color: rgb(158, 155, 155);
     color: white;
-    font-size: 12px;
+    font-size: 11px;
     border-radius: 25px;
-    padding: 3px 1px 3px 1px;
-    text-align: center;
+    padding: 3px 5px 3px 5px;
+    width: fit-content;
 }
 
 .uploaded-time {
+    font-size: 12px;
     text-align: center;
     margin-bottom: 3px;
     color: rgb(207, 204, 204);
 }
 
 .edit-delete-buttons-container {
-    margin-left: 140px;
+    margin-left: 150px;
     display: flex;
     justify-content: left;
 }
@@ -91,7 +94,7 @@
     align-items:center;
     font-size: 9px;
     border: 1px solid rgb(226, 226, 226); 
-    padding: 1px;
+    padding: 1px 4px 1px 4px;
     letter-spacing: 1px;
 }
 
