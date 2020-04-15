@@ -1657,6 +1657,7 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       photoFile: null,
       photoUrl: null,
       trackFile: null,
+      trackUrl: null,
       artist_id: _this.props.currentUser.id,
       submited: false
     };
@@ -1679,13 +1680,6 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleTrack",
     value: function handleTrack(e) {
-      this.setState({
-        trackFile: e.currentTarget.files[0]
-      });
-    }
-  }, {
-    key: "handlePhoto",
-    value: function handlePhoto(e) {
       var _this3 = this;
 
       var file = e.currentTarget.files[0];
@@ -1693,6 +1687,23 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
 
       fileReader.onloadend = function () {
         _this3.setState({
+          trackFile: file,
+          trackUrl: fileReader.result
+        });
+      };
+
+      if (file) fileReader.readAsDataURL(file);
+    }
+  }, {
+    key: "handlePhoto",
+    value: function handlePhoto(e) {
+      var _this4 = this;
+
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this4.setState({
           photoFile: file,
           photoUrl: fileReader.result
         });
@@ -1728,20 +1739,34 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       if (this.state.submited) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
         to: "users/".concat(currentUser.id)
       });
-      var preview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      var imagePreview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "image-preview",
         src: this.state.photoUrl,
         alt: "TrackPhoto"
       }) : null;
-      var buttonText;
-      var buttonClass;
+      var trackPreview = this.state.trackUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "track-preview"
+      }, "Track is ready to go!") : null;
+      var imageText;
+      var imageClass;
 
-      if (preview) {
-        buttonText = "Replace image";
-        buttonClass = "replace-image";
+      if (imagePreview) {
+        imageText = "Replace image";
+        imageClass = "replace-image";
       } else {
-        buttonText = "Upload image";
-        buttonClass = "upload-image";
+        imageText = "Upload image";
+        imageClass = "upload-image";
+      }
+
+      var trackText;
+      var trackClass;
+
+      if (trackPreview) {
+        trackText = "Replace track";
+        trackClass = "replace-track";
+      } else {
+        trackText = "Upload track";
+        trackClass = "upload-track";
       }
 
       var genreSelector = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
@@ -1829,19 +1854,19 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
         className: "div2a"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "photo-container"
-      }, preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: buttonClass
-      }, buttonText, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, imagePreview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: imageClass
+      }, imageText, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "photo-input",
         type: "file",
         onChange: this.handlePhoto
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "upload-track"
-      }, "Upload track", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: trackClass
+      }, trackText, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "track-input",
         type: "file",
         onChange: this.handleTrack
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), trackPreview), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "div2b"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "orange"

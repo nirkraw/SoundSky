@@ -93,6 +93,15 @@
    border: 1px solid black;
  }
 
+ .track-preview {
+   position: absolute;
+   left: 56px;
+   bottom: 138px;
+   font-size: 18px;
+   font-family: 'Overpass', sans-serif;
+   color: gray;
+ }
+
  .div2b {
    display: flex;
    flex-direction: column;
@@ -186,19 +195,48 @@
  .upload-track {
    text-align: center;
    vertical-align: center;
-   background-color: rgb(228, 224, 224);
+   background-color: #FF5500;
    position: absolute;
    left: 50px;
-   bottom: 175px;
+   bottom: 160px;
    cursor: pointer;
    border-radius: 3px;
    border: 1px solid grey;
    height: 15px;
    padding: 2px 11px 2px 10px;
-   font-size: 13px;
+   font-size: 16px;
    line-height: 15px;
    font-family: 'Overpass', sans-serif;
    width: 150px;
+   color: white;
+ }
+
+ .upload-track:hover {
+   background-color: rgb(228, 224, 224);
+   color: black;
+ }
+
+ .replace-track {
+   text-align: center;
+   vertical-align: center;
+   background-color: transparentize($color: #FF5500, $amount: .2);
+   position: absolute;
+   left: 50px;
+   bottom: 160px;
+   cursor: pointer;
+   border-radius: 3px;
+   border: 1px solid grey;
+   height: 15px;
+   padding: 2px 11px 2px 10px;
+   font-size: 16px;
+   line-height: 15px;
+   font-family: 'Overpass', sans-serif;
+   width: 150px;
+   color:white; 
+ }
+
+ .replace-track:hover {
+   background-color: #FF5500;
  }
 
  .track-input {

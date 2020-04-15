@@ -11,6 +11,7 @@ class TrackUpload extends React.Component {
             photoFile: null,
             photoUrl: null,
             trackFile: null,
+            trackUrl: null,
             artist_id: this.props.currentUser.id,
             submited: false
         }
@@ -26,7 +27,12 @@ class TrackUpload extends React.Component {
     }
 
     handleTrack(e) {
-       this.setState({trackFile: e.currentTarget.files[0]});
+        const file = e.currentTarget.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            this.setState({trackFile: file, trackUrl: fileReader.result });
+        }
+        if (file) fileReader.readAsDataURL(file);
     }
 
     handlePhoto(e) {
@@ -57,18 +63,29 @@ class TrackUpload extends React.Component {
     render() {
         if(this.state.submited) return(<Redirect to={`users/${currentUser.id}`}/>)
        
-        const preview = this.state.photoUrl ? <img className="image-preview" src={this.state.photoUrl} alt="TrackPhoto" /> : null;
+        const imagePreview = this.state.photoUrl ? <img className="image-preview" src={this.state.photoUrl} alt="TrackPhoto" /> : null;
+        const trackPreview = this.state.trackUrl ? <p className="track-preview">Track is ready to go!</p>: null; 
         
-        let buttonText;
-        let buttonClass;
-        if(preview) {
-            buttonText = "Replace image";
-            buttonClass= "replace-image"
+        let imageText;
+        let imageClass;
+        if(imagePreview) {
+            imageText = "Replace image";
+            imageClass= "replace-image"
         } else {
-            buttonText = "Upload image";
-            buttonClass = "upload-image"
+            imageText = "Upload image";
+            imageClass = "upload-image"
         }
-    
+
+        let trackText;
+        let trackClass;
+        if (trackPreview) {
+            trackText = "Replace track";
+            trackClass = "replace-track"
+        } else {
+            trackText = "Upload track";
+            trackClass = "upload-track"
+        }
+
         const genreSelector = (
             <select 
             value = {this.state.genre} 
@@ -127,20 +144,21 @@ class TrackUpload extends React.Component {
                         <div className="div2">
                             <div className ="div2a">
                                 <div className="photo-container">
-                                    {preview}
-                                     <label className={buttonClass}>{buttonText}
+                                    {imagePreview}
+                                     <label className={imageClass}>{imageText}
                                         <   input
                                                 className="photo-input"
                                                 type="file"
                                                 onChange={this.handlePhoto} />
                                         </label>
                                 </div>
-                                <label className="upload-track">Upload track
+                                <label className={trackClass}>{trackText} 
                                 <   input
                                     className="track-input"
                                     type="file" 
                                     onChange={this.handleTrack} />
                                 </label>
+                                    {trackPreview}
                             </div>
                             <div className="div2b">
                         <label>Title<span className="orange"> *</span>
