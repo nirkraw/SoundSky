@@ -1,0 +1,18 @@
+.top-banner {
+  background-image: url(asset_path("crowd2.jpg")); 
+  background-size: cover;
+  height: 340px;
+}
+
+.splash-content-container {
+  display: flex;
+  justify-content: center;
+//   border: 2px solid red;
+}
+
+.splash-content-container > h1 {
+    margin-top: 50px; 
+    font-family: 'Overpass', sans-serif;
+    font-size: 20px;
+    color: rgb(36, 35, 35);
+}

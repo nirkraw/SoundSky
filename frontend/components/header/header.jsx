@@ -6,7 +6,6 @@ const Header = ({logout, openModal, currentUser }) => {
   const sessionButtons = () => {
     if(location.pathname === "/") {
       return (
-        <div className="top-banner">
           <header className="signedout-header">
             {soundSkyLogo}
             <div className ="session-buttons">
@@ -14,7 +13,7 @@ const Header = ({logout, openModal, currentUser }) => {
               <button className= "signup-button" onClick={() => openModal('signup')}>Create account</button>
             </div>
           </header>
-        </div>)
+      )
     } else {
       return (
         <div></div>
@@ -22,13 +21,27 @@ const Header = ({logout, openModal, currentUser }) => {
     }
   };
   const signinHeader = (currentUser, logout) => {
-    return(<header className= "signedin-header" >
-      {soundSkyLogo}
-      <div className= "right-banner">
-        <NavLink to="/upload" className="nav-bar-upload">Upload</NavLink> 
-        <NavLink to={`/users/${currentUser.id}`} className="user-show-link">{currentUser.username}</NavLink>
-        <NavLink to="/" className="logout-button" onClick={logout}>Log Out</NavLink>
-      </div>
+    return(<header>
+      <div className= "signedin-header" >
+        <NavLink to="/" ><div className="logo-container">
+          <img className="cloud-logo" src="/assets/music-cloud" alt="cloud_logo" />
+        </div></NavLink> 
+            <div className="home">
+          <NavLink to="/">Home</NavLink> 
+            </div>
+            <div className="linkedin">
+          <a href="https://www.linkedin.com/in/nir-krawczyk-b001a5145" target="blank">LinkedIn</a>
+            </div>
+            <div className="nir-kay">
+          <a href="https://nirkaymusic.com/" target="_blank">Nir Kay</a>
+            </div>
+        <div className= "right-banner">
+          <NavLink to="/upload" className="nav-bar-upload">Upload</NavLink> 
+          <img className="nav-bar-artist-pic" src={currentUser.profilePhotoUrl} alt="artist-pic"/>
+          <NavLink to={`/users/${currentUser.id}`} className="user-show-link">{currentUser.username}</NavLink>
+          <NavLink to="/" className="logout-button" onClick={logout}>Log Out</NavLink>
+        </div>
+      </div> 
     </header>)
   };
   if (currentUser) {

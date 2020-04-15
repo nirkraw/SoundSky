@@ -135,7 +135,7 @@ class TrackUpload extends React.Component {
 
 
         return(
-                <form onSubmit={this.hleSubmit} className="upload-form-box">
+                <form onSubmit={this.handleSubmit} className="upload-form-box">
                     <div onClick={this.props.closeModal} className="close-x">X</div>
                         <div className="div1">
                             {errorsLi}

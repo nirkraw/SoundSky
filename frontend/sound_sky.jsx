@@ -10,6 +10,7 @@ import {fetchTracks} from "./utils/track_util";
 window.fetchUsers = fetchUsers;
 window.fetchTracks = fetchTracks;
 window.fetchUser = fetchUser;
+
 //TEST
 
 document.addEventListener('DOMContentLoaded', () => {

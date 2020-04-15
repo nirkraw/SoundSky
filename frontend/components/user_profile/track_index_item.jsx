@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import formatUploadTime from "../../utils/time_format_util";
+import WaveFormContainer from "../waveform/waveform_container";
 
 
 class TrackIndexItem extends React.Component {
@@ -36,6 +37,7 @@ class TrackIndexItem extends React.Component {
                                 <NavLink to={`/users/${artist.id}`} className="track-artist-name">{artist.username}</NavLink>   
                                 <p className="track-title">{track.title}</p>
                             </div>
+                            {/* <WaveFormContainer track={track}/> */}
                             <div className="track-genre-time">
                                 <p className="uploaded-time">{formatUploadTime(track.created_at)}</p>
                                 {track.genre ?
