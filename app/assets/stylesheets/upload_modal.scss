@@ -2,7 +2,7 @@
    outline: 1px solid white;
    border-color: white;
    border-radius: 2px;
-   height: 500px;
+   height: 450px;
    width: 650px;
    padding: 20px;
    background: rgb(255, 255, 255);
@@ -96,7 +96,7 @@
  .track-preview {
    position: absolute;
    left: 56px;
-   bottom: 138px;
+   bottom: 118px;
    font-size: 18px;
    font-family: 'Overpass', sans-serif;
    color: gray;
@@ -109,7 +109,7 @@
  }
 
  .div2b > label {
-   font-size: 11px;
+   font-size: 10px;
    letter-spacing: normal;
    margin-bottom: 25px;
    padding: 5px;
@@ -163,6 +163,9 @@
    justify-content: space-between; 
    align-items: center;
    border-top: 1px solid rgb(231, 224, 224);
+   position: absolute;
+   width: 95%;
+   bottom: 9px;
  }
  
  .upload-submit {
@@ -198,7 +201,7 @@
    background-color: #FF5500;
    position: absolute;
    left: 50px;
-   bottom: 160px;
+   bottom: 140px;
    cursor: pointer;
    border-radius: 3px;
    border: 1px solid grey;
@@ -222,7 +225,7 @@
    background-color: transparentize($color: #FF5500, $amount: .2);
    position: absolute;
    left: 50px;
-   bottom: 160px;
+   bottom: 140px;
    cursor: pointer;
    border-radius: 3px;
    border: 1px solid grey;

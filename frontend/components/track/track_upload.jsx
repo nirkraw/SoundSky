@@ -178,7 +178,7 @@ class TrackUpload extends React.Component {
                                     <br/>
                                     <textarea 
                                     value={this.state.description}
-                                    cols="30" rows="10" 
+                                    cols="5" rows="5" 
                                     placeholder="Describe your track"
                                     onChange= {this.handleInput("description")}
                                     className="description-input"

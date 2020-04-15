@@ -9,7 +9,10 @@ class UploadButton extends React.Component {
        
         return (
             <div className="upload-button-container">
-                <button onClick={() => this.props.openModal('upload')} className="upload-button">choose files to upload</button>
+                <div className="upload-grey-box">
+                    <h3>Add your new track here</h3>
+                    <button onClick={() => this.props.openModal('upload')} className="upload-button">choose files to upload</button>
+                </div>
             </div>
         )
     }

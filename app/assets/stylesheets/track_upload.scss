@@ -3,12 +3,34 @@
     justify-content: center;
 }
 
+.upload-grey-box {
+    width: 575px;
+    height: 320px;
+    left: 250px;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+    margin-top: 100px;
+    border: 1px solid rgb(240, 238, 238);
+}
+
+.upload-grey-box > h3 {
+    font-size: 22px;
+    font-family: 'Overpass', sans-serif;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: #333333; 
+}
+
 .upload-button {
-    margin-top: 30%;
+    right: 36%;
+    top: 250px;
     background-color: #FF5500;
     color: white;
-    width: 280px;
-    height: 25px;
+    width: 250px;
+    height: 33px;
     border: 1px white;
     border-radius: 3px;
     font-size: 14px;
