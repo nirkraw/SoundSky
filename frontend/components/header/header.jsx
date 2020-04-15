@@ -39,7 +39,7 @@ const Header = ({logout, openModal, currentUser }) => {
           <NavLink to="/upload" className="nav-bar-upload">Upload</NavLink> 
           <img className="nav-bar-artist-pic" src={currentUser.profilePhotoUrl} alt="artist-pic"/>
           <NavLink to={`/users/${currentUser.id}`} className="user-show-link">{currentUser.username}</NavLink>
-          <NavLink to="/" className="logout-button" onClick={logout}>Log Out</NavLink>
+          <NavLink to="/" className="signout-button" onClick={logout}>Sign out</NavLink>
         </div>
       </div> 
     </header>)

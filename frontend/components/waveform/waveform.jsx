@@ -18,7 +18,7 @@ class Waveform extends React.Component {
                 waveColor: "blue",
                 height: 200,
                 partialRender: true,
-                xhr: {cache: 'default', mode: 'cors', method: 'GET'}
+                xhr: {cache: 'default', mode: 'cors', method: 'GET', credentials: true}
             })
             this.wavesurfer.load(this.props.track.trackUrl);
             this.wavesurfer.on('ready', function () {

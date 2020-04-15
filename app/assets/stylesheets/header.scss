@@ -96,7 +96,7 @@
 }
 .right-banner {
   position: absolute;
-  right: 25px;
+  right: 28px;
   display: flex;
   bottom: 2px;
   width: 200px;
@@ -138,7 +138,7 @@
   color: white;
 }
 
- .logout-button {
+.signout-button {
   color: #ccc;
   font-family: 'Overpass', sans-serif;
   font-size: 12px;
@@ -147,7 +147,7 @@
   padding-right: 5px;
   padding-left: 20px;
   line-height: 1.5;
- }
+}
 
  .logout-button:hover {
     color: white;

@@ -496,9 +496,9 @@ var Header = function Header(_ref) {
       className: "user-show-link"
     }, currentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
       to: "/",
-      className: "logout-button",
+      className: "signout-button",
       onClick: logout
-    }, "Log Out"))));
+    }, "Sign out"))));
   };
 
   if (currentUser) {
@@ -2345,7 +2345,9 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "track-artist-name"
       }, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "track-title"
-      }, track.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, track.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_waveform_waveform_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        track: track
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-genre-time"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "uploaded-time"
@@ -2505,7 +2507,8 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
           xhr: {
             cache: 'default',
             mode: 'cors',
-            method: 'GET'
+            method: 'GET',
+            credentials: true
           }
         });
         this.wavesurfer.load(this.props.track.trackUrl);
