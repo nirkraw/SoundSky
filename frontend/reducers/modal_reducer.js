@@ -14,9 +14,9 @@ export default function modalReducer(state = defaultState, action) {
                 trackId: action.trackId, 
                 artistId: action.artistId 
             };
-            return newState; 
+            return newState;
         case CLOSE_MODAL:
-            return defaultState
+            return defaultState;
         default:
             return state;
     }

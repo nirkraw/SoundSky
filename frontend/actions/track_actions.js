@@ -59,8 +59,9 @@ export const updateTrack = (form_track, trackId) => dispatch => (
     )
 )
 
-export const deleteTrack = (trackId) => dispatch => (
-    (TrackUtil.deleteTrack(trackId))
-        .then(() => dispatch(receiveTrack(trackId)))
-)
+export const deleteTrack = (trackId) => dispatch => {
+    debugger 
+    return((TrackUtil.deleteTrack(trackId))
+        .then(() => dispatch(receiveTrack(trackId))))
+}
 

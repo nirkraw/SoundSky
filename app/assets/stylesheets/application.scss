@@ -21,6 +21,10 @@ button:hover {
   cursor: pointer;
 }
 
+button {
+  outline: none;
+}
+
 
  .modal-background {
   position: fixed;

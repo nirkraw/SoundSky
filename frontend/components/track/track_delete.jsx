@@ -4,6 +4,7 @@ import formatUploadTime from "../../utils/time_format_util";
 class TrackDelete extends React.Component {
     constructor(props) {
         super(props)
+        this.handleDelete= this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -21,7 +22,12 @@ class TrackDelete extends React.Component {
         this.props.pauseTrack();
     }
 
-    render() {
+    handleDelete(e) {
+        e.preventDefault();
+        this.props.deleteTrack(this.props.track.id).then(this.props.closeModal())
+    }
+
+    render() { 
        const {track, playing, artist, currentTrack} = this.props
        debugger 
        return(
@@ -49,8 +55,8 @@ class TrackDelete extends React.Component {
                 <h3 className="delete-track-header">Permanently delete this track?</h3>
                 <p className="delete-info">Removing this track is irreversible. You will lose all the plays, likes and comments for this track with no way to get them back.</p>
                 <div className="delete-buttons">
-                    <button className="delete-cancel-button">Cancel</button>
-                    <button className="delete-forever-button">Delete forever</button>
+                    <button className="delete-cancel-button" onClick={this.props.closeModal}>Cancel</button>
+                    <button className="delete-forever-button" onClick={this.handleDelete}>Delete forever</button>
                 </div>
                 
         </div>

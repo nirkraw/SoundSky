@@ -322,6 +322,7 @@ var updateTrack = function updateTrack(form_track, trackId) {
 };
 var deleteTrack = function deleteTrack(trackId) {
   return function (dispatch) {
+    debugger;
     return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrack"](trackId).then(function () {
       return dispatch(receiveTrack(trackId));
     });
@@ -1139,9 +1140,13 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(TrackDelete);
 
   function TrackDelete(props) {
+    var _this;
+
     _classCallCheck(this, TrackDelete);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(TrackDelete, [{
@@ -1163,9 +1168,15 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
       this.props.pauseTrack();
     }
   }, {
+    key: "handleDelete",
+    value: function handleDelete(e) {
+      e.preventDefault();
+      this.props.deleteTrack(this.props.track.id).then(this.props.closeModal());
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var _this$props = this.props,
           track = _this$props.track,
@@ -1188,14 +1199,14 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
         className: "play-pause-buttons-container"
       }, playing && track.id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.pauseTrack();
+          return _this2.pauseTrack();
         },
         className: "pause-button",
         src: "/assets/pause-button-2.png",
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.playTrack();
+          return _this2.playTrack();
         },
         className: "play-button",
         src: "/assets/play-button-2.png",
@@ -1219,9 +1230,11 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
       }, "Removing this track is irreversible. You will lose all the plays, likes and comments for this track with no way to get them back."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "delete-buttons"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "delete-cancel-button"
+        className: "delete-cancel-button",
+        onClick: this.props.closeModal
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "delete-forever-button"
+        className: "delete-forever-button",
+        onClick: this.handleDelete
       }, "Delete forever")));
     }
   }]);
@@ -2983,6 +2996,7 @@ var updateTrack = function updateTrack(track, trackId) {
   });
 };
 var deleteTrack = function deleteTrack(trackId) {
+  debugger;
   return $.ajax({
     method: 'DELETE',
     url: "/api/tracks/".concat(trackId)

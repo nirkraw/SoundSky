@@ -49,10 +49,9 @@ class Api::TracksController < ApplicationController
     end
     
     def destroy
-         @track = Track.find(params[:id])
-        if @track && @track.delete 
-            render 'api/users/show'
-        end
+        @track = Track.find(params[:id])
+        @track.delete 
+        render 'api/tracks/show'
     end
 
     def track_params 
