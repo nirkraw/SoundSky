@@ -80,22 +80,22 @@ class TrackUpload extends React.Component {
                 <option value="Ambient">Ambient</option>
                 <option value="Classical">Classical</option>
                 <option value="Country">Country</option>
-                <option value="Dance and EDM">Dance EDM</option>
+                <option value="Dance &amp; EDM">Dance &amp; EDM</option>
                 <option value="Dancehall">Dancehall</option>
                 <option value="DeepHouse">DeepHouse</option>
                 <option value="Disco">Disco</option>
-                <option value="Drum and Bass">Drum and Bass</option>
+                <option value="Drum &amp; Bass">Drum &amp; Bass</option>
                 <option value="Electronic">Electronic</option>
-                <option value="Folk and Singer-Songwriter">Folk and Singer-Songwriter</option>
-                <option value="Hip-Hop and Rap">Hip-Hop and Rap</option>
+                <option value="Folk &amp; Singer-Songwriter">Folk &amp; Singer-Songwriter</option>
+                <option value="Hip-Hop &amp; Rap">Hip-Hop &amp; Rap</option>
                 <option value="House">House</option>
                 <option value="Indie">Indie</option>
-                <option value="Jazz and Blues">Jazz and Blues</option>
+                <option value="Jazz &amp; Blues">Jazz &amp; Blues</option>
                 <option value="Latin">Latin</option>
                 <option value="Metal">Metal</option>
                 <option value="Piano">Piano</option>
                 <option value="Pop">Pop</option>
-                <option value="RnB and Soul">RnB and Soul</option>
+                <option value="RnB &amp; Soul">RnB &amp; Soul</option>
                 <option value="Reggae">Reggae</option>
                 <option value="Reggaeton">Reggaeton</option>
                 <option value="Rock">Rock</option>
@@ -118,7 +118,7 @@ class TrackUpload extends React.Component {
 
 
         return(
-                <form onSubmit={this.handleSubmit} className="upload-form-box">
+                <form onSubmit={this.hleSubmit} className="upload-form-box">
                     <div onClick={this.props.closeModal} className="close-x">X</div>
                         <div className="div1">
                             {errorsLi}
@@ -135,18 +135,19 @@ class TrackUpload extends React.Component {
                                                 onChange={this.handlePhoto} />
                                         </label>
                                 </div>
-                                <label>Upload track
+                                <label className="upload-track">Upload track
                                 <   input
+                                    className="track-input"
                                     type="file" 
                                     onChange={this.handleTrack} />
                                 </label>
                             </div>
                             <div className="div2b">
-                                <label>Title*
+                        <label>Title<span className="orange"> *</span>
                                     <br/>
                                     <input type="text"
                                         value={this.state.title}
-                                        placeholder="Add title here"
+                                        placeholder="Name your track"
                                         onChange={this.handleInput('title')}
                                         className="title-input"
                                     />
@@ -169,7 +170,7 @@ class TrackUpload extends React.Component {
                             </div>
                         </div>
                         <div className="div3">
-                            <p className="required-fields">* Required fields</p>
+                    <p className="required-fields"><span className="orange">* </span> Required fields</p>
                             <button className="upload-submit">Save</button>
                     </div>
                 </form>
