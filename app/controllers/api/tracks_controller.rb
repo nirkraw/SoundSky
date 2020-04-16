@@ -20,7 +20,7 @@ class Api::TracksController < ApplicationController
     def update
         @track = Track.find(params[:id])
         if !(photo_param[:photo].instance_of? String)
-            @track.photo.purge
+            @track.photo.destroy
             @track.photo.attach(photo_param[:photo])
         end
         
@@ -55,7 +55,7 @@ class Api::TracksController < ApplicationController
         params.require(:track).permit(:title, :artist_id, :genre, :description)
     end
 
-     def photo_param
+    def photo_param
         params.require(:track).permit(:photo)
     end
     
