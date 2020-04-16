@@ -2362,12 +2362,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _track_upload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_upload */ "./frontend/components/track/track_upload.jsx");
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 
 
 
-var MapStateToProps = function MapStateToProps(state) {
+
+var MapStateToProps = function MapStateToProps(state, ownProps) {
   return {
     currentUser: state.entities.users[state.session.currentUserId],
     errors: state.errors.track
@@ -2385,7 +2387,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var TrackUploadContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(MapStateToProps, mapDispatchToProps)(_track_upload__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var TrackUploadContainer = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(MapStateToProps, mapDispatchToProps)(_track_upload__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (TrackUploadContainer);
 
 /***/ }),

@@ -1,20 +1,18 @@
 class Api::TracksController < ApplicationController
 
     def create
-        # if params[:track][:audio] == "null"
-        #      render json: ["Please upload a track"], status: 422
-        # elsif params[:track][:photo] == "null"
-        #     render json: ["Please add a picture"], status: 422
-        # elsif params[:track][:title] == ""
-        #     render json: ["Enter a title"], status: 422
-        # else 
+        if params[:track][:audio] == "null"
+             render json: ["Please upload a track"], status: 422
+        elsif params[:track][:title] == ""
+            render json: ["Enter a title"], status: 422
+        else 
             @track = Track.new(create_track_params)
             if @track.save!
                 render json: 'api/users/show'
             else
                 render json: @track.errors.full_messages  
             end
-        # end`
+        end
     end
 
     def update
