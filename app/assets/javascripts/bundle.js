@@ -984,7 +984,6 @@ var Splash = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "playTrack",
     value: function playTrack(track, artist) {
-      debugger;
       this.props.updatePlayerTrack(track);
       this.props.updatePlayerArtist(artist);
       this.props.playTrack();
@@ -1005,7 +1004,6 @@ var Splash = /*#__PURE__*/function (_React$Component) {
           currentTrack = _this$props.currentTrack,
           playing = _this$props.playing,
           currentUser = _this$props.currentUser;
-      debugger;
       if (allTracks.length < 1) return null;
       if (allUsers.length < 1) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1811,7 +1809,6 @@ var TrackEdit = /*#__PURE__*/function (_React$Component) {
       title: _this.props.track.title,
       description: _this.props.track.description,
       genre: _this.props.track.genre,
-      trackUrl: _this.props.track.trackUrl,
       photoUrl: _this.props.track.photoUrl,
       artist_id: _this.props.currentUser.id
     };
@@ -1856,8 +1853,7 @@ var TrackEdit = /*#__PURE__*/function (_React$Component) {
         formData.append('track[photo]', this.state.photoUrl);
       }
 
-      formData.append('track[audio]', this.state.trackUrl);
-      this.props.updateTrack(formData, this.props.track.id);
+      this.props.updateTrack(formData, this.props.track.id).then(this.props.closeModal());
     }
   }, {
     key: "render",
@@ -2557,22 +2553,18 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchAllUsers();
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.props.fetchUserTracks(this.props.match.params.userId);
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this = this;
 
-      if (!this.props.tracks.length) return null;
-      if (!this.props.artist) return null;
+      if (this.props.tracks.length < 1) return null;
+      if (this.props.artist.length < 1) return null;
       var tracksMap = this.props.tracks.map(function (track) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_track_index_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: track.id,
           artist: _this.props.artist,
-          track: track
+          track: track,
+          tracks: _this.props.tracks
         });
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -2714,6 +2706,12 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(TrackIndexItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      debugger;
+      this.props.fetchTracks();
+    }
+  }, {
     key: "playTrack",
     value: function playTrack() {
       this.props.updatePlayerTrack(this.props.track);
@@ -2736,6 +2734,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           currentUser = _this$props.currentUser,
           playing = _this$props.playing,
           currentTrack = _this$props.currentTrack;
+      if (!currentTrack) return null;
       debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "track-index-with-buttons",
@@ -2831,6 +2830,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  debugger;
   return {
     currentUser: state.entities.users[state.session.currentUserId],
     artist: ownProps.artist,
@@ -2856,6 +2856,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     openModal: function openModal(modal, trackId, artistId) {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])(modal, trackId, artistId));
+    },
+    fetchTracks: function fetchTracks() {
+      return dispatch(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"]());
     }
   };
 };

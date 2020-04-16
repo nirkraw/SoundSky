@@ -5,12 +5,13 @@ import { updatePlayerTrack, playTrack, pauseTrack, updatePlayerArtist } from "..
 import { openModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => {
+    debugger 
     return ({
         currentUser: state.entities.users[state.session.currentUserId],
         artist: ownProps.artist,
         track: ownProps.track,
         playing: state.ui.player.playing,
-        currentTrack: (state.entities.tracks)[state.ui.player.trackId],
+        currentTrack: state.entities.tracks[state.ui.player.trackId]
     })
 }
 
@@ -19,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
     updatePlayerArtist: (artist) => dispatch(updatePlayerArtist(artist)),
     playTrack: () => dispatch(playTrack()),
     pauseTrack: () => dispatch(pauseTrack()),
-    openModal: (modal, trackId, artistId) => dispatch(openModal(modal, trackId, artistId))
+    openModal: (modal, trackId, artistId) => dispatch(openModal(modal, trackId, artistId)),
+    fetchTracks: () => dispatch(TrackActions.fetchTracks())
 })
 
 

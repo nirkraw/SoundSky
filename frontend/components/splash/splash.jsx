@@ -12,7 +12,6 @@ class Splash extends React.Component {
     }
 
     playTrack(track, artist) {
-        debugger
         this.props.updatePlayerTrack(track)
         this.props.updatePlayerArtist(artist)
         this.props.playTrack()
@@ -24,7 +23,6 @@ class Splash extends React.Component {
 
     render() {
         const {allTracks, allUsers, currentTrack, playing, currentUser} = this.props
-        debugger 
         if(allTracks.length < 1) return null;
         if(allUsers.length < 1) return null; 
         return(

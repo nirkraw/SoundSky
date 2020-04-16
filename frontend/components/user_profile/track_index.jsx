@@ -13,20 +13,17 @@ class TrackIndex extends React.Component {
         this.props.fetchAllUsers();
     }
 
-    componentDidUpdate() {
-        this.props.fetchUserTracks(this.props.match.params.userId)
-    }
-
 
     render() { 
-        if (!this.props.tracks.length) return null;
-        if (!this.props.artist) return null; 
+        if (this.props.tracks.length < 1) return null;
+        if (this.props.artist.length < 1) return null; 
         const tracksMap = (
             this.props.tracks.map(track => (
                 <TrackIndexItemContainer 
                     key={track.id}
                     artist={this.props.artist}
                     track={track}
+                    tracks={this.props.tracks}
                 />
             ))
         )

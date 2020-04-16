@@ -7,7 +7,6 @@ class TrackEdit extends React.Component {
             title: this.props.track.title,
             description: this.props.track.description,
             genre: this.props.track.genre,
-            trackUrl: this.props.track.trackUrl,
             photoUrl: this.props.track.photoUrl,
             artist_id: this.props.currentUser.id,
         }
@@ -40,8 +39,7 @@ class TrackEdit extends React.Component {
         if(this.state.photoUrl) {
             formData.append('track[photo]', this.state.photoUrl);
         }
-        formData.append('track[audio]', this.state.trackUrl);
-        this.props.updateTrack(formData, this.props.track.id)
+        this.props.updateTrack(formData, this.props.track.id).then(this.props.closeModal())
     }
 
     render() {
