@@ -7,7 +7,6 @@ class Waveform extends React.Component {
     }
 
     componentDidMount() {
-        debugger 
         if(this.props.track) {
             this.wavesurfer = WaveSurfer.create({
                 container: '#waveform',

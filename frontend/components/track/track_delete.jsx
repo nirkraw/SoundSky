@@ -29,7 +29,6 @@ class TrackDelete extends React.Component {
 
     render() { 
        const {track, playing, artist, currentTrack} = this.props
-       debugger 
        return(
            <div className="delete-form-box">
             <div onClick={this.props.closeModal} className="close-x">X</div>

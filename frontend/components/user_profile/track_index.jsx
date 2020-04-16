@@ -5,18 +5,18 @@ import React from 'react';
 class TrackIndex extends React.Component {
     constructor(props) {
         super(props)
-    }
+    } 
 
     componentDidMount() {
-        this.props.fetchTracks();
+        this.props.fetchUserTracks(this.props.match.params.userId)
+        // this.props.closeModal()
         this.props.fetchAllUsers();
-        this.props.closeModal()
     }
 
 
     render() { 
-        if (!this.props.artist) return null;
-        if (!this.props.tracks) return null;
+        if (!(this.props.tracks.length > 1)) return null;
+        if (!this.props.artist) return null; 
         const tracksMap = (
             this.props.tracks.map(track => (
                 <TrackIndexItemContainer 

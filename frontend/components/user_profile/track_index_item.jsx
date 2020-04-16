@@ -21,6 +21,7 @@ class TrackIndexItem extends React.Component {
 
     render() {
        const { track, artist, currentUser, playing, currentTrack } = this.props 
+       debugger
        return ( 
            <li className="track-index-with-buttons" key={this.props.key}> 
                 <div className = "track-index-item-container">
@@ -37,7 +38,7 @@ class TrackIndexItem extends React.Component {
                                 <NavLink to={`/users/${artist.id}`} className="track-artist-name">{artist.username}</NavLink>   
                                 <p className="track-title">{track.title}</p>
                             </div>
-                            <WaveFormContainer track={track}/>
+                            {/* <WaveFormContainer track={track}/> */}
                             <div className="track-genre-time">
                                 <p className="uploaded-time">{formatUploadTime(track.created_at)}</p>
                                 {track.genre ?

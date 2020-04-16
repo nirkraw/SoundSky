@@ -240,7 +240,7 @@ var logoutUser = function logoutUser() {
 /*!*******************************************!*\
   !*** ./frontend/actions/track_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_TRACKS, RECEIVE_TRACK, REMOVE_TRACK, RECEIVE_TRACK_ERRORS, receiveTracks, receiveTrack, removeTrack, errorHandler, fetchTracks, fetchTrack, createTrack, updateTrack, deleteTrack */
+/*! exports provided: RECEIVE_TRACKS, RECEIVE_TRACK, REMOVE_TRACK, RECEIVE_TRACK_ERRORS, RECEIVE_USER_TRACKS, receiveTracks, receiveTrack, receiveUserTracks, removeTrack, errorHandler, fetchTracks, fetchTrack, createTrack, updateTrack, deleteTrack, fetchUserTracks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -249,8 +249,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TRACK", function() { return RECEIVE_TRACK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_TRACK", function() { return REMOVE_TRACK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TRACK_ERRORS", function() { return RECEIVE_TRACK_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER_TRACKS", function() { return RECEIVE_USER_TRACKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTracks", function() { return receiveTracks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTrack", function() { return receiveTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUserTracks", function() { return receiveUserTracks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTrack", function() { return removeTrack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorHandler", function() { return errorHandler; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTracks", function() { return fetchTracks; });
@@ -258,12 +260,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTrack", function() { return createTrack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrack", function() { return updateTrack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrack", function() { return deleteTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserTracks", function() { return fetchUserTracks; });
 /* harmony import */ var _utils_track_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/track_util */ "./frontend/utils/track_util.js");
 
 var RECEIVE_TRACKS = "RECEIVE_TRACKS";
 var RECEIVE_TRACK = "RECEIVE_TRACK";
 var REMOVE_TRACK = "REMOVE_TRACK";
 var RECEIVE_TRACK_ERRORS = "RECEIVE_TRACK_ERRORS";
+var RECEIVE_USER_TRACKS = "RECEIVE_USER_TRACKS";
 var receiveTracks = function receiveTracks(tracks) {
   return {
     type: RECEIVE_TRACKS,
@@ -274,6 +278,13 @@ var receiveTrack = function receiveTrack(track) {
   return {
     type: RECEIVE_TRACK,
     track: track
+  };
+};
+var receiveUserTracks = function receiveUserTracks(_ref) {
+  var tracks = _ref.tracks;
+  return {
+    type: RECEIVE_USER_TRACKS,
+    tracks: tracks
   };
 };
 var removeTrack = function removeTrack(trackId) {
@@ -322,9 +333,15 @@ var updateTrack = function updateTrack(form_track, trackId) {
 };
 var deleteTrack = function deleteTrack(trackId) {
   return function (dispatch) {
-    debugger;
     return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrack"](trackId).then(function () {
       return dispatch(receiveTrack(trackId));
+    });
+  };
+};
+var fetchUserTracks = function fetchUserTracks(userId) {
+  return function (dispatch) {
+    return _utils_track_util__WEBPACK_IMPORTED_MODULE_0__["fetchUserTracks"](userId).then(function (tracks) {
+      return dispatch(receiveUserTracks(tracks));
     });
   };
 };
@@ -335,17 +352,19 @@ var deleteTrack = function deleteTrack(trackId) {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USERS, receiveUsers, fetchAllUsers */
+/*! exports provided: RECEIVE_USERS, RECEIVE_USER, receiveUsers, fetchAllUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllUsers", function() { return fetchAllUsers; });
 /* harmony import */ var _utils_user_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/user_util */ "./frontend/utils/user_util.js");
 
 var RECEIVE_USERS = "RECEIVE_USERS";
+var RECEIVE_USER = "RECEIVE_USER";
 var receiveUsers = function receiveUsers(users) {
   return {
     type: RECEIVE_USERS,
@@ -1213,7 +1232,6 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
           playing = _this$props.playing,
           artist = _this$props.artist,
           currentTrack = _this$props.currentTrack;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "delete-form-box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2132,17 +2150,17 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchTracks();
+      this.props.fetchUserTracks(this.props.match.params.userId); // this.props.closeModal()
+
       this.props.fetchAllUsers();
-      this.props.closeModal();
     }
   }, {
     key: "render",
     value: function render() {
       var _this = this;
 
+      if (!(this.props.tracks.length > 1)) return null;
       if (!this.props.artist) return null;
-      if (!this.props.tracks) return null;
       var tracksMap = this.props.tracks.map(function (track) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_track_index_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: track.id,
@@ -2212,7 +2230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    tracks: Object.values(state.entities.tracks),
+    tracks: Object.values(state.entities.userTracks),
     artist: state.entities.users[ownProps.match.params.userId],
     currentUser: state.entities.users[state.session.currentUserId]
   };
@@ -2220,8 +2238,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchTracks: function fetchTracks() {
-      return dispatch(Object(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"])());
+    fetchUserTracks: function fetchUserTracks(userId) {
+      return dispatch(Object(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["fetchUserTracks"])(userId));
     },
     fetchAllUsers: function fetchAllUsers() {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAllUsers"])());
@@ -2311,6 +2329,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           currentUser = _this$props.currentUser,
           playing = _this$props.playing,
           currentTrack = _this$props.currentTrack;
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "track-index-with-buttons",
         key: this.props.key
@@ -2345,9 +2364,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "track-artist-name"
       }, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "track-title"
-      }, track.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_waveform_waveform_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        track: track
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, track.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-genre-time"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "uploaded-time"
@@ -2492,8 +2509,6 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
   _createClass(Waveform, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
-
       if (this.props.track) {
         this.wavesurfer = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create({
           container: '#waveform',
@@ -2548,7 +2563,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  debugger;
   return {
     track: ownProps.track,
     playing: state.ui.player.playing,
@@ -2575,12 +2589,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tracks_reducer */ "./frontend/reducers/tracks_reducer.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _user_tracks_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user_tracks_reducer */ "./frontend/reducers/user_tracks_reducer.js");
+
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  tracks: _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  tracks: _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  userTracks: _user_tracks_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -2901,6 +2918,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/reducers/user_tracks_reducer.js":
+/*!**************************************************!*\
+  !*** ./frontend/reducers/user_tracks_reducer.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/track_actions */ "./frontend/actions/track_actions.js");
+
+
+var userTracksReducer = function userTracksReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_TRACKS"]:
+      return action.tracks;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (userTracksReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/users_reducer.js":
 /*!********************************************!*\
   !*** ./frontend/reducers/users_reducer.js ***!
@@ -3148,7 +3195,7 @@ var formatUploadTime = function formatUploadTime(created_at) {
 /*!**************************************!*\
   !*** ./frontend/utils/track_util.js ***!
   \**************************************/
-/*! exports provided: fetchTracks, fetchTrack, createTrack, updateTrack, deleteTrack */
+/*! exports provided: fetchTracks, fetchTrack, createTrack, updateTrack, deleteTrack, fetchUserTracks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3158,6 +3205,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTrack", function() { return createTrack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrack", function() { return updateTrack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrack", function() { return deleteTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserTracks", function() { return fetchUserTracks; });
 var fetchTracks = function fetchTracks() {
   return $.ajax({
     url: "/api/tracks"
@@ -3187,10 +3235,14 @@ var updateTrack = function updateTrack(track, trackId) {
   });
 };
 var deleteTrack = function deleteTrack(trackId) {
-  debugger;
   return $.ajax({
     method: 'DELETE',
     url: "/api/tracks/".concat(trackId)
+  });
+};
+var fetchUserTracks = function fetchUserTracks(userId) {
+  return $.ajax({
+    url: "/api/users/".concat(userId)
   });
 };
 

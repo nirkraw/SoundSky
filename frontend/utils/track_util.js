@@ -31,9 +31,14 @@ export const updateTrack = (track, trackId) => {
 }
 
 export const deleteTrack = trackId => {
-    debugger
    return( $.ajax({
         method: 'DELETE',
         url: `/api/tracks/${trackId}`,
+    }))
+}
+
+export const fetchUserTracks = userId => {
+    return($.ajax({
+        url: `/api/users/${userId}`
     }))
 }

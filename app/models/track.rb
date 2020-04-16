@@ -13,15 +13,13 @@ before_create :ensure_audio
 before_create :ensure_photo
 
    def ensure_audio
-      
        errors[:audio] << "must be attached" unless self.audio.attached?
    end
 
    def ensure_photo
-      
       if !self.photo.attached?
-         file = self.artist.profile_picture.blob 
-         self.photo.attach(io: file, filename: 'defualt_track.jpg')
+         file = open(self.artist.profile_picture.service_url) 
+         self.photo.attach(io: file, filename: 'defualt_photo.jpg')
       end
    end
     

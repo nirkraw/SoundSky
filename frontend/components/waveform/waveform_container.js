@@ -2,7 +2,6 @@ import { connect } from "react-redux"
 import Waveform from './waveform';
 
 const mapStateToProps = (state, ownProps) => {
-    debugger 
     return (
         {
             track: ownProps.track,

@@ -1,4 +1,4 @@
-import { fetchTracks } from "../../actions/track_actions";
+import { fetchUserTracks } from "../../actions/track_actions";
 import { fetchAllUsers } from "../../actions/user_actions"; 
 import { connect } from "react-redux";
 import TrackIndex from "./track_index";
@@ -7,14 +7,14 @@ import { closeModal } from "../../actions/modal_actions";
 
 const mapStateToProps = (state, ownProps) => {
     return({
-        tracks: Object.values(state.entities.tracks),
+        tracks: Object.values(state.entities.userTracks),
         artist: state.entities.users[ownProps.match.params.userId],
         currentUser: state.entities.users[state.session.currentUserId]
     })
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchTracks: ()=> dispatch(fetchTracks()),
+    fetchUserTracks: (userId)=> dispatch(fetchUserTracks(userId)),
     fetchAllUsers: ()=>dispatch(fetchAllUsers()),
     closeModal: () => dispatch(closeModal())
 })

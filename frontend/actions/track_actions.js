@@ -4,6 +4,7 @@ export const RECEIVE_TRACKS = "RECEIVE_TRACKS";
 export const RECEIVE_TRACK = "RECEIVE_TRACK";
 export const REMOVE_TRACK = "REMOVE_TRACK";
 export const RECEIVE_TRACK_ERRORS = "RECEIVE_TRACK_ERRORS";
+export const RECEIVE_USER_TRACKS = "RECEIVE_USER_TRACKS"
 
 
 export const receiveTracks = (tracks) => {
@@ -18,10 +19,18 @@ export const receiveTrack = (track) => ({
     track
 })
 
+export const receiveUserTracks= ({tracks}) => {
+    return({
+        type: RECEIVE_USER_TRACKS,
+        tracks
+    })
+}
+
 export const removeTrack = (trackId) => ({
     type: REMOVE_TRACK,
     trackId
 })
+
 
 
 export const errorHandler = (errors) => ({
@@ -60,8 +69,12 @@ export const updateTrack = (form_track, trackId) => dispatch => (
 )
 
 export const deleteTrack = (trackId) => dispatch => {
-    debugger 
     return((TrackUtil.deleteTrack(trackId))
         .then(() => dispatch(receiveTrack(trackId))))
 }
 
+
+export const fetchUserTracks = (userId) => dispatch => {
+    return((TrackUtil.fetchUserTracks(userId))
+        .then(tracks => dispatch(receiveUserTracks(tracks))))
+}
