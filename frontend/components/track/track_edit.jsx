@@ -124,7 +124,7 @@ class TrackEdit extends React.Component {
                         </div>
                     </div>
                     <div className="div2b">
-                        <label>Title*
+                        <label>Title<span className="orange"> *</span>
                                     <br />
                             <input type="text"
                                 value={this.state.title}
@@ -140,7 +140,7 @@ class TrackEdit extends React.Component {
                                     <br />
                             <textarea
                                 value={this.state.description}
-                                cols="30" rows="10"
+                                cols="5" rows="5"
                                 onChange={this.handleInput("description")}
                                 className="description-input"
                                 spellCheck="true"
@@ -149,7 +149,7 @@ class TrackEdit extends React.Component {
                     </div>
                 </div>
                 <div className="div3">
-                    <p className="required-fields">* Required fields</p>
+                    <p className="required-fields"><span className="orange">* </span> Required fields</p>
                     <button className="upload-submit">Save</button>
                 </div>
             </form>

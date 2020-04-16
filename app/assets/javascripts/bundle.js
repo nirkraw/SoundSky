@@ -938,6 +938,7 @@ var SignupFormContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["conne
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -962,6 +963,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Splash = /*#__PURE__*/function (_React$Component) {
   _inherits(Splash, _React$Component);
 
@@ -980,16 +982,32 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       this.props.fetchUsers();
     }
   }, {
+    key: "playTrack",
+    value: function playTrack(track, artist) {
+      debugger;
+      this.props.updatePlayerTrack(track);
+      this.props.updatePlayerArtist(artist);
+      this.props.playTrack();
+    }
+  }, {
+    key: "pauseTrack",
+    value: function pauseTrack() {
+      this.props.pauseTrack();
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var _this$props = this.props,
           allTracks = _this$props.allTracks,
-          playingTrack = _this$props.playingTrack,
+          allUsers = _this$props.allUsers,
+          currentTrack = _this$props.currentTrack,
           playing = _this$props.playing,
-          artist = _this$props.artist;
+          currentUser = _this$props.currentUser;
       debugger;
       if (allTracks.length < 1) return null;
-      if (!artist) return null;
+      if (allUsers.length < 1) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1000,33 +1018,305 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         className: "track-rows-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-row-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[0].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[1].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[10].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[10].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[10], allUsers[allTracks[10].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[10].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[10].artist_id)
+      }, allUsers[allTracks[10].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[15].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[15].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[15], allUsers[allTracks[15].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[15].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[15].artist_id)
+      }, allUsers[allTracks[15].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[2].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[2].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[2], allUsers[allTracks[2].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[2].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[2].artist_id)
+      }, allUsers[allTracks[2].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[3].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[3].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[3], allUsers[allTracks[3].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[3].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[3].artist_id)
+      }, allUsers[allTracks[3].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[4].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[5].photoUrl
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[4].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[4], allUsers[allTracks[4].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[4].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[4].artist_id)
+      }, allUsers[allTracks[4].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[8].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[8].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[8], allUsers[allTracks[8].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[8].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[8].artist_id)
+      }, allUsers[allTracks[8].artist_id].username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-row-container2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[6].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[7].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[8].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[6].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[6], allUsers[allTracks[6].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[6].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[6].artist_id)
+      }, allUsers[allTracks[6].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[14].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[14].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[14], allUsers[allTracks[14].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[14].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[14].artist_id)
+      }, allUsers[allTracks[14].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[5].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[5].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[5], allUsers[allTracks[5].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[5].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[5].artist_id)
+      }, allUsers[allTracks[5].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[9].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[11].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[13].photoUrl
-      })))));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[9].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[9], allUsers[allTracks[9].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[9].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[9].artist_id)
+      }, allUsers[allTracks[9].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[0].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[0].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[0], allUsers[allTracks[0].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[0].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[0].artist_id)
+      }, allUsers[allTracks[0].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[1].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[1].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[1], allUsers[allTracks[1].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, allTracks[1].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[1].artist_id)
+      }, allUsers[allTracks[1].artist_id].username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-in-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Thanks for listening. Now join in."), currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "/upload"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "splash-upload"
+      }, "Upload")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-buttons-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Save tracks, follow artists and build playlists. All for free."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this.props.openModal('signup');
+        },
+        className: "splash-create-account"
+      }, "Create Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-signin-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Already have an account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this.props.openModal('login');
+        },
+        className: "splash-sign-in"
+      }, "Sign in")))))));
     }
   }]);
 
@@ -1050,6 +1340,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _splash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./splash */ "./frontend/components/splash/splash.jsx");
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+
+
 
 
 
@@ -1057,10 +1351,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    currentTrack: state.entities.tracks[state.ui.player.trackId],
     playingTrack: state.entities.tracks[state.ui.player.trackId],
     allTracks: Object.values(state.entities.tracks),
+    allUsers: state.entities.users,
     playing: state.ui.player.playing,
-    artist: state.entities.users[state.ui.player.artistId]
+    currentUser: state.entities.users[state.session.currentUserId]
   };
 };
 
@@ -1071,6 +1367,21 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["fetchAllUsers"])());
+    },
+    openModal: function openModal(modal) {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])(modal));
+    },
+    updatePlayerTrack: function updatePlayerTrack(track) {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_5__["updatePlayerTrack"])(track));
+    },
+    updatePlayerArtist: function updatePlayerArtist(artist) {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_5__["updatePlayerArtist"])(artist));
+    },
+    playTrack: function playTrack() {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_5__["playTrack"])());
+    },
+    pauseTrack: function pauseTrack() {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_5__["pauseTrack"])());
     }
   };
 };
@@ -1661,15 +1972,17 @@ var TrackEdit = /*#__PURE__*/function (_React$Component) {
         onChange: this.handlePhoto
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "div2b"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title*", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "orange"
+      }, " *"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.title,
         onChange: this.handleInput('title'),
         className: "title-input"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Genre", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), genreSelector), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.description,
-        cols: "30",
-        rows: "10",
+        cols: "5",
+        rows: "5",
         onChange: this.handleInput("description"),
         className: "description-input",
         spellCheck: "true"
@@ -1677,7 +1990,9 @@ var TrackEdit = /*#__PURE__*/function (_React$Component) {
         className: "div3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "required-fields"
-      }, "* Required fields"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "orange"
+      }, "* "), " Required fields"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "upload-submit"
       }, "Save")));
     }

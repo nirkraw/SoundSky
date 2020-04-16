@@ -31,12 +31,12 @@
 }
 
 .cloud-logo {
-  height: 35px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   background-color: transparent;
   position: absolute;
-  right: 28px;
-  top: 4px;
+  right: 34px;
+  top: 7px;
   image-resolution: 100%;
 }
 
@@ -145,14 +145,13 @@
   font-weight: 200;
   text-decoration: none;
   padding-right: 5px;
-  padding-left: 20px;
+  padding-left: 12px;
   line-height: 1.5;
 }
 
- .logout-button:hover {
-    color: white;
- }
-
+.logout-button:hover {
+  color: white;
+}
 
 .signin-button, .signup-button {
   margin: 5px;

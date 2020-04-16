@@ -2,8 +2,8 @@
    outline: 1px solid white;
    border-color: white;
    border-radius: 2px;
-   height: 300px;
-   width: 400px;
+   height: 350px;
+   width: 450px;
    padding: 20px;
    background: rgb(255, 255, 255);
    position: relative;
@@ -32,18 +32,24 @@
 
  .delete-track-header{
      border-top: 1px solid rgb(212, 208, 208);
+     font-family: 'Overpass', sans-serif;
+     font-weight: 400;
      padding-top: 15px;
      margin-top: 40px;
-     font-size: 17px;
+     font-size: 14px;
      text-align: left;
+     color: rgb(39, 39, 39);
  }
 
  .delete-info {
      padding-top: 15px;
-     font-size: 12px;
+     font-family: 'Overpass', sans-serif;
+     font-weight: 200;
+     font-size: 11px;
      left: 70px; 
+     margin-top: 15px;
      margin-left: 15px;
-     width: 150px; 
+     width: 170px; 
  }
 
  .delete-buttons {
