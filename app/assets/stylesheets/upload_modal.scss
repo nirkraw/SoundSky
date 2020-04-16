@@ -1,0 +1,251 @@
+ .upload-form-box {
+   outline: 1px solid white;
+   border-color: white;
+   border-radius: 2px;
+   height: 450px;
+   width: 650px;
+   padding: 20px;
+   background: rgb(255, 255, 255);
+   position: relative;
+   display: flex;
+   flex-direction: column;
+ }
+ .div1{
+   display: flex;
+   justify-content: left;
+   margin-bottom: 20px;
+ }
+
+ .div2 {
+   display: flex;
+   justify-content: left;
+ }
+
+ .div2a {
+   display: flex;
+   flex-direction: column;
+   width: 40%; 
+ }
+
+ .photo-container {
+   position: relative;
+   height: 230px;
+   width: 230px;
+   border: 1px solid black;
+   background-image: url(asset_path("background.jpg")); 
+   background-size: cover;
+   margin-bottom: 25px;
+ }
+
+ .upload-image {
+   position: absolute;
+   z-index: 5;
+   bottom: 25px; 
+   right: 66px;
+   text-align: center;
+   vertical-align: center;
+   background-color: rgb(228, 224, 224);
+   cursor: pointer;
+   border-radius: 3px;
+   border: 1px solid grey;
+   height: 15px;
+   padding: 2px 11px 2px 10px;
+   font-size: 13px;
+   line-height: 15px;
+   font-family: 'Overpass', sans-serif;
+ }
+
+ .replace-image {
+   position: absolute;
+   z-index: 5;
+   bottom: -25px; 
+   right: 0px;
+   text-align: center;
+   vertical-align: center;
+   background-color: rgb(246, 241, 241);
+   cursor: pointer;
+   border-radius: 3px;
+   border: 1px solid rgb(223, 221, 221);
+   height: 15px;
+   padding: 2px 11px 2px 10px;
+   font-size: 13px;
+   line-height: 15px;
+ }
+
+ .upload-image:hover {
+   background-color: white;
+ }
+
+ .replace-image:hover {
+   border: 1px solid rgb(85, 83, 83);
+ }
+
+ .photo-input {
+   display: none;
+ }
+
+ .image-preview {
+   position: absolute;
+   width: 233px;
+   height: 233px;
+   bottom: -1px;
+   left: -1px;
+   border: 1px solid black;
+ }
+
+ .track-preview {
+   position: absolute;
+   left: 56px;
+   bottom: 118px;
+   font-size: 18px;
+   font-family: 'Overpass', sans-serif;
+   color: gray;
+ }
+
+ .div2b {
+   display: flex;
+   flex-direction: column;
+   width: 60%;
+ }
+
+ .div2b > label {
+   font-size: 10px;
+   letter-spacing: normal;
+   margin-bottom: 25px;
+   padding: 5px;
+   font-family: 'Montserrat', sans-serif;
+   font-weight: 300px;
+   color: black;
+ }
+
+ .div1 > h3 {
+   font-size: 22px;
+   font-family: 'Overpass', sans-serif;
+   font-weight: 600;
+   padding-bottom: 8px;
+   border-bottom: 1px solid #FF5500;
+   color: #FF5500;
+ }
+
+ .title-input {
+   font-family: 'Overpass', sans-serif;
+   font-size: 13px;
+   text-align: left;
+   width: 95%;
+   height: 20px;
+   border: 1px solid rgb(190, 190, 190);
+   border-radius: 3px;
+   margin-top: 7px; 
+   border-color: rgb(197, 195, 195);
+ }
+
+ .genre-input {
+   height: 20px;
+   width: 50%;
+   border: 1px solid rgb(190, 190, 190);
+   margin-top: 7px;
+   font-family: 'Overpass', sans-serif;
+   background-color: white;
+   border-color: rgb(197, 195, 195);
+ }
+
+ .description-input {
+   width: 95%;
+   margin-top: 7px;
+   font-family: 'Overpass', sans-serif;
+   font-size: 13px;
+   border-radius: 3px;
+   border-color: rgb(197, 195, 195);
+ }
+
+ .div3 {
+   display: flex;
+   justify-content: space-between; 
+   align-items: center;
+   border-top: 1px solid rgb(231, 224, 224);
+   position: absolute;
+   width: 95%;
+   bottom: 9px;
+ }
+ 
+ .upload-submit {
+   text-transform: capitalize;
+   background-color: #FF5500;
+   height: 25px;
+   font-size: 12px;
+   font-weight: bold;
+   width: 7%;
+   font-family: 'Overpass', sans-serif;
+   font-weight: 200;
+   color: white;
+   border-radius: 10%;
+   margin-top: 20px;
+   vertical-align: center;
+   padding-bottom: 3px;
+ }
+
+ .required-fields {
+   font-size: 12px;
+   margin-top: 20px;
+ }
+
+ .upload-errors {
+   list-style: none;
+   font-family: 'Montserrat', sans-serif;
+   color: rgb(245, 7, 7);
+ }
+
+ .upload-track {
+   text-align: center;
+   vertical-align: center;
+   background-color: #FF5500;
+   position: absolute;
+   left: 50px;
+   bottom: 140px;
+   cursor: pointer;
+   border-radius: 3px;
+   border: 1px solid grey;
+   height: 15px;
+   padding: 2px 11px 2px 10px;
+   font-size: 16px;
+   line-height: 15px;
+   font-family: 'Overpass', sans-serif;
+   width: 150px;
+   color: white;
+ }
+
+ .upload-track:hover {
+   background-color: rgb(228, 224, 224);
+   color: black;
+ }
+
+ .replace-track {
+   text-align: center;
+   vertical-align: center;
+   background-color: transparentize($color: #FF5500, $amount: .2);
+   position: absolute;
+   left: 50px;
+   bottom: 140px;
+   cursor: pointer;
+   border-radius: 3px;
+   border: 1px solid grey;
+   height: 15px;
+   padding: 2px 11px 2px 10px;
+   font-size: 16px;
+   line-height: 15px;
+   font-family: 'Overpass', sans-serif;
+   width: 150px;
+   color:white; 
+ }
+
+ .replace-track:hover {
+   background-color: #FF5500;
+ }
+
+ .track-input {
+   display: none;
+ }
+
+ .orange {
+   color: orange;
+ }

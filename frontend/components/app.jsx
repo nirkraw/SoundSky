@@ -1,21 +1,25 @@
 import React from 'react';
-import HeaderContainer from "./header/header_container";
+import {HeaderContainer} from "../components/header/header_container";
 import TrackIndexContainer from "./user_profile/track_index_container";
-import { AuthRoute } from '../utils/route_util';
+import { AuthRoute, ProtectedRoute } from '../utils/route_util';
 import Modal from './modal/modal';
-import {Switch, Route} from 'react-router-dom'; 
-import Splash from "./splash/splash";
+import {Switch, Route, NativeRouter} from 'react-router-dom'; 
+import AudioPlayerContainer from "../components/track/audio_player_container";
+import UploadButtonContainer from "../components/track/upload_button_container";
+import SplashContainer from "../components/splash/splash_container";
 
 const App = () => {
   
     return(
     <div>
-     <Modal />
-     <HeaderContainer />
+        <Modal />
+            <HeaderContainer />
             <Switch>
-                <Route path="/users/:userId" component={TrackIndexContainer} />
-                <Route path="/" component={Splash} />
+                <Route exact path="/" component={SplashContainer} />
+                <Route exact path="/users/:userId" component={TrackIndexContainer} />
+                <ProtectedRoute exact path="/upload" component={UploadButtonContainer} />
             </Switch>
+        <AudioPlayerContainer />
     </div>
     )
 };

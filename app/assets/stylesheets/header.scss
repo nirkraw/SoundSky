@@ -1,45 +1,159 @@
+
 .signedout-header {
   display: flex;
   justify-content: space-between;
-  margin: 5px 10px 5px 10px;
   padding: 5px 10px 5px 10px;
   align-items: center;
+  background-color: black;
+  height: 27px;
 }
+
 
 .signedin-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 5px 10px 5px 10px;
-  align-items: center;
-  border: 1px solid black;
   background-color: #333333;
+  height: 27px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+.logo-container {
+  position: absolute;
+  height: 40px;
+  width: 100px;
+  position: relative;
+  bottom: 8px;
+  background-color: transparentize($color: #242424, $amount: .4);
+}
+
+.cloud-logo {
+  height: 30px;
+  width: 30px;
+  background-color: transparent;
+  position: absolute;
+  right: 34px;
+  top: 7px;
+  image-resolution: 100%;
+}
+
+
+.home {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 5px;
+  height: 40px;
+  bottom: 0px;
+  left: 112px;
+  width: 100px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background-color: transparentize($color: #242424, $amount: .4);
+}
+
+.linkedin {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 5px;
+  height: 40px;
+  bottom: 0px;
+  left: 210px;
+  width: 100px;
+  border-right: 1px solid black;
+  background-color: transparentize($color: #242424, $amount: .4);
+}
+
+.nir-kay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0px;
+  left: 310px;
+  height: 40px;
+  width: 100px;
+  border-right: 1px solid black;
+  background-color: transparentize($color: #242424, $amount: .4);
+}
+
+ .nir-kay > a, .linkedin > a, .home > a {
+  text-decoration: none;
+  color: rgb(200, 199, 199);
+  font-family: 'Overpass', sans-serif;
+  font-size: 12px;
+  padding: 5px, 15px, 5px, 15px;
+}
+
+.nir-kay > a:hover, .linkedin > a:hover, .home > a:hover {
+  color: white;
+}
+.right-banner {
+  position: absolute;
+  right: 28px;
+  display: flex;
+  bottom: 2px;
+  width: 200px;
+  height: 33px;
+  align-items: center;
+}
+
+.nav-bar-artist-pic {
+  width: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+.nav-bar-upload {
+  color: #ccc;
+  font-family: 'Overpass', sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  text-decoration: none;
+  padding-right: 20px;
+  line-height: 1.5;
+}
+
+.nav-bar-upload:hover {
+  color: white;
 }
 
 .user-show-link {
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  background-color: transparent;
-  color: rgb(244, 241, 255);
-  margin: 10px;
+  color: #ccc;
+  font-family: 'Overpass', sans-serif;
+  font-size: 12px;
+  font-weight: 200;
   text-decoration: none;
+  padding-right: 5px;
+  padding-left: 5px;
+  line-height: 1.5;
 }
 
 .user-show-link:hover {
   color: white;
 }
 
-.right-banner {
-  margin-right: 5px;
-}
-
-.header-link {
+.signout-button {
+  color: #ccc;
+  font-family: 'Overpass', sans-serif;
+  font-size: 12px;
+  font-weight: 200;
   text-decoration: none;
-  color: black;
+  padding-right: 5px;
+  padding-left: 12px;
+  line-height: 1.5;
 }
 
-.signin-button, .signup-button, .logout-button {
+.logout-button:hover {
+  color: white;
+}
+
+.signin-button, .signup-button {
   margin: 5px;
   padding: 2px 11px 2px 11px;
   font-size: 11px;
@@ -64,13 +178,7 @@
   border-radius: 3px;
 }
 
- .logout-button {
-   border: 2px solid white;
-   border-radius: 3px;
-   background-color: white;
-   color: rgba(21, 44, 121, 0.849);
-   margin-right: 10px;
- }
+
 
 .soundsky {
   font-family: sans-serif;

@@ -1,34 +1,44 @@
-export const fetchTracks = (userId)=> {
+export const fetchTracks = ()=> {
     return $.ajax({
-        url: `/api/users/${userId}/tracks`
+        url: "/api/tracks"
     })
 }
 
-export const fetchTrack = (userId, trackId) => (
+export const fetchTrack = trackId => (
     $.ajax({
-        url: `/api/users/${userId}/tracks/${trackId}`
+        url: `/api/tracks/${trackId}`
     })
 )
 
-export const createTrack = (userId, track) => (
-    $.ajax({
+export const createTrack = track => {
+   return( $.ajax({
         method: 'POST',
-        url: `/api/users/${userId}/tracks`,
-        data: {track}
-    })
-)
+        url: `/api/tracks`,
+        data: track,
+        contentType: false,
+        processData: false 
+    }))
+}
 
-export const updateTrack = (userId, track) => (
-    $.ajax({
+export const updateTrack = (track, trackId) => {
+    return($.ajax({
         method: 'PATCH',
-        url: `/api/users/${userId}/tracks/${track.id}`,
-        data: { track }
-    })
-)
+        url: `/api/tracks/${trackId}`,
+        data: track,
+        contentType: false,
+        processData: false 
+    }))
+}
 
-export const deleteTrack = (userId, trackId) => (
-    $.ajax({
+export const deleteTrack = trackId => {
+   return( $.ajax({
         method: 'DELETE',
-        url: `/api/users/${userId}/tracks/${trackId}`,
-    })
-)
+        url: `/api/tracks/${trackId}`,
+    }))
+}
+
+export const fetchUserTracks = userId => {
+    return($.ajax({
+        url: `/api/users/${userId}`
+    }))
+}

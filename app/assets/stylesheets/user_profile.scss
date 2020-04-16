@@ -1,0 +1,89 @@
+.profile-header {
+    position: relative;
+    top: 35px;
+}
+
+.artist-cover-pic {
+    width: 98%;
+    height: 210px;
+    padding-left: 10px;
+    object-fit: cover;
+}
+
+.artist-profile-pic {
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 5;
+}
+
+.profile-picture-and-name {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    display: flex;
+    flex-direction: left;
+}
+
+.profile-username {
+    margin-left: 15px;
+    margin-top: 5px;
+    color: white;
+    background-color: transparentize($color: #000000, $amount: .2);
+    font-size: 23px;
+    font-family: 'Overpass', sans-serif;
+    font-weight: 200;
+    height: 22px;
+    padding: 5px;
+}
+
+.recent-tracks {
+    margin-left: 10px;
+    margin-top: 15px;
+    width: 70%;
+}
+
+.recent-header {
+    font-size: 20px;
+    font-family: 'Overpass', sans-serif;
+    color: rgb(53, 51, 51);
+}
+
+.tracks {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.upload-container {
+    height: 50px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgb(226, 223, 223); 
+}
+
+.user-show-upload {
+    display: block;
+    background-color:#FF5500;
+    width: 98px;
+    height: 45px;
+    text-decoration: none;
+    color: white;
+    border: 1px thin rgb(149, 147, 147);
+    border-radius: 2px;
+    padding: 4px 6px 4px 6px;
+    font-size: 15px;
+    font-family: 'Overpass', sans-serif;
+    text-align: center;
+}
+
+.upload-phrase {
+    font-size: 13px;
+    margin-bottom: 15px; 
+    margin-top: 20px; 
+    font-family: 'Overpass', sans-serif;
+    
+}

@@ -1,45 +1,60 @@
 import { NavLink } from 'react-router-dom'; 
-import TrackIndexItem from './track_index_item';
+import TrackIndexItemContainer from './track_index_item_container';
 import React from 'react';
 
 class TrackIndex extends React.Component {
     constructor(props) {
         super(props)
-    }
+    } 
 
     componentDidMount() {
-        this.props.fetchTracks(this.props.match.params.userId);
+        this.props.fetchUserTracks(this.props.match.params.userId)
+        this.props.closeModal()
         this.props.fetchAllUsers();
     }
 
-    render() { 
-        if (!this.props.artist) return null;
-        if (!this.props.tracks) return null;
 
+    render() { 
+        if (this.props.tracks.length < 1) return null;
+        if (this.props.artist.length < 1) return null; 
         const tracksMap = (
             this.props.tracks.map(track => (
-                <TrackIndexItem
-                    key ={track.id}
+                <TrackIndexItemContainer 
+                    key={track.id}
                     artist={this.props.artist}
                     track={track}
-                    deleteTrack={this.props.deleteTrack}
-                    editTrack={this.props.editTrack}
-                    currentUser={this.props.currentUser}
+                    tracks={this.props.tracks}
                 />
             ))
         )
         return (
             <div>
-                <h1>{this.props.artist.username}</h1>
-                <img className = "artist-profile-pic" 
-                src={this.props.artist.profilePhotoUrl} 
-                alt="ArtistProfilePic"/>
-                <img className="artist-cover-pic"
-                    src={this.props.artist.coverPhotoUrl}
-                    alt="ArtistCoverPic" />
-                <h3>Recent</h3>
-                <ul>{tracksMap}</ul>
-                {/* <NavLink to="upload" className="user-show-upload">Upload</NavLink>    */}
+                <div className="profile-header">
+                    <img className="artist-cover-pic"
+                        src={this.props.artist.coverPhotoUrl}
+                        alt="ArtistCoverPic" />
+                    <div className="profile-picture-and-name">
+                        <img className="artist-profile-pic"
+                            src={this.props.artist.profilePhotoUrl}
+                            alt="ArtistProfilePic" />
+                        <h1 className="profile-username">{this.props.artist.username}</h1>
+                     </div>
+                </div>
+               
+               <div className="recent-tracks"> 
+                    <h3 className="recent-header">Recent</h3>
+                    <div className="tracks">
+                        <ul>{tracksMap}</ul>
+                    </div>
+                    {this.props.currentUser === this.props.artist ?
+                    <div className="upload-container">
+                        <p className="upload-phrase">More uploads means more listeners.</p>
+                        <NavLink to="/upload" className="user-show-upload">Upload more</NavLink>   
+                    </div>
+                    :
+                    <div className="upload-container"></div>
+                    }
+               </div>
             </div>
         )
     }
