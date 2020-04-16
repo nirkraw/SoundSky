@@ -399,7 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_track_audio_player_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/track/audio_player_container */ "./frontend/components/track/audio_player_container.js");
 /* harmony import */ var _components_track_upload_button_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/track/upload_button_container */ "./frontend/components/track/upload_button_container.js");
-/* harmony import */ var _components_splash_splash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/splash/splash */ "./frontend/components/splash/splash.jsx");
+/* harmony import */ var _components_splash_splash_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/splash/splash_container */ "./frontend/components/splash/splash_container.js");
 
 
 
@@ -414,7 +414,7 @@ var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header_header_container__WEBPACK_IMPORTED_MODULE_1__["HeaderContainer"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
     exact: true,
     path: "/",
-    component: _components_splash_splash__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_splash_splash_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
     exact: true,
     path: "/users/:userId",
@@ -974,15 +974,59 @@ var Splash = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Splash, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchTracks();
+      this.props.fetchUsers();
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this$props = this.props,
+          allTracks = _this$props.allTracks,
+          playingTrack = _this$props.playingTrack,
+          playing = _this$props.playing,
+          artist = _this$props.artist;
+      debugger;
+      if (allTracks.length < 1) return null;
+      if (!artist) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-banner"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash-content-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hear what's trending for free in the SoundSky community")));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hear what's trending for free in the SoundSky community"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-rows-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-row-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[0].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[1].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[2].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[3].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[4].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[5].photoUrl
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-row-container2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[6].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[7].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[8].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[9].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[11].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[13].photoUrl
+      })))));
     }
   }]);
 
@@ -990,6 +1034,49 @@ var Splash = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Splash);
+
+/***/ }),
+
+/***/ "./frontend/components/splash/splash_container.js":
+/*!********************************************************!*\
+  !*** ./frontend/components/splash/splash_container.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _splash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./splash */ "./frontend/components/splash/splash.jsx");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    playingTrack: state.entities.tracks[state.ui.player.trackId],
+    allTracks: Object.values(state.entities.tracks),
+    playing: state.ui.player.playing,
+    artist: state.entities.users[state.ui.player.artistId]
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchTracks: function fetchTracks() {
+      return dispatch(Object(_actions_track_actions__WEBPACK_IMPORTED_MODULE_2__["fetchTracks"])());
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["fetchAllUsers"])());
+    }
+  };
+};
+
+var SplashContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_splash__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (SplashContainer);
 
 /***/ }),
 
@@ -2150,16 +2237,21 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchUserTracks(this.props.match.params.userId); // this.props.closeModal()
-
+      this.props.fetchUserTracks(this.props.match.params.userId);
+      this.props.closeModal();
       this.props.fetchAllUsers();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.props.fetchUserTracks(this.props.match.params.userId);
     }
   }, {
     key: "render",
     value: function render() {
       var _this = this;
 
-      if (!(this.props.tracks.length > 1)) return null;
+      if (!this.props.tracks.length) return null;
       if (!this.props.artist) return null;
       var tracksMap = this.props.tracks.map(function (track) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_track_index_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {

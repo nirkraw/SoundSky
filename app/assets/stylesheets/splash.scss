@@ -6,7 +6,9 @@
 
 .splash-content-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: center;
 //   border: 2px solid red;
 }
 
@@ -14,5 +16,29 @@
     margin-top: 50px; 
     font-family: 'Overpass', sans-serif;
     font-size: 20px;
-    color: rgb(36, 35, 35);
+    color: rgb(36, 35, 35); 
+    margin-bottom: 50px;
+}
+.track-row-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+}
+
+.track-row-container > img {
+  width: 140px;
+  height: 140px;
+  padding: 10px;
+}
+
+.track-row-container2 {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+}
+
+.track-row-container2 > img {
+   width: 140px;
+  height: 140px;
+  padding: 10px;
 }
