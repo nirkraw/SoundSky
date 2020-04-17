@@ -1,24 +1,20 @@
-# README
+# [SkyCloud](https://soundsky.herokuapp.com/#/)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Site description
+SkyCloud is a clone of the popular website SoundCloud - a free music streaming and sharing platform. It allows users to upload their own tracks and view what other artists have uploaded.
 
-Things you may want to cover:
+## Technologies Used
+- Ruby on Rails -- backend
+- React -- Front-end user interface
+- Redux -- State container for React 
+- AJAX -- asynchronous front-end to back-end communication 
+- Heroku -- domain hosting 
+- AWS -- cloud storage
+- PostgreSQL -- data storage
 
-* Ruby version
+## Features 
 
-* System dependencies
+## Audio-Streaming 
 
-* Configuration
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
