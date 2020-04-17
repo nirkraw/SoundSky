@@ -981,6 +981,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchTracks();
       this.props.fetchUsers();
+      this.pauseTrack();
     }
   }, {
     key: "playTrack",
@@ -1443,6 +1444,12 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchTracks();
       this.props.fetchUsers();
+      var audio = document.getElementById("audio");
+
+      if (audio) {
+        audio.src = this.props.track.trackUrl;
+        audio.pause();
+      }
     }
   }, {
     key: "componentDidUpdate",
@@ -2713,6 +2720,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       debugger;
       this.props.fetchTracks();
+      this.pauseTrack();
     }
   }, {
     key: "playTrack",

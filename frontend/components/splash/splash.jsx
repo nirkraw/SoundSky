@@ -9,6 +9,7 @@ class Splash extends React.Component {
     componentDidMount() {
         this.props.fetchTracks();
         this.props.fetchUsers();
+        this.pauseTrack();
     }
 
     playTrack(track, artist) {

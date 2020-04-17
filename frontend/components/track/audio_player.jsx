@@ -9,6 +9,11 @@ class AudioPlayer extends React.Component {
     componentDidMount() {
         this.props.fetchTracks();
         this.props.fetchUsers();
+        const audio = document.getElementById("audio");
+        if (audio) {
+            audio.src = this.props.track.trackUrl
+            audio.pause();
+        }
     }
 
     componentDidUpdate() {

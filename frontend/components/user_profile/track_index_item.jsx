@@ -13,6 +13,7 @@ class TrackIndexItem extends React.Component {
     componentDidMount() {
         debugger
         this.props.fetchTracks()
+        this.pauseTrack();
     }
 
     playTrack() {
