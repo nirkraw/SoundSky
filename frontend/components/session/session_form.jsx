@@ -39,34 +39,42 @@ class SessionForm extends React.Component {
             )
      
         return (
-            <div className="session-form-container">
-                <form onSubmit={this.handleSubmit} className="login-form-box">
-                <div 
-                onClick={this.props.closeModal} 
-                className="close-x">X</div>
-                    <div className="login-form">
-                        <h3>{this.props.formType}</h3>
-                        {errorsLi}
-                        <input type="text"
-                                value={this.state.username}
-                                placeholder = "username"
-                                onChange={this.handleInput('username')}
-                                className="login-input"
-                            />
-                        <input type="password"
-                                value={this.state.password}
-                                placeholder="your password"
-                                onChange={this.handleInput('password')}
-                                className="login-input"
-                            />
-                         <button className = "session-submit">{this.props.button}</button>
-                         <button className="demo-user"
-                                 onClick ={this.createDemoUser} 
-                                 type="submit" 
-                                 >Demo User</button>
-                    </div>
-                </form>
-            </div>
+          <div className="session-form-container">
+            <form onSubmit={this.handleSubmit} className="login-form-box">
+              <div onClick={this.props.closeModal} className="close-x">
+                X
+              </div>
+              <div className="login-form">
+                <h3>{this.props.formType}</h3>
+                {errorsLi}
+                <input
+                  type="text"
+                  value={this.state.username}
+                  placeholder="username"
+                  onChange={this.handleInput("username")}
+                  className="login-input"
+                />
+                <input
+                  type="password"
+                  value={this.state.password}
+                  placeholder="your password"
+                  onChange={this.handleInput("password")}
+                  className="login-input"
+                />
+                <button className="session-submit">{this.props.button}</button>
+                {(this.props.formType !== "Create your SoundSky account")
+                ?<button
+                  className="demo-user"
+                  onClick={this.createDemoUser}
+                  type="submit"
+                >
+                  Demo User
+                </button>
+                : null
+                }
+              </div>
+            </form>
+          </div>
         );
     }
 }

@@ -857,21 +857,21 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         type: "text",
         value: this.state.username,
         placeholder: "username",
-        onChange: this.handleInput('username'),
+        onChange: this.handleInput("username"),
         className: "login-input"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
         placeholder: "your password",
-        onChange: this.handleInput('password'),
+        onChange: this.handleInput("password"),
         className: "login-input"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "session-submit"
-      }, this.props.button), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.props.button), this.props.formType !== "Create your SoundSky account" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "demo-user",
         onClick: this.createDemoUser,
         type: "submit"
-      }, "Demo User"))));
+      }, "Demo User") : null)));
     }
   }]);
 
@@ -906,7 +906,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     formType: "Create your SoundSky account",
-    button: "Continue",
+    button: "Sign Up",
     errors: state.errors.session
   };
 };
@@ -2228,14 +2228,11 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       }
 
       var imageText;
-      var imageClass;
 
       if (imagePreview) {
-        imageText = "Replace image";
-        imageClass = "replace-image";
+        imageText = "Replace Image";
       } else {
         imageText = "Upload image";
-        imageClass = "upload-image";
       }
 
       var trackText;
@@ -2328,8 +2325,16 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "photo-container"
       }, imagePreview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: imageClass
-      }, imageText, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "upload-image"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "upload-image-text-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "camera-icon",
+        src: "/assets/camera.png",
+        alt: "camera"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "upload-image-text"
+      }, imageText)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "photo-input",
         type: "file",
         onChange: this.handlePhoto

@@ -29,6 +29,8 @@
 
  .photo-container {
    position: relative;
+   display: flex;
+   justify-content: center;
    height: 230px;
    width: 230px;
    border: 1px solid black;
@@ -38,20 +40,16 @@
  }
 
  .upload-image {
-   position: absolute;
+   margin-top: 180px;
    z-index: 5;
-   bottom: 25px; 
-   right: 66px;
-   text-align: center;
-   vertical-align: center;
+   width: fit-content;
    background-color: rgb(228, 224, 224);
    cursor: pointer;
    border-radius: 3px;
    border: 1px solid grey;
-   height: 15px;
-   padding: 2px 11px 2px 10px;
+   height: 20px;
+   padding: 2px 11px 2px 11px;
    font-size: 13px;
-   line-height: 15px;
    font-family: 'Overpass', sans-serif;
  }
 
@@ -272,3 +270,17 @@
  .orange {
    color: orange;
  }
+
+ .camera-icon {
+   height: 17px;
+   width: 17px;
+   margin-right: 5px;
+ }
+
+.upload-image-text-container {
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}

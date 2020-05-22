@@ -89,13 +89,10 @@ class TrackUpload extends React.Component {
 
 
     let imageText;
-    let imageClass;
     if (imagePreview) {
-      imageText = "Replace image";
-      imageClass = "replace-image";
+        imageText = "Replace Image"
     } else {
-      imageText = "Upload image";
-      imageClass = "upload-image";
+      imageText = "Upload image"
     }
 
     let trackText;
@@ -161,8 +158,15 @@ class TrackUpload extends React.Component {
           <div className="div2a">
             <div className="photo-container">
               {imagePreview}
-              <label className={imageClass}>
-                {imageText}
+              <label className="upload-image">
+                <div className="upload-image-text-container">
+                  <img
+                    className="camera-icon"
+                    src="/assets/camera.png"
+                    alt="camera"
+                  />
+                  <p className="upload-image-text">{imageText}</p>
+                </div>
                 <input
                   className="photo-input"
                   type="file"
@@ -185,7 +189,7 @@ class TrackUpload extends React.Component {
             <label>
               Title<span className="orange"> *</span>
               <br />
-              {(!this.state.titleError) ? (
+              {!this.state.titleError ? (
                 <input
                   type="text"
                   value={this.state.title}

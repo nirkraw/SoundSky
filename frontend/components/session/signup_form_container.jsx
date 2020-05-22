@@ -6,7 +6,7 @@ import { openModal, closeModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state) => ({
     formType: "Create your SoundSky account",
-    button: "Continue",
+    button: "Sign Up",
     errors: state.errors.session
 })
 
