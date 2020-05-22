@@ -5,7 +5,6 @@ import { updatePlayerTrack, playTrack, pauseTrack, updatePlayerArtist } from "..
 import { openModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => {
-    debugger 
     return ({
         currentUser: state.entities.users[state.session.currentUserId],
         artist: ownProps.artist,

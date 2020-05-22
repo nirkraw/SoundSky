@@ -3,15 +3,12 @@ import {NavLink} from 'react-router-dom';
 import formatUploadTime from "../../utils/time_format_util";
 import WaveFormContainer from "../waveform/waveform_container";
 
-
-
 class TrackIndexItem extends React.Component {
     constructor(props) {
         super(props)
     }
 
     componentDidMount() {
-        debugger
         this.props.fetchTracks()
         this.pauseTrack();
     }
@@ -29,7 +26,6 @@ class TrackIndexItem extends React.Component {
     render() {
         const { track, artist, currentUser, playing, currentTrack } = this.props 
         if(!currentTrack) return null; 
-       debugger 
        return ( 
            <li className="track-index-with-buttons" key={this.props.key}> 
                 <div className = "track-index-item-container">

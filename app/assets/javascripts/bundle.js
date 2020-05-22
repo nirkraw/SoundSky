@@ -837,7 +837,6 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       var errorsLi = this.props.errors.map(function (error) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "session-errors",
@@ -1811,6 +1810,7 @@ var TrackEdit = /*#__PURE__*/function (_React$Component) {
       title: _this.props.track.title,
       description: _this.props.track.description,
       genre: _this.props.track.genre,
+      photoFile: null,
       photoUrl: _this.props.track.photoUrl,
       artist_id: _this.props.currentUser.id
     };
@@ -1837,9 +1837,19 @@ var TrackEdit = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handlePhoto",
     value: function handlePhoto(e) {
-      this.setState({
-        photoFile: e.currentTarget.files[0]
-      });
+      var _this3 = this;
+
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this3.setState({
+          photoFile: file,
+          photoUrl: fileReader.result
+        });
+      };
+
+      if (file) fileReader.readAsDataURL(file);
     }
   }, {
     key: "handleSubmit",
@@ -1851,8 +1861,8 @@ var TrackEdit = /*#__PURE__*/function (_React$Component) {
       formData.append('track[description]', this.state.description);
       formData.append('track[artist_id]', this.state.artist_id);
 
-      if (this.state.photoUrl) {
-        formData.append('track[photo]', this.state.photoUrl);
+      if (this.state.photoFile) {
+        formData.append('track[photo]', this.state.photoFile);
       }
 
       this.props.updateTrack(formData, this.props.track.id).then(this.props.closeModal());
@@ -2107,7 +2117,9 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       trackFile: null,
       trackUrl: null,
       artist_id: _this.props.currentUser.id,
-      submited: false
+      submited: false,
+      titleError: "",
+      trackError: ""
     };
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -2163,23 +2175,34 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var formData = new FormData();
-      formData.append('track[title]', this.state.title);
-      formData.append('track[genre]', this.state.genre);
-      formData.append('track[description]', this.state.description);
-      formData.append('track[artist_id]', this.state.artist_id);
 
-      if (this.state.photoFile) {
-        formData.append('track[photo]', this.state.photoFile);
+      if (!this.state.trackFile) {
+        this.setState({
+          trackError: "Upload a track."
+        });
+      } else if (!this.state.title) {
+        this.setState({
+          titleError: "Enter a title."
+        });
+      } else {
+        var formData = new FormData();
+        formData.append("track[title]", this.state.title);
+        formData.append("track[genre]", this.state.genre);
+        formData.append("track[description]", this.state.description);
+        formData.append("track[artist_id]", this.state.artist_id);
+
+        if (this.state.photoFile) {
+          formData.append("track[photo]", this.state.photoFile);
+        }
+
+        if (this.state.trackFile) {
+          formData.append("track[audio]", this.state.trackFile);
+        }
+
+        this.props.createTrack(formData).then(this.setState({
+          submited: true
+        }));
       }
-
-      if (this.state.trackFile) {
-        formData.append('track[audio]', this.state.trackFile);
-      }
-
-      this.props.createTrack(formData).then(this.setState({
-        submited: true
-      }));
     }
   }, {
     key: "render",
@@ -2192,9 +2215,18 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
         src: this.state.photoUrl,
         alt: "TrackPhoto"
       }) : null;
-      var trackPreview = this.state.trackUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "track-preview"
-      }, "Track is ready to go!") : null;
+      var trackPreview;
+
+      if (this.state.trackUrl) {
+        trackPreview = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "track-preview"
+        }, "Track is ready to go!");
+      } else {
+        trackPreview = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "session-track-errors"
+        }, this.state.trackError);
+      }
+
       var imageText;
       var imageClass;
 
@@ -2209,7 +2241,7 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       var trackText;
       var trackClass;
 
-      if (trackPreview) {
+      if (this.state.trackUrl) {
         trackText = "Replace track";
         trackClass = "replace-track";
       } else {
@@ -2219,7 +2251,7 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
 
       var genreSelector = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         value: this.state.genre,
-        onChange: this.handleInput('genre'),
+        onChange: this.handleInput("genre"),
         className: "genre-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "None"
@@ -2282,21 +2314,14 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       }, "Triphop"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "World"
       }, "World"));
-      var errorsLi = this.props.errors.map(function (error) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "session-errors",
-          key: error
-        }, error);
-      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit,
         className: "upload-form-box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.props.closeModal,
         className: "close-x"
       }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "div1"
-      }, errorsLi, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basic info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basic info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "div2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "div2a"
@@ -2316,14 +2341,22 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleTrack
       })), trackPreview), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "div2b"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "session-title-errors"
+      }, this.state.titleError), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "orange"
-      }, " *"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, " *"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !this.state.titleError ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.title,
         placeholder: "Name your track",
-        onChange: this.handleInput('title'),
+        onChange: this.handleInput("title"),
         className: "title-input"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.title,
+        placeholder: "Name your track",
+        onChange: this.handleInput("title"),
+        className: "title-input-error"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Genre", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), genreSelector), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.description,
         cols: "5",
@@ -2339,6 +2372,7 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "orange"
       }, "* "), " Required fields"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleSubmit,
         className: "upload-submit"
       }, "Save")));
     }
@@ -2712,7 +2746,6 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackIndexItem, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       this.props.fetchTracks();
       this.pauseTrack();
     }
@@ -2740,7 +2773,6 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           playing = _this$props.playing,
           currentTrack = _this$props.currentTrack;
       if (!currentTrack) return null;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "track-index-with-buttons",
         key: this.props.key
@@ -2835,7 +2867,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  debugger;
   return {
     currentUser: state.entities.users[state.session.currentUserId],
     artist: ownProps.artist,

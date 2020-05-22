@@ -7,6 +7,7 @@ class TrackEdit extends React.Component {
             title: this.props.track.title,
             description: this.props.track.description,
             genre: this.props.track.genre,
+            photoFile: null,
             photoUrl: this.props.track.photoUrl,
             artist_id: this.props.currentUser.id,
         }
@@ -26,7 +27,12 @@ class TrackEdit extends React.Component {
 
 
     handlePhoto(e) {
-        this.setState({ photoFile: e.currentTarget.files[0] });
+        const file = e.currentTarget.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            this.setState({ photoFile: file, photoUrl: fileReader.result });
+        }
+        if (file) fileReader.readAsDataURL(file);
     }
 
     handleSubmit(e) {
@@ -36,8 +42,8 @@ class TrackEdit extends React.Component {
         formData.append('track[genre]', this.state.genre);
         formData.append('track[description]', this.state.description);
         formData.append('track[artist_id]', this.state.artist_id);
-        if(this.state.photoUrl) {
-            formData.append('track[photo]', this.state.photoUrl);
+        if(this.state.photoFile) {
+            formData.append('track[photo]', this.state.photoFile);
         }
         this.props.updateTrack(formData, this.props.track.id).then(this.props.closeModal())
     }
