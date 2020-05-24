@@ -23,11 +23,10 @@
 
 .logo-container {
   position: absolute;
-  height: 40px;
+  height: 45px;
   width: 100px;
   position: relative;
   bottom: 8px;
-  background-color: transparentize($color: #242424, $amount: .4);
 }
 
 .cloud-logo {
@@ -36,7 +35,7 @@
   background-color: transparent;
   position: absolute;
   right: 34px;
-  top: 7px;
+  top: 10px;
   image-resolution: 100%;
 }
 
@@ -47,13 +46,12 @@
   justify-content: center;
   align-items: center;
   bottom: 5px;
-  height: 40px;
+  height: 45px;
   bottom: 0px;
   left: 112px;
   width: 100px;
   border-left: 1px solid black;
   border-right: 1px solid black;
-  background-color: transparentize($color: #242424, $amount: .4);
 }
 
 .linkedin {
@@ -62,12 +60,11 @@
   justify-content: center;
   align-items: center;
   bottom: 5px;
-  height: 40px;
+  height: 45px;
   bottom: 0px;
   left: 210px;
   width: 100px;
   border-right: 1px solid black;
-  background-color: transparentize($color: #242424, $amount: .4);
 }
 
 .nir-kay {
@@ -77,17 +74,16 @@
   align-items: center;
   bottom: 0px;
   left: 310px;
-  height: 40px;
+  height: 45px;
   width: 100px;
   border-right: 1px solid black;
-  background-color: transparentize($color: #242424, $amount: .4);
 }
 
  .nir-kay > a, .linkedin > a, .home > a {
   text-decoration: none;
   color: rgb(200, 199, 199);
   font-family: 'Overpass', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   padding: 5px, 15px, 5px, 15px;
 }
 
@@ -96,24 +92,24 @@
 }
 .right-banner {
   position: absolute;
-  right: 28px;
+  right: 20px;
   display: flex;
-  bottom: 2px;
-  width: 200px;
+  bottom: 5px;
+  width: 250px;
   height: 33px;
   align-items: center;
 }
 
 .nav-bar-artist-pic {
-  width: 20px;
-  width: 20px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
 }
 .nav-bar-upload {
   color: #ccc;
   font-family: 'Overpass', sans-serif;
   font-weight: 200;
-  font-size: 12px;
+  font-size: 14px;
   text-decoration: none;
   padding-right: 20px;
   line-height: 1.5;
@@ -126,7 +122,7 @@
 .user-show-link {
   color: #ccc;
   font-family: 'Overpass', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 200;
   text-decoration: none;
   padding-right: 5px;
@@ -141,7 +137,7 @@
 .signout-button {
   color: #ccc;
   font-family: 'Overpass', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 200;
   text-decoration: none;
   padding-right: 5px;
