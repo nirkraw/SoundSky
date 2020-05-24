@@ -8,8 +8,8 @@
 }
 
 .track-image {
-    width: 9em;
-    height: 9em; 
+    width: 10em;
+    height: 10em; 
     object-fit: cover;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .play-button, .pause-button {
-    height: 33px;
-    width: 33px;
+    height: 45px;
+    width: 45px;
 }
 
 .play-button:hover, .pause-button:hover {
@@ -41,7 +41,7 @@
 
 .track-artist-name {
     text-decoration: none;
-    font-size: 11px;
+    font-size: 13px;
     font-family: 'Overpass', sans-serif;
     color: rgb(170, 169, 169);
 }
@@ -51,7 +51,7 @@
 }
 
 .track-title {
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'Overpass', sans-serif;
     color: rgb(59, 59, 59);
 }
@@ -67,7 +67,7 @@
 .track-genre{
     background-color: rgb(158, 155, 155);
     color: white;
-    font-size: 11px;
+    font-size: 13px;
     font-family: 'Overpass', sans-serif;
     border-radius: 25px;
     padding: 3px 5px 3px 5px;
@@ -75,7 +75,7 @@
 }
 
 .uploaded-time {
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'Overpass', sans-serif;
     text-align: center;
     margin-bottom: 3px;
@@ -83,7 +83,7 @@
 }
 
 .edit-delete-buttons-container {
-    margin-left: 150px;
+    margin-left: 170px;
     display: flex;
     justify-content: left;
 }

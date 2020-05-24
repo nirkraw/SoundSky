@@ -5,14 +5,14 @@
 
 .artist-cover-pic {
     width: 98%;
-    height: 210px;
+    height: 280px;
     padding-left: 10px;
     object-fit: cover;
 }
 
 .artist-profile-pic {
-    height: 160px;
-    width: 160px;
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
     object-fit: cover;
     z-index: 5;
@@ -20,8 +20,8 @@
 
 .profile-picture-and-name {
     position: absolute;
-    bottom: 25px;
-    left: 20px;
+    bottom: 35px;
+    left: 40px;
     display: flex;
     flex-direction: left;
 }
@@ -31,23 +31,24 @@
     margin-top: 5px;
     color: white;
     background-color: transparentize($color: #000000, $amount: .2);
-    font-size: 23px;
+    font-size: 25px;
     font-family: 'Overpass', sans-serif;
     font-weight: 200;
     height: 22px;
-    padding: 5px;
+    padding: 10px;
 }
 
 .recent-tracks {
     margin-left: 10px;
-    margin-top: 15px;
+    margin-top: 50px;
     width: 70%;
 }
 
 .recent-header {
-    font-size: 20px;
+    font-size: 23px;
     font-family: 'Overpass', sans-serif;
-    color: rgb(53, 51, 51);
+    font-weight: 300;
+    color: rgb(53, 52, 52);
 }
 
 .tracks {
@@ -74,7 +75,7 @@
     color: white;
     border: 1px thin rgb(149, 147, 147);
     border-radius: 2px;
-    padding: 4px 6px 4px 6px;
+    padding: 6px 6px 6px 6px;
     font-size: 15px;
     font-family: 'Overpass', sans-serif;
     text-align: center;
@@ -85,5 +86,5 @@
     margin-bottom: 15px; 
     margin-top: 20px; 
     font-family: 'Overpass', sans-serif;
-    
+    color: rgb(87, 87, 87);   
 }
