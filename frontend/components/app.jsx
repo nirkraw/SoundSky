@@ -7,6 +7,7 @@ import {Switch, Route, NativeRouter} from 'react-router-dom';
 import AudioPlayerContainer from "../components/track/audio_player_container";
 import UploadButtonContainer from "../components/track/upload_button_container";
 import SplashContainer from "../components/splash/splash_container";
+import TrackShowContainer from "../components/track/track_show_container";
 
 const App = () => {
   
@@ -17,6 +18,7 @@ const App = () => {
             <Switch>
                 <Route exact path="/" component={SplashContainer} />
                 <Route exact path="/users/:userId" component={TrackIndexContainer} />
+                <Route exact path="/users/:userId/:trackId" component={TrackShowContainer} />
                 <ProtectedRoute exact path="/upload" component={UploadButtonContainer} />
             </Switch>
         <AudioPlayerContainer />

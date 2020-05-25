@@ -2,9 +2,9 @@ class Api::TracksController < ApplicationController
 
     def create
         @track = Track.new(create_track_params)
+        @track.photo.attach(photo_param[:photo])
+        @track.audio.attach(audio_param[:audio])
         if @track.save!
-            @track.photo.attach(photo_param[:photo])
-            @track.audio.attach(audio_param[:audio])
             render json: 'api/tracks/show'
         else
             render json: @track.errors.full_messages  

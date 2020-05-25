@@ -1,0 +1,85 @@
+.track-show-main-container {
+    width: 100%;
+    margin-left: 12px;
+}
+
+.track-show-top-banner {
+    margin-top: 44px;
+    height: 380px;
+    width: 98%;
+    background: rgb(134,110,100);
+    background: linear-gradient(90deg, rgba(134,110,100,1) 49%, rgba(102,81,81,1) 100%);
+    position: relative;
+}
+
+.track-show-artist {
+    position: absolute;
+    top: 30px;
+    left: 120px;
+    font-size: 18px;
+    color: rgb(184, 182, 182);
+    width: 100px;
+    padding: 3px 5px 3px 5px;
+    width: fit-content;
+    background-color: black;
+    font-family: 'Overpass', sans-serif;
+}
+
+.track-show-title {
+    position: absolute;
+    top: 60px;
+    left: 120px;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    width: 100px;
+    padding: 3px 5px 3px 5px;
+    width: fit-content;
+    background-color: black;
+    font-family: 'Overpass', sans-serif;
+}
+
+.track-show-play-pause-buttons-container {
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+    position: absolute;
+    top: 23px;
+    left: 30px;
+}
+
+.track-show-play-button, .track-show-pause-button {
+    height: 75px;
+    width: 75px;
+}
+
+.track-show-album-pic {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 335px;
+    width: 335px;
+}
+
+.track-show-uploaded-time {
+    position: absolute;
+    right: 390px;
+    top: 30px;
+    font-size: 18px;
+    font-family: 'Overpass', sans-serif;
+    text-align: center;
+    margin-bottom: 3px;
+    color: rgb(250, 250, 250);
+}
+
+.track-show-track-genre {
+    position: absolute;
+    right: 390px;
+    top: 60px;
+    background-color: rgb(158, 155, 155);
+    color: white;
+    font-size: 17px;
+    font-family: 'Overpass', sans-serif;
+    border-radius: 25px;
+    padding: 3px 5px 3px 5px;
+    width: fit-content;
+}

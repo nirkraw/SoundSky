@@ -14,7 +14,6 @@ class AudioPlayer extends React.Component {
        if (!track || !artist) return null; 
          
        const audio = document.getElementById("audio");
-       console.log(this.props.changeTrack)
          if (audio && this.props.changeTrack) {
            audio.src = this.props.track.trackUrl;
            if (this.props.playing) {
