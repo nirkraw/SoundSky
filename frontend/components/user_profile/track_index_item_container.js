@@ -1,7 +1,13 @@
 import * as TrackActions from "../../actions/track_actions";
 import { connect } from "react-redux";
 import TrackIndexItem from "./track_index_item";
-import { updatePlayerTrack, playTrack, pauseTrack, updatePlayerArtist } from "../../actions/player_actions";
+import {
+  updatePlayerTrack,
+  playTrack,
+  pauseTrack,
+  updatePlayerArtist,
+  changeTrack
+} from "../../actions/player_actions";
 import { openModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,7 +26,8 @@ const mapDispatchToProps = dispatch => ({
     playTrack: () => dispatch(playTrack()),
     pauseTrack: () => dispatch(pauseTrack()),
     openModal: (modal, trackId, artistId) => dispatch(openModal(modal, trackId, artistId)),
-    fetchTracks: () => dispatch(TrackActions.fetchTracks())
+    fetchTracks: () => dispatch(TrackActions.fetchTracks()),
+    changeTrack:(boolean) => dispatch(changeTrack(boolean))
 })
 
 

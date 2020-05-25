@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
     return (
         { track: (state.entities.tracks)[state.ui.player.trackId],
           playing: state.ui.player.playing,
-          artist: state.entities.users[state.ui.player.artistId] 
+          artist: state.entities.users[state.ui.player.artistId],
+          changeTrack: state.ui.player.changeTrack
         }) 
 }
 

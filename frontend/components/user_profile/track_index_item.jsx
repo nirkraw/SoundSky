@@ -10,13 +10,14 @@ class TrackIndexItem extends React.Component {
 
     componentDidMount() {
         this.props.fetchTracks()
-        this.pauseTrack();
+        this.props.changeTrack(false);
     }
 
     playTrack() {
         this.props.updatePlayerTrack(this.props.track)
         this.props.updatePlayerArtist(this.props.artist)
         this.props.playTrack()
+        this.props.changeTrack(true)
     }
 
     pauseTrack() {

@@ -7,6 +7,15 @@ class Waveform extends React.Component {
     }
 
     componentDidMount() {
+        let xhr = {
+          cache: "default",
+          mode: "cors",
+          method: "GET",
+        //   credentials: "same-origin",
+          redirect: "follow",
+          referrer: "client",
+          headers: [{ key: "Authorization", value: "my-token" }],
+        };
         if(this.props.track) {
             this.wavesurfer = WaveSurfer.create({
                 container: '#waveform',
@@ -17,7 +26,7 @@ class Waveform extends React.Component {
                 waveColor: "blue",
                 height: 200,
                 partialRender: true,
-                xhr: {cache: 'default', mode: 'cors', method: 'GET', credentials: true}
+                xhr: xhr 
             })
             this.wavesurfer.load(this.props.track.trackUrl);
             this.wavesurfer.on('ready', function () {

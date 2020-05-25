@@ -4,29 +4,25 @@ import {NavLink} from 'react-router-dom';
 class AudioPlayer extends React.Component {
     constructor(props) {
         super(props)
+    
     }
 
-    componentDidMount() {
-        this.props.fetchTracks();
-        this.props.fetchUsers();
-    }
 
-    componentDidUpdate() {
-        const audio = document.getElementById("audio");
-        if(audio) {
-        audio.src = this.props.track.trackUrl
-            if (this.props.playing) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        }
-    }
 
     render() {
        const {track, artist} = this.props 
        if (!track || !artist) return null; 
-
+         
+       const audio = document.getElementById("audio");
+       console.log(this.props.changeTrack)
+         if (audio && this.props.changeTrack) {
+           audio.src = this.props.track.trackUrl;
+           if (this.props.playing) {
+             audio.play();
+           } else {
+             audio.pause();
+           }
+         }
        return( 
        <footer className ="audio-player-container">
             <div className ="audio-player">

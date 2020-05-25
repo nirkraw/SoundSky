@@ -123,7 +123,7 @@ var closeModal = function closeModal() {
 /*!********************************************!*\
   !*** ./frontend/actions/player_actions.js ***!
   \********************************************/
-/*! exports provided: UPDATE_PLAYER_TRACK, PLAY_TRACK, PAUSE_TRACK, UPDATE_PLAYER_ARTIST, updatePlayerTrack, updatePlayerArtist, playTrack, pauseTrack */
+/*! exports provided: UPDATE_PLAYER_TRACK, PLAY_TRACK, PAUSE_TRACK, UPDATE_PLAYER_ARTIST, CHANGE_TRACK, updatePlayerTrack, updatePlayerArtist, playTrack, pauseTrack, changeTrack */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -132,14 +132,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLAY_TRACK", function() { return PLAY_TRACK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAUSE_TRACK", function() { return PAUSE_TRACK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PLAYER_ARTIST", function() { return UPDATE_PLAYER_ARTIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_TRACK", function() { return CHANGE_TRACK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePlayerTrack", function() { return updatePlayerTrack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePlayerArtist", function() { return updatePlayerArtist; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playTrack", function() { return playTrack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseTrack", function() { return pauseTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeTrack", function() { return changeTrack; });
 var UPDATE_PLAYER_TRACK = "UPDATE_PLAYER_TRACK";
 var PLAY_TRACK = "PLAY_TRACK";
 var PAUSE_TRACK = "PAUSE_TRACK";
 var UPDATE_PLAYER_ARTIST = "UPDATE_PLAYER_ARTIST";
+var CHANGE_TRACK = 'CHANGE_TRACK';
 var updatePlayerTrack = function updatePlayerTrack(track) {
   return {
     type: UPDATE_PLAYER_TRACK,
@@ -160,6 +163,12 @@ var playTrack = function playTrack() {
 var pauseTrack = function pauseTrack() {
   return {
     type: PAUSE_TRACK
+  };
+};
+var changeTrack = function changeTrack(_boolean) {
+  return {
+    type: CHANGE_TRACK,
+    changeTrack: _boolean
   };
 };
 
@@ -980,7 +989,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchTracks();
       this.props.fetchUsers();
-      this.pauseTrack();
+      this.props.changeTrack(false);
     }
   }, {
     key: "playTrack",
@@ -988,6 +997,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       this.props.updatePlayerTrack(track);
       this.props.updatePlayerArtist(artist);
       this.props.playTrack();
+      this.props.changeTrack(true);
     }
   }, {
     key: "pauseTrack",
@@ -1381,6 +1391,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     pauseTrack: function pauseTrack() {
       return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_5__["pauseTrack"])());
+    },
+    changeTrack: function changeTrack(_boolean) {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_5__["changeTrack"])(_boolean));
     }
   };
 };
@@ -1439,17 +1452,16 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(AudioPlayer, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchTracks();
-      this.props.fetchUsers();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          track = _this$props.track,
+          artist = _this$props.artist;
+      if (!track || !artist) return null;
       var audio = document.getElementById("audio");
+      console.log(this.props.changeTrack);
 
-      if (audio) {
+      if (audio && this.props.changeTrack) {
         audio.src = this.props.track.trackUrl;
 
         if (this.props.playing) {
@@ -1458,14 +1470,7 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
           audio.pause();
         }
       }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          track = _this$props.track,
-          artist = _this$props.artist;
-      if (!track || !artist) return null;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
         className: "audio-player-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1524,7 +1529,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     track: state.entities.tracks[state.ui.player.trackId],
     playing: state.ui.player.playing,
-    artist: state.entities.users[state.ui.player.artistId]
+    artist: state.entities.users[state.ui.player.artistId],
+    changeTrack: state.ui.player.changeTrack
   };
 };
 
@@ -2752,7 +2758,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchTracks();
-      this.pauseTrack();
+      this.props.changeTrack(false);
     }
   }, {
     key: "playTrack",
@@ -2760,6 +2766,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
       this.props.updatePlayerTrack(this.props.track);
       this.props.updatePlayerArtist(this.props.artist);
       this.props.playTrack();
+      this.props.changeTrack(true);
     }
   }, {
     key: "pauseTrack",
@@ -2900,6 +2907,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchTracks: function fetchTracks() {
       return dispatch(_actions_track_actions__WEBPACK_IMPORTED_MODULE_0__["fetchTracks"]());
+    },
+    changeTrack: function changeTrack(_boolean) {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_3__["changeTrack"])(_boolean));
     }
   };
 };
@@ -2960,6 +2970,19 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
   _createClass(Waveform, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var xhr = {
+        cache: "default",
+        mode: "cors",
+        method: "GET",
+        //   credentials: "same-origin",
+        redirect: "follow",
+        referrer: "client",
+        headers: [{
+          key: "Authorization",
+          value: "my-token"
+        }]
+      };
+
       if (this.props.track) {
         this.wavesurfer = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create({
           container: '#waveform',
@@ -2970,12 +2993,7 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
           waveColor: "blue",
           height: 200,
           partialRender: true,
-          xhr: {
-            cache: 'default',
-            mode: 'cors',
-            method: 'GET',
-            credentials: true
-          }
+          xhr: xhr
         });
         this.wavesurfer.load(this.props.track.trackUrl);
         this.wavesurfer.on('ready', function () {
@@ -3131,7 +3149,8 @@ __webpack_require__.r(__webpack_exports__);
 var defaultState = {
   trackId: 4,
   artistId: 14,
-  playing: false
+  playing: false,
+  changeTrack: false
 };
 
 var playerReducer = function playerReducer() {
@@ -3155,6 +3174,10 @@ var playerReducer = function playerReducer() {
 
     case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__["PAUSE_TRACK"]:
       newState.playing = false;
+      return newState;
+
+    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__["CHANGE_TRACK"]:
+      newState.changeTrack = action.changeTrack;
       return newState;
 
     default:
