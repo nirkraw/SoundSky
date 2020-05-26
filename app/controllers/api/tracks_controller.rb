@@ -13,12 +13,12 @@ class Api::TracksController < ApplicationController
 
     def update
         @track = Track.find(params[:id])
-        if !(photo_param[:photo].instance_of? String)
+       
+        if ((!photo_param[:photo].instance_of? String) && photo_param[:photo])
             @track.photo.destroy
             @track.photo.attach(photo_param[:photo])
         end
-        
-        if @track.update(update_track_params)
+        if @track.update_attributes(update_track_params)
             render "api/tracks/show"
         else
             render @track.errors.full_messages, status: 401
