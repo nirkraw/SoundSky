@@ -10,6 +10,7 @@ import {
   changeTrack,
 } from "../../actions/player_actions";
 import { openModal } from "../../actions/modal_actions";
+import {likeTrack, unlikeTrack } from "../../actions/like_actions";
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -17,6 +18,7 @@ const mapStateToProps = (state, ownProps) => ({
   artist: state.entities.users[ownProps.match.params.userId],
   playing: state.ui.player.playing,
   currentTrack: state.entities.tracks[state.ui.player.trackId],
+  currentUser: state.entities.users[state.session.currentUserId],
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,6 +30,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchAllUsers: () => dispatch(fetchAllUsers()),
   changeTrack: (boolean) => dispatch(changeTrack(boolean)),
   openModal: (modal, trackId, artistId) => dispatch(openModal(modal, trackId, artistId)),
+  likeTrack: (like) => dispatch(likeTrack(like)),
+  unlikeTrack: (likeId) => dispatch(unlikeTrack(likeId))
 });
 
 const TrackShowContainer = connect(mapStateToProps, mapDispatchToProps)(TrackShow)

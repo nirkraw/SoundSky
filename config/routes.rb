@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :index, :show] 
     resource :session, only: [:create, :destroy]
     resources :tracks, except: [:new, :edit]
+    resource :likes, only: [:create, :destroy]
   end
   
   root to: 'root#root'

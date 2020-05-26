@@ -152,7 +152,7 @@
     justify-content: left;
 }
 
-.track-show-edit-button, .track-show-delete-button, .track-show-like-button {
+.track-show-edit-button, .track-show-delete-button, .track-show-like-button, .track-show-liked-button {
     margin-right: 10px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -168,11 +168,11 @@
     letter-spacing: 1px;
 }
 
-.track-show-edit-button > p, .track-show-delete-button > p, .track-show-like-button > p {
+.track-show-edit-button > p, .track-show-delete-button > p, .track-show-like-button > p, .track-show-liked-button > p {
     font-size: 14px;
 }
 
-.track-show-edit-button:hover, .track-show-delete-button:hover, .track-show-like-button:hover {
+.track-show-edit-button:hover, .track-show-delete-button:hover, .track-show-like-button:hover, .track-show-liked-button:hover {
     border: 1px solid rgb(56, 56, 56); 
     cursor: pointer;
 }
@@ -193,4 +193,8 @@
     height: 12px;
     width: 12px;
     margin-right: 5px; 
+}
+
+.track-show-liked-button {
+    border-color: red;
 }

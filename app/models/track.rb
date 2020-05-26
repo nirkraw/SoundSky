@@ -9,6 +9,10 @@ class_name: :User
 has_one_attached :photo 
 has_one_attached :audio 
 
+has_many :likes,
+foreign_key: :track_id,
+class_name: :Like 
+
 before_create :ensure_audio
 before_create :ensure_photo
 

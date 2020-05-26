@@ -86,6 +86,32 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/like_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/like_actions.js ***!
+  \******************************************/
+/*! exports provided: likeTrack, unlikeTrack */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeTrack", function() { return likeTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unlikeTrack", function() { return unlikeTrack; });
+/* harmony import */ var _utils_like_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/like_util */ "./frontend/utils/like_util.js");
+
+var likeTrack = function likeTrack(like) {
+  return function (dispatch) {
+    return Object(_utils_like_util__WEBPACK_IMPORTED_MODULE_0__["createLike"])(like);
+  };
+};
+var unlikeTrack = function unlikeTrack(likeId) {
+  return function (dispatch) {
+    return Object(_utils_like_util__WEBPACK_IMPORTED_MODULE_0__["destroyLike"])(likeId);
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/modal_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
@@ -2117,9 +2143,16 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(TrackShow);
 
   function TrackShow(props) {
+    var _this;
+
     _classCallCheck(this, TrackShow);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.playTrack = _this.playTrack.bind(_assertThisInitialized(_this));
+    _this.pauseTrack = _this.pauseTrack.bind(_assertThisInitialized(_this));
+    _this.likeTrack = _this.likeTrack.bind(_assertThisInitialized(_this));
+    _this.unlikeTrack = _this.unlikeTrack.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(TrackShow, [{
@@ -2143,16 +2176,64 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       this.props.pauseTrack();
     }
   }, {
+    key: "likeTrack",
+    value: function likeTrack(e) {
+      e.preventDefault();
+      this.props.likeTrack({
+        track_id: this.props.track.id,
+        user_id: this.props.artist.id
+      });
+      this.props.fetchTracks();
+    }
+  }, {
+    key: "unlikeTrack",
+    value: function unlikeTrack(e, likeId) {
+      e.preventDefault();
+      this.props.unlikeTrack(likeId);
+      this.props.fetchTracks();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var _this$props = this.props,
           track = _this$props.track,
           artist = _this$props.artist,
           playing = _this$props.playing,
-          currentTrack = _this$props.currentTrack;
+          currentTrack = _this$props.currentTrack,
+          currentUser = _this$props.currentUser;
       if (!track) return null;
+      var likeButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-show-like-button",
+        onClick: this.likeTrack
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "track-show-like-icon",
+        src: "/assets/heart.png",
+        alt: "heart"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Like"));
+
+      var _loop = function _loop(i) {
+        var like = track.likes[i];
+
+        if (like.user_id === currentUser.id) {
+          likeButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "track-show-liked-button",
+            onClick: function onClick(e) {
+              return _this2.unlikeTrack(e, like.id);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            className: "track-show-like-icon",
+            src: "/assets/heart-red",
+            alt: "red heart"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Liked"));
+        }
+      };
+
+      for (var i = 0; i < track.likes.length; i++) {
+        _loop(i);
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "outside-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2163,14 +2244,14 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-play-pause-buttons-container"
       }, playing && track.id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.pauseTrack();
+          return _this2.pauseTrack();
         },
         className: "track-show-pause-button",
         src: "/assets/pause-button-2.png",
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.playTrack();
+          return _this2.playTrack();
         },
         className: "track-show-play-button",
         src: "/assets/play-button-2.png",
@@ -2203,19 +2284,10 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         placeholder: "Write a comment"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-buttons-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "track-show-like-button" //   onClick={() =>
-        //     this.props.openModal("delete", track.id, artist.id)
-        //   }
-
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "track-show-like-icon",
-        src: "/assets/heart.png",
-        alt: "heart"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Like")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, likeButton, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-edit-button",
         onClick: function onClick() {
-          return _this.props.openModal("edit", track.id);
+          return _this2.props.openModal("edit", track.id);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "track-show-pencil-icon",
@@ -2224,7 +2296,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-delete-button",
         onClick: function onClick() {
-          return _this.props.openModal("delete", track.id, artist.id);
+          return _this2.props.openModal("delete", track.id, artist.id);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "track-show-trash-icon",
@@ -2258,6 +2330,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+
 
 
 
@@ -2270,7 +2344,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     track: state.entities.tracks[ownProps.match.params.trackId],
     artist: state.entities.users[ownProps.match.params.userId],
     playing: state.ui.player.playing,
-    currentTrack: state.entities.tracks[state.ui.player.trackId]
+    currentTrack: state.entities.tracks[state.ui.player.trackId],
+    currentUser: state.entities.users[state.session.currentUserId]
   };
 };
 
@@ -2299,6 +2374,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     openModal: function openModal(modal, trackId, artistId) {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["openModal"])(modal, trackId, artistId));
+    },
+    likeTrack: function likeTrack(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_6__["likeTrack"])(like));
+    },
+    unlikeTrack: function unlikeTrack(likeId) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_6__["unlikeTrack"])(likeId));
     }
   };
 };
@@ -3782,6 +3863,38 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/utils/like_util.js":
+/*!*************************************!*\
+  !*** ./frontend/utils/like_util.js ***!
+  \*************************************/
+/*! exports provided: createLike, destroyLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyLike", function() { return destroyLike; });
+var createLike = function createLike(like) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/likes",
+    data: {
+      like: like
+    }
+  });
+};
+var destroyLike = function destroyLike(likeId) {
+  return $.ajax({
+    method: "DELETE",
+    url: '/api/likes',
+    data: {
+      likeId: likeId
+    }
+  });
+};
 
 /***/ }),
 
