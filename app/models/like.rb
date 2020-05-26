@@ -1,6 +1,6 @@
 class Like < ApplicationRecord
 
-validates :user_id, :track_id, uniqueness: true
+# validates :user_id, :track_id, uniqueness: true
 
 belongs_to :user,
 foreign_key: :user_id,
