@@ -1611,6 +1611,7 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchTracks();
       this.props.fetchUsers();
+      this.props.changeTrack(false);
     }
   }, {
     key: "playTrack",
@@ -1618,6 +1619,7 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
       this.props.updatePlayerTrack(this.props.track);
       this.props.updatePlayerArtist(this.props.artist);
       this.props.playTrack();
+      this.props.changeTrack(true);
     }
   }, {
     key: "pauseTrack",
@@ -1760,6 +1762,9 @@ var mapdispatchToProps = function mapdispatchToProps(dispatch) {
     },
     pauseTrack: function pauseTrack() {
       return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["pauseTrack"])());
+    },
+    changeTrack: function changeTrack(_boolean) {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["changeTrack"])(_boolean));
     }
   };
 };
@@ -2149,6 +2154,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
           currentTrack = _this$props.currentTrack;
       if (!track) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "outside-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-main-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-top-banner"
@@ -2180,7 +2187,52 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-album-pic",
         src: track.photoUrl,
         alt: "album pic"
-      })));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-content-and-related-tracks-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-show-main-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "write-comment-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "track-show-artist-pic",
+        src: artist.profilePhotoUrl,
+        alt: "artist-pic"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "write-comment-input",
+        type: "text",
+        placeholder: "Write a comment"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-show-buttons-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-show-like-button" //   onClick={() =>
+        //     this.props.openModal("delete", track.id, artist.id)
+        //   }
+
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "track-show-like-icon",
+        src: "/assets/heart.png",
+        alt: "heart"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Like")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-show-edit-button",
+        onClick: function onClick() {
+          return _this.props.openModal("edit", track.id);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "track-show-pencil-icon",
+        src: "/assets/pencil.png",
+        alt: "pencil"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-show-delete-button",
+        onClick: function onClick() {
+          return _this.props.openModal("delete", track.id, artist.id);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "track-show-trash-icon",
+        src: "/assets/trash.png",
+        alt: "pencil"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Delete")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-show-related-tracks"
+      }))));
     }
   }]);
 
@@ -2205,6 +2257,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -2242,6 +2296,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     changeTrack: function changeTrack(_boolean) {
       return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["changeTrack"])(_boolean));
+    },
+    openModal: function openModal(modal, trackId, artistId) {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["openModal"])(modal, trackId, artistId));
     }
   };
 };

@@ -9,6 +9,7 @@ import {
   updatePlayerArtist,
   changeTrack,
 } from "../../actions/player_actions";
+import { openModal } from "../../actions/modal_actions";
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -26,6 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchTracks: () => dispatch(fetchTracks()),
   fetchAllUsers: () => dispatch(fetchAllUsers()),
   changeTrack: (boolean) => dispatch(changeTrack(boolean)),
+  openModal: (modal, trackId, artistId) => dispatch(openModal(modal, trackId, artistId)),
 });
 
 const TrackShowContainer = connect(mapStateToProps, mapDispatchToProps)(TrackShow)

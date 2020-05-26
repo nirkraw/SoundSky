@@ -2,7 +2,13 @@ import { connect } from 'react-redux';
 import TrackDelete from './track_delete';
 import {deleteTrack, fetchTracks} from '../../actions/track_actions';
 import { fetchAllUsers} from '../../actions/user_actions';
-import { updatePlayerTrack, playTrack, pauseTrack, updatePlayerArtist } from "../../actions/player_actions";
+import {
+  updatePlayerTrack,
+  playTrack,
+  pauseTrack,
+  updatePlayerArtist,
+  changeTrack,
+} from "../../actions/player_actions";
 import { closeModal } from "../../actions/modal_actions";
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,16 +22,17 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapdispatchToProps = dispatch => ({
-    deleteTrack: (trackId) => dispatch(deleteTrack(trackId)),
-    closeModal: () => dispatch(closeModal()),
-    fetchTracks: () => dispatch(fetchTracks()),
-    fetchUsers: () => dispatch(fetchAllUsers()),
-    updatePlayerTrack: (track) => dispatch(updatePlayerTrack(track)),
-    updatePlayerArtist: (artist) => dispatch(updatePlayerArtist(artist)),
-    playTrack: () => dispatch(playTrack()),
-    pauseTrack: () => dispatch(pauseTrack()),
-})
+const mapdispatchToProps = (dispatch) => ({
+  deleteTrack: (trackId) => dispatch(deleteTrack(trackId)),
+  closeModal: () => dispatch(closeModal()),
+  fetchTracks: () => dispatch(fetchTracks()),
+  fetchUsers: () => dispatch(fetchAllUsers()),
+  updatePlayerTrack: (track) => dispatch(updatePlayerTrack(track)),
+  updatePlayerArtist: (artist) => dispatch(updatePlayerArtist(artist)),
+  playTrack: () => dispatch(playTrack()),
+  pauseTrack: () => dispatch(pauseTrack()),
+  changeTrack: (boolean) => dispatch(changeTrack(boolean)),
+});
 
 const TrackDeleteContainer = connect(mapStateToProps, mapdispatchToProps)(TrackDelete);
 export default TrackDeleteContainer; 
