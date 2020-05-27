@@ -1,5 +1,6 @@
 import React from 'react'
 import formatUploadTime from "../../utils/time_format_util";
+import { NavLink } from "react-router-dom";
 
 class TrackShow extends React.Component {
   constructor(props) {
@@ -96,7 +97,9 @@ class TrackShow extends React.Component {
                 />
               )}
             </div>
-            <h1 className="track-show-artist">{artist.username}</h1>
+            <NavLink to={`/users/${artist.id}`} className="track-show-artist">
+              {artist.username}
+            </NavLink>
             <h1 className="track-show-title">{track.title}</h1>
             <p className="track-show-uploaded-time">
               {formatUploadTime(track.created_at)}
@@ -147,6 +150,36 @@ class TrackShow extends React.Component {
                     alt="pencil"
                   />
                   <p>Delete</p>
+                </div>
+              </div>
+              <div className="track_info_and_comments_container">
+                <div className="artist-info-and-picture">
+                  <img
+                    className="track-show-main-artist-pic"
+                    src={artist.profilePhotoUrl}
+                    alt="artist-pic"
+                  />
+                  <div className="artist-info">
+                    <NavLink
+                      to={`/users/${artist.id}`}
+                      className="track-show-artist-name"
+                    >
+                      {artist.username}
+                    </NavLink>
+                  </div>
+                </div>
+                <div className="comments-container">
+                  <div className="track-show-description-container">
+                    <h2 className="track-show-description">
+                      {track.description}
+                    </h2>
+                    <p className="track-show-track-genres">{`#${track.genre}`}</p>
+                    {(track.comments.length > 1)
+                    ? <p className="number-of-comments">{track.comments.length} comments</p>
+                    : <div></div>
+                    }
+                  </div>
+                  <div className="comment-section"></div>
                 </div>
               </div>
             </div>

@@ -13,6 +13,10 @@ has_many :likes,
 foreign_key: :track_id,
 class_name: :Like 
 
+has_many :comments,
+foreign_key: :user_id,
+class_name: :Comment 
+
 before_create :ensure_audio
 before_create :ensure_photo
 

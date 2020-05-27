@@ -8,7 +8,15 @@ attr_reader :password
 
 has_many :tracks,
 foreign_key: :artist_id,
-class_name: :Track 
+class_name: :Track
+
+has_many :likes,
+foreign_key: :user_id,
+class_name: :Like
+
+has_many :comments,
+foreign_key: :user_id,
+class_name: :Comment 
 
 has_one_attached :profile_picture
 has_one_attached :cover_picture 

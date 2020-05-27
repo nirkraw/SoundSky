@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :tracks, except: [:new, :edit]
     resource :likes, only: [:create, :destroy]
+    resource :comments, only: [:create, :destroy]
   end
   
   root to: 'root#root'
