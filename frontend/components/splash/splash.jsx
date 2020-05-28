@@ -22,6 +22,7 @@ class Splash extends React.Component {
 
     pauseTrack() {
         this.props.pauseTrack();
+        this.props.changeTrack(true);
     }
 
     render() {

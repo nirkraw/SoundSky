@@ -1061,6 +1061,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
     key: "pauseTrack",
     value: function pauseTrack() {
       this.props.pauseTrack();
+      this.props.changeTrack(true);
     }
   }, {
     key: "render",
@@ -2186,6 +2187,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
     _this.deleteComment = _this.deleteComment.bind(_assertThisInitialized(_this));
+    _this.findRelatedTrack = _this.findRelatedTrack.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2208,6 +2210,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
     key: "pauseTrack",
     value: function pauseTrack() {
       this.props.pauseTrack();
+      this.props.changeTrack(true);
     }
   }, {
     key: "likeTrack",
@@ -2258,6 +2261,12 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       this.props.fetchTracks();
     }
   }, {
+    key: "findRelatedTrack",
+    value: function findRelatedTrack(tracks, trackId) {
+      var randTrackId = Math.floor(Math.random() * tracks.length);
+      return tracks[randTrackId];
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -2299,39 +2308,57 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         _loop(i);
       }
 
-      var trackComments = track.comments.map(function (comment) {
-        var commentUser = _this2.props.users[comment.user_id];
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: comment.id,
-          className: "comment-section"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "comment-section-content"
+      var trackComments;
+
+      if (track.comments.length === 0) {
+        trackComments = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "quiet-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "comment-user-pic",
-          src: commentUser.profilePhotoUrl,
-          alt: "user-pic"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "comment-artist-info"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
-          to: "/users/".concat(artist.id),
-          className: "comment-username"
-        }, commentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "comment-body"
-        }, comment.body))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "comment-section-time"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "comment-uploaded-time"
-        }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "comment-trash-icon-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "comment-trash-icon",
-          onClick: function onClick(e) {
-            return _this2.deleteComment(e, comment.id);
-          },
-          src: "/assets/trash.png",
-          alt: "pencil"
-        })));
-      });
+          className: "comment-icon-big",
+          src: "/assets/speech-bubble.png",
+          alt: "comment-icon"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+          className: "quiet-header-1"
+        }, "Seems a little quiet over here"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+          className: "quiet-header-2"
+        }, "Be the first to comment on this track"));
+      } else {
+        trackComments = track.comments.map(function (comment) {
+          var commentUser = _this2.props.users[comment.user_id];
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: comment.id,
+            className: "comment-section"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "comment-section-content"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            className: "comment-user-pic",
+            src: commentUser.profilePhotoUrl,
+            alt: "user-pic"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "comment-artist-info"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+            to: "/users/".concat(artist.id),
+            className: "comment-username"
+          }, commentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "comment-body"
+          }, comment.body))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "comment-section-time"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "comment-uploaded-time"
+          }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "comment-trash-icon-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            className: "comment-trash-icon",
+            onClick: function onClick(e) {
+              return _this2.deleteComment(e, comment.id);
+            },
+            src: "/assets/trash.png",
+            alt: "pencil"
+          })));
+        });
+      }
+
+      var relatedTrack = this.findRelatedTrack(artist.tracks, track.id);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "outside-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2431,9 +2458,36 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "comment-icon",
         src: "/assets/comment.png",
         alt: "comment-icon"
-      }), track.comments.length, " comments") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), trackComments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), track.comments.length, " comments") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), trackComments))), artist.tracks.length !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-related-tracks"
-      }))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "related-tracks-header-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "related-track-header-and-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "sound-bar-icon",
+        src: "/assets/sound-bar.png",
+        alt: "sound-bar"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "related-tracks-header"
+      }, "Related tracks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+        to: "/users/".concat(artist.id),
+        className: "view-all-header"
+      }, "View all")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "related-tracks-track"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "related-tracks-album-pic",
+        src: artist.profilePhotoUrl,
+        alt: "related-track-photo"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "related-tracks-track-name-and-artist"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+        to: "/users/".concat(artist.id),
+        className: "related-track-artist-name"
+      }, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+        to: "/users/".concat(artist.id, "/").concat(relatedTrack.id),
+        className: "related-track-track-title"
+      }, relatedTrack.title)))) : null)));
     }
   }]);
 
@@ -2473,6 +2527,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     track: state.entities.tracks[ownProps.match.params.trackId],
+    tracks: state.entities.tracks,
     artist: state.entities.users[ownProps.match.params.userId],
     users: state.entities.users,
     playing: state.ui.player.playing,
@@ -3235,6 +3290,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "pauseTrack",
     value: function pauseTrack() {
       this.props.pauseTrack();
+      this.props.changeTrack(true);
     }
   }, {
     key: "render",

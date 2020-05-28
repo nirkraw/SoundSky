@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import formatUploadTime from "../../utils/time_format_util";
 import { NavLink } from "react-router-dom";
 
@@ -15,6 +15,7 @@ class TrackShow extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.createComment = this.createComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
+    this.findRelatedTrack = this.findRelatedTrack.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +33,7 @@ class TrackShow extends React.Component {
 
   pauseTrack() {
     this.props.pauseTrack();
+    this.props.changeTrack(true);
   }
 
   likeTrack(e) {
@@ -74,6 +76,11 @@ class TrackShow extends React.Component {
     this.props.fetchTracks();
   }
 
+  findRelatedTrack(tracks, trackId) {
+      const randTrackId = Math.floor(Math.random() * tracks.length);
+      return tracks[randTrackId];
+  }
+
   render() {
     const { track, artist, playing, currentTrack, currentUser } = this.props;
     if (!track) return null;
@@ -107,41 +114,60 @@ class TrackShow extends React.Component {
       }
     }
 
-    const trackComments = track.comments.map((comment) => {
-      const commentUser = this.props.users[comment.user_id];
-
-      return (
-        <div key={comment.id} className="comment-section">
-          <div className="comment-section-content">
-            <img
-              className="comment-user-pic"
-              src={commentUser.profilePhotoUrl}
-              alt="user-pic"
-            />
-            <div className="comment-artist-info">
-              <NavLink to={`/users/${artist.id}`} className="comment-username">
-                {commentUser.username}
-              </NavLink>
-              <p className="comment-body">{comment.body}</p>
+    let trackComments;
+    if (track.comments.length === 0) {
+      trackComments = (
+        <div className="quiet-container">
+          <img
+            className="comment-icon-big"
+            src="/assets/speech-bubble.png"
+            alt="comment-icon"
+          />
+          <h1 className="quiet-header-1">Seems a little quiet over here</h1>
+          <h1 className="quiet-header-2">Be the first to comment on this track</h1>
+        </div>
+      );
+    } else {
+      trackComments = track.comments.map((comment) => {
+        const commentUser = this.props.users[comment.user_id];
+        return (
+          <div key={comment.id} className="comment-section">
+            <div className="comment-section-content">
+              <img
+                className="comment-user-pic"
+                src={commentUser.profilePhotoUrl}
+                alt="user-pic"
+              />
+              <div className="comment-artist-info">
+                <NavLink
+                  to={`/users/${artist.id}`}
+                  className="comment-username"
+                >
+                  {commentUser.username}
+                </NavLink>
+                <p className="comment-body">{comment.body}</p>
+              </div>
             </div>
-          </div>
-          <div className="comment-section-time">
-            <p className="comment-uploaded-time">
-              {formatUploadTime(comment.created_at)}
-            </p>
-          </div>
-          <div className="comment-trash-icon-container">
-            <img
+            <div className="comment-section-time">
+              <p className="comment-uploaded-time">
+                {formatUploadTime(comment.created_at)}
+              </p>
+            </div>
+            <div className="comment-trash-icon-container">
+              <img
                 className="comment-trash-icon"
                 onClick={(e) => this.deleteComment(e, comment.id)}
                 src="/assets/trash.png"
                 alt="pencil"
-            />
+              />
+            </div>
           </div>
-        </div>
-      );
-    });
+        );
+      });
+    }
 
+    const relatedTrack = this.findRelatedTrack(artist.tracks, track.id);
+    
     return (
       <div className="outside-container">
         <div className="track-show-main-container">
@@ -260,7 +286,44 @@ class TrackShow extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="track-show-related-tracks"></div>
+            {(artist.tracks.length !== 0)
+            ? <div className="track-show-related-tracks">
+              <div className="related-tracks-header-container">
+                <div className="related-track-header-and-icon">
+                  <img
+                    className="sound-bar-icon"
+                    src="/assets/sound-bar.png"
+                    alt="sound-bar"
+                  />
+                  <h1 className="related-tracks-header">Related tracks</h1>
+                </div>
+                <NavLink to={`/users/${artist.id}`} className="view-all-header">
+                  View all
+                </NavLink>
+              </div>
+              <div className="related-tracks-track">
+                <img
+                  className="related-tracks-album-pic"
+                  src={artist.profilePhotoUrl}
+                  alt="related-track-photo"
+                />
+                <div className="related-tracks-track-name-and-artist">
+                  <NavLink
+                    to={`/users/${artist.id}`}
+                    className="related-track-artist-name"
+                  >
+                    {artist.username}
+                  </NavLink>
+                  <NavLink
+                    to={`/users/${artist.id}/${relatedTrack.id}`}
+                    className="related-track-track-title"
+                  >
+                    {relatedTrack.title}
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+            : null}
           </div>
         </div>
       </div>
