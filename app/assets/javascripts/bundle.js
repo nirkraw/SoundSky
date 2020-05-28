@@ -2185,6 +2185,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
     _this.unlikeTrack = _this.unlikeTrack.bind(_assertThisInitialized(_this));
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
+    _this.deleteComment = _this.deleteComment.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2250,6 +2251,13 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "deleteComment",
+    value: function deleteComment(e, commentId) {
+      e.preventDefault();
+      this.props.destroyNewComment(commentId);
+      this.props.fetchTracks();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -2313,7 +2321,16 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
           className: "comment-section-time"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "comment-uploaded-time"
-        }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))));
+        }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "comment-trash-icon-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "comment-trash-icon",
+          onClick: function onClick(e) {
+            return _this2.deleteComment(e, comment.id);
+          },
+          src: "/assets/trash.png",
+          alt: "pencil"
+        })));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "outside-container"

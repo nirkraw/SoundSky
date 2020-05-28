@@ -6,7 +6,7 @@ class TrackShow extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {comment: ""}
+    this.state = { comment: "" };
 
     this.playTrack = this.playTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
@@ -14,6 +14,7 @@ class TrackShow extends React.Component {
     this.unlikeTrack = this.unlikeTrack.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.createComment = this.createComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
   }
 
   componentDidMount() {
@@ -35,10 +36,13 @@ class TrackShow extends React.Component {
 
   likeTrack(e) {
     e.preventDefault();
-    this.props.likeTrack({track_id: this.props.track.id, user_id: this.props.artist.id});
+    this.props.likeTrack({
+      track_id: this.props.track.id,
+      user_id: this.props.artist.id,
+    });
     this.props.fetchTracks();
   }
-  
+
   unlikeTrack(e, likeId) {
     e.preventDefault();
     this.props.unlikeTrack(likeId);
@@ -46,14 +50,14 @@ class TrackShow extends React.Component {
   }
 
   handleInput(e) {
-    e.preventDefault()
-    this.setState({ comment: e.target.value });   
+    e.preventDefault();
+    this.setState({ comment: e.target.value });
   }
 
   createComment(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
-      
+
       this.props.createNewComment({
         body: this.state.comment,
         track_id: this.props.track.id,
@@ -64,15 +68,18 @@ class TrackShow extends React.Component {
     }
   }
 
+  deleteComment(e, commentId) {
+    e.preventDefault();
+    this.props.destroyNewComment(commentId);
+    this.props.fetchTracks();
+  }
+
   render() {
     const { track, artist, playing, currentTrack, currentUser } = this.props;
     if (!track) return null;
 
     let likeButton = (
-      <div
-        className="track-show-like-button"
-        onClick={this.likeTrack}
-      >
+      <div className="track-show-like-button" onClick={this.likeTrack}>
         <img
           className="track-show-like-icon"
           src="/assets/heart.png"
@@ -82,27 +89,27 @@ class TrackShow extends React.Component {
       </div>
     );
     for (let i = 0; i < track.likes.length; i++) {
-        const like = track.likes[i];
-        if (like.user_id === currentUser.id) {
-            likeButton = (
-              <div
-                className="track-show-liked-button"
-                onClick={(e) => this.unlikeTrack(e, like.id)}
-              >
-                <img
-                  className="track-show-like-icon"
-                  src="/assets/heart-red"
-                  alt="red heart"
-                />
-                <p>Liked</p>
-              </div>
-            );
-        }
+      const like = track.likes[i];
+      if (like.user_id === currentUser.id) {
+        likeButton = (
+          <div
+            className="track-show-liked-button"
+            onClick={(e) => this.unlikeTrack(e, like.id)}
+          >
+            <img
+              className="track-show-like-icon"
+              src="/assets/heart-red"
+              alt="red heart"
+            />
+            <p>Liked</p>
+          </div>
+        );
+      }
     }
 
-    const trackComments = track.comments.map(comment => {
-      const commentUser= this.props.users[comment.user_id]
-      
+    const trackComments = track.comments.map((comment) => {
+      const commentUser = this.props.users[comment.user_id];
+
       return (
         <div key={comment.id} className="comment-section">
           <div className="comment-section-content">
@@ -122,6 +129,14 @@ class TrackShow extends React.Component {
             <p className="comment-uploaded-time">
               {formatUploadTime(comment.created_at)}
             </p>
+          </div>
+          <div className="comment-trash-icon-container">
+            <img
+                className="comment-trash-icon"
+                onClick={(e) => this.deleteComment(e, comment.id)}
+                src="/assets/trash.png"
+                alt="pencil"
+            />
           </div>
         </div>
       );
@@ -230,7 +245,11 @@ class TrackShow extends React.Component {
                     <p className="track-show-track-genres">{`#${track.genre}`}</p>
                     {track.comments.length > 1 ? (
                       <p className="number-of-comments">
-                        <img className="comment-icon" src="/assets/comment.png" alt="comment-icon" />
+                        <img
+                          className="comment-icon"
+                          src="/assets/comment.png"
+                          alt="comment-icon"
+                        />
                         {track.comments.length} comments
                       </p>
                     ) : (

@@ -6,6 +6,7 @@
 
 .track-show-main-container {
     width: 1243px;
+    min-height: 1000px;
     height: 100%;
     background-color: white;
     margin-left: 12px;
@@ -290,6 +291,7 @@
 }
 
 .comment-section {
+    position: relative;
     display: flex;
     justify-content: space-around;
     margin-top: 10px ;
@@ -350,4 +352,26 @@
     height: 15px;
     width: 15px;
     margin-right: 7px;
+}
+
+.comment-trash-icon-container {
+    border: 1px solid rgb(139, 137, 137);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    right: 55px;
+    top: 15px; 
+}
+
+.comment-trash-icon-container {
+    cursor: pointer;
+}
+
+.comment-trash-icon {
+    height: 15px;
+    width: 15px;
+    padding: 3px;
 }
