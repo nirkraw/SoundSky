@@ -1,12 +1,12 @@
 .outside-container {
     width: 100%;
     background-color: rgb(233, 231, 231);
-    height: 1000px;
+    height: 100%;
 }
 
 .track-show-main-container {
     width: 1243px;
-    height: contain;
+    height: 100%;
     background-color: white;
     margin-left: 12px;
 }
@@ -107,7 +107,7 @@
 .track-show-main-content{
     margin-top: 15px;
     width: 885px;
-    height: 400px; 
+    height: fit-content; 
     border-right: 1px solid rgb(221, 220, 220);
     display: flex;
     flex-direction: column;
@@ -125,6 +125,7 @@
     background-color: rgb(233, 231, 231);
     display: flex;
     align-items: center;
+    border: 1px solid lightgray;
 }
 
 .track-show-artist-pic {
@@ -165,7 +166,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
     height: 20px;
-    width: auto;
+    width: 60px;
     display:flex; 
     justify-content: center; 
     align-items:center;
@@ -220,14 +221,18 @@
     flex-direction: column;
     align-items: center;
     height: 100%;
-    width: 20%;
+    width: 17%;
+    margin-left: 18px;
 }
 
 .comments-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: left;
     height: 100%;
     width: 80%;
+    margin-left: 15px;
+    margin-bottom: 50px;
 }
 
 .track-show-main-artist-pic {
@@ -260,7 +265,7 @@
 }
 
 .track-show-description-container {
-    width: 90%;
+    width: 94%;
     height: fit-content;
     border-bottom: 1px solid rgb(221, 220, 220); ;
 }
@@ -282,4 +287,67 @@
     padding: 3px 5px 3px 5px;
     width: fit-content;
     margin-bottom: 10px;
+}
+
+.comment-section {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px ;
+    height: fit-content;
+    width: 100%;
+}
+
+.comment-user-pic{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.comment-artist-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.comment-username {
+    color: rgb(141, 139, 139);
+    font-size: 14px;
+    font-family: 'Overpass', sans-serif;
+    text-decoration: none;
+}
+
+.comment-body {
+    font-size: 14px;
+    font-family: 'Overpass', sans-serif;
+}
+
+.comment-section-content {
+    display: flex;
+    justify-content: left;
+    width: 85%;
+}
+
+.comment-section-time {
+    width: 15%;
+}
+
+.comment-uploaded-time {
+    font-size: 13px;
+    font-family: 'Overpass', sans-serif;
+    color: rgb(155, 153, 153);
+}
+
+.number-of-comments {
+    font-size: 15px;
+    font-family: 'Overpass', sans-serif;
+    color: rgb(155, 153, 153);
+    margin-bottom: 10px;
+}
+
+.comment-icon {
+    height: 15px;
+    width: 15px;
+    margin-right: 7px;
 }

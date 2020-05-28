@@ -2,7 +2,7 @@ class Api::CommentsController < ApplicationController
 
     def create
         @comment = Comment.new(comment_params)
-        @comment.save 
+        @comment.save! 
     end
 
     def destroy
@@ -11,7 +11,7 @@ class Api::CommentsController < ApplicationController
     end
 
     def comment_params 
-        params.require(:comment).permit(:user_id, :track_id, :parent_comment_id)
+        params.require(:comment).permit(:user_id, :track_id, :body, :parent_comment_id)
     end
 end
 

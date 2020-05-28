@@ -86,6 +86,32 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/comment_action.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/comment_action.js ***!
+  \********************************************/
+/*! exports provided: createNewComment, destroyNewComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNewComment", function() { return createNewComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyNewComment", function() { return destroyNewComment; });
+/* harmony import */ var _utils_comment_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/comment_util */ "./frontend/utils/comment_util.js");
+
+var createNewComment = function createNewComment(comment) {
+  return function (dispatch) {
+    return Object(_utils_comment_util__WEBPACK_IMPORTED_MODULE_0__["createComment"])(comment);
+  };
+};
+var destroyNewComment = function destroyNewComment(commentId) {
+  return function (dispatch) {
+    return Object(_utils_comment_util__WEBPACK_IMPORTED_MODULE_0__["destroyComment"])(commentId);
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/like_actions.js":
 /*!******************************************!*\
   !*** ./frontend/actions/like_actions.js ***!
@@ -2150,10 +2176,15 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, TrackShow);
 
     _this = _super.call(this, props);
+    _this.state = {
+      comment: ""
+    };
     _this.playTrack = _this.playTrack.bind(_assertThisInitialized(_this));
     _this.pauseTrack = _this.pauseTrack.bind(_assertThisInitialized(_this));
     _this.likeTrack = _this.likeTrack.bind(_assertThisInitialized(_this));
     _this.unlikeTrack = _this.unlikeTrack.bind(_assertThisInitialized(_this));
+    _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
+    _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2193,6 +2224,30 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       this.props.unlikeTrack(likeId);
       this.props.fetchTracks();
+    }
+  }, {
+    key: "handleInput",
+    value: function handleInput(e) {
+      e.preventDefault();
+      this.setState({
+        comment: e.target.value
+      });
+    }
+  }, {
+    key: "createComment",
+    value: function createComment(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        this.props.createNewComment({
+          body: this.state.comment,
+          track_id: this.props.track.id,
+          user_id: this.props.artist.id
+        });
+        this.props.fetchTracks();
+        this.setState({
+          comment: ""
+        });
+      }
     }
   }, {
     key: "render",
@@ -2236,6 +2291,30 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         _loop(i);
       }
 
+      var trackComments = track.comments.map(function (comment) {
+        var commentUser = _this2.props.users[comment.user_id];
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: comment.id,
+          className: "comment-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "comment-section-content"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "comment-user-pic",
+          src: commentUser.profilePhotoUrl,
+          alt: "user-pic"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "comment-artist-info"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+          to: "/users/".concat(artist.id),
+          className: "comment-username"
+        }, commentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "comment-body"
+        }, comment.body))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "comment-section-time"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "comment-uploaded-time"
+        }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))));
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "outside-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2282,7 +2361,10 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         src: artist.profilePhotoUrl,
         alt: "artist-pic"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onKeyDown: this.createComment,
+        onChange: this.handleInput,
         className: "write-comment-input",
+        value: this.state.comment,
         type: "text",
         placeholder: "Write a comment"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2328,9 +2410,11 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-track-genres"
       }, "#".concat(track.genre)), track.comments.length > 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "number-of-comments"
-      }, track.comments.length, " comments") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "comment-section"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "comment-icon",
+        src: "/assets/comment.png",
+        alt: "comment-icon"
+      }), track.comments.length, " comments") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), trackComments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-related-tracks"
       }))));
     }
@@ -2359,6 +2443,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+/* harmony import */ var _actions_comment_action__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/comment_action */ "./frontend/actions/comment_action.js");
+
 
 
 
@@ -2371,6 +2457,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     track: state.entities.tracks[ownProps.match.params.trackId],
     artist: state.entities.users[ownProps.match.params.userId],
+    users: state.entities.users,
     playing: state.ui.player.playing,
     currentTrack: state.entities.tracks[state.ui.player.trackId],
     currentUser: state.entities.users[state.session.currentUserId]
@@ -2408,6 +2495,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     unlikeTrack: function unlikeTrack(likeId) {
       return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_6__["unlikeTrack"])(likeId));
+    },
+    createNewComment: function createNewComment(comment) {
+      return dispatch(Object(_actions_comment_action__WEBPACK_IMPORTED_MODULE_7__["createNewComment"])(comment));
+    },
+    destroyNewComment: function destroyNewComment(commentId) {
+      return dispatch(Object(_actions_comment_action__WEBPACK_IMPORTED_MODULE_7__["destroyNewComment"])(commentId));
     }
   };
 };
@@ -3328,13 +3421,9 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
         cache: "default",
         mode: "cors",
         method: "GET",
-        //   credentials: "same-origin",
+        credentials: "same-origin",
         redirect: "follow",
-        referrer: "client",
-        headers: [{
-          key: "Authorization",
-          value: "my-token"
-        }]
+        referrer: "client"
       };
 
       if (this.props.track) {
@@ -3891,6 +3980,38 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/utils/comment_util.js":
+/*!****************************************!*\
+  !*** ./frontend/utils/comment_util.js ***!
+  \****************************************/
+/*! exports provided: createComment, destroyComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyComment", function() { return destroyComment; });
+var createComment = function createComment(comment) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/comments",
+    data: {
+      comment: comment
+    }
+  });
+};
+var destroyComment = function destroyComment(commentId) {
+  return $.ajax({
+    method: "DELETE",
+    url: "/api/comments",
+    data: {
+      commentId: commentId
+    }
+  });
+};
 
 /***/ }),
 

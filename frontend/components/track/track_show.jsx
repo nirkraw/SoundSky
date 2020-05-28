@@ -6,10 +6,14 @@ class TrackShow extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {comment: ""}
+
     this.playTrack = this.playTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
     this.likeTrack = this.likeTrack.bind(this);
     this.unlikeTrack = this.unlikeTrack.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.createComment = this.createComment.bind(this);
   }
 
   componentDidMount() {
@@ -41,10 +45,29 @@ class TrackShow extends React.Component {
     this.props.fetchTracks();
   }
 
+  handleInput(e) {
+    e.preventDefault()
+    this.setState({ comment: e.target.value });   
+  }
+
+  createComment(e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      
+      this.props.createNewComment({
+        body: this.state.comment,
+        track_id: this.props.track.id,
+        user_id: this.props.artist.id,
+      });
+      this.props.fetchTracks();
+      this.setState({ comment: "" });
+    }
+  }
+
   render() {
     const { track, artist, playing, currentTrack, currentUser } = this.props;
     if (!track) return null;
-  
+
     let likeButton = (
       <div
         className="track-show-like-button"
@@ -76,6 +99,34 @@ class TrackShow extends React.Component {
             );
         }
     }
+
+    const trackComments = track.comments.map(comment => {
+      const commentUser= this.props.users[comment.user_id]
+      
+      return (
+        <div key={comment.id} className="comment-section">
+          <div className="comment-section-content">
+            <img
+              className="comment-user-pic"
+              src={commentUser.profilePhotoUrl}
+              alt="user-pic"
+            />
+            <div className="comment-artist-info">
+              <NavLink to={`/users/${artist.id}`} className="comment-username">
+                {commentUser.username}
+              </NavLink>
+              <p className="comment-body">{comment.body}</p>
+            </div>
+          </div>
+          <div className="comment-section-time">
+            <p className="comment-uploaded-time">
+              {formatUploadTime(comment.created_at)}
+            </p>
+          </div>
+        </div>
+      );
+    });
+
     return (
       <div className="outside-container">
         <div className="track-show-main-container">
@@ -120,7 +171,10 @@ class TrackShow extends React.Component {
                   alt="artist-pic"
                 />
                 <input
+                  onKeyDown={this.createComment}
+                  onChange={this.handleInput}
                   className="write-comment-input"
+                  value={this.state.comment}
                   type="text"
                   placeholder="Write a comment"
                 />
@@ -174,12 +228,16 @@ class TrackShow extends React.Component {
                       {track.description}
                     </h2>
                     <p className="track-show-track-genres">{`#${track.genre}`}</p>
-                    {(track.comments.length > 1)
-                    ? <p className="number-of-comments">{track.comments.length} comments</p>
-                    : <div></div>
-                    }
+                    {track.comments.length > 1 ? (
+                      <p className="number-of-comments">
+                        <img className="comment-icon" src="/assets/comment.png" alt="comment-icon" />
+                        {track.comments.length} comments
+                      </p>
+                    ) : (
+                      <div></div>
+                    )}
                   </div>
-                  <div className="comment-section"></div>
+                  {trackComments}
                 </div>
               </div>
             </div>

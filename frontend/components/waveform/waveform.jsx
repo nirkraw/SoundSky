@@ -11,10 +11,9 @@ class Waveform extends React.Component {
           cache: "default",
           mode: "cors",
           method: "GET",
-        //   credentials: "same-origin",
+          credentials: "same-origin",
           redirect: "follow",
-          referrer: "client",
-          headers: [{ key: "Authorization", value: "my-token" }],
+          referrer: "client"
         };
         if(this.props.track) {
             this.wavesurfer = WaveSurfer.create({
