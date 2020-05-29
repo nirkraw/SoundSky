@@ -26,13 +26,13 @@ button {
 }
 
 
- .modal-background {
+.modal-background {
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(189, 181, 181, 0.7);
+  background: rgba(189, 181, 181, 0.95);
   z-index: 10;
   animation-name: modal-background-fade-in;
   animation-duration: 0.5s;
@@ -43,7 +43,7 @@ button {
     background: transparent;
   }
   to {
-     background: rgba(189, 181, 181, 0.7);
+     background: rgba(189, 181, 181, 0.95);
   }
 }
 

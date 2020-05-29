@@ -40,7 +40,7 @@ class SessionForm extends React.Component {
      
         return (
           <div className="session-form-container">
-            <form onSubmit={this.handleSubmit} className="login-form-box">
+            <form className="login-form-box">
               <div onClick={this.props.closeModal} className="close-x">
                 X
               </div>
@@ -50,28 +50,29 @@ class SessionForm extends React.Component {
                 <input
                   type="text"
                   value={this.state.username}
-                  placeholder="username"
+                  placeholder="Username"
                   onChange={this.handleInput("username")}
                   className="login-input"
                 />
                 <input
                   type="password"
                   value={this.state.password}
-                  placeholder="your password"
+                  placeholder="Your Password"
                   onChange={this.handleInput("password")}
                   className="login-input"
                 />
-                <button className="session-submit">{this.props.button}</button>
-                {(this.props.formType !== "Create your SoundSky account")
-                ?<button
-                  className="demo-user"
-                  onClick={this.createDemoUser}
-                  type="submit"
-                >
-                  Demo User
-                </button>
-                : null
-                }
+                <div className="session-submit" onClick={this.handleSubmit}>
+                  <p>{this.props.button}</p>
+                </div>
+                {this.props.formType !== "Create your SoundSky account" ? (
+                  <div
+                    className="demo-user"
+                    onClick={this.createDemoUser}
+                    type="submit"
+                  >
+                  <p>Demo User</p>
+                  </div>
+                ) : null}
               </div>
             </form>
           </div>

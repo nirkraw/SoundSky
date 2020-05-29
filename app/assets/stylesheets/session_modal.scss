@@ -13,54 +13,78 @@
 .login-form > h3 {
   margin: 10px;
   font-size: 32px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Overpass', sans-serif;
 }
 
 .login-form > input {
-  width: 70%;
-  height: 25px;
-  margin: 10px;
+  width: 90%;
+  height: 37px;
+  margin: 5px;
   border: 1px solid rgb(190, 190, 190);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .login-input {
   margin-left: 20px;
-  size: 25px;
-  font-size: 15px;
-  text-align: center;
+  font-size: 19px;
+  text-align: left;
+  text-indent: 5px;
+  font-family: 'Overpass', sans-serif;
 }
 
 .login-form-box {
   outline: 1px solid white;
   border-color: white;
   border-radius: 2px;
-  height: auto;
-  width: 450px;
+  height: 500px;
+  width: 400px;
   padding: 20px;
   background: rgb(255, 255, 255);
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .session-submit {
-  text-transform: capitalize;
-  background-color: orange;
-  height: 35px;
-  font-size: 15px;
-  width: 71%;
+  background-color: #FF5500;
+  height: 40px;
+  width: 91%;
+  margin: 5px;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 4px;
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.session-submit:hover {
+  cursor: pointer;
+}
+
+.session-submit > p {
+  color: white;
+  font-family: 'Overpass', sans-serif;
   font-size: 17px;
-  font-family: "Montserrat", sans-serif;
 }
 
 .demo-user {
-  margin-top: 5px;
-  text-transform: capitalize;
-  background-color: rgb(181, 181, 216);
-  height: 35px;
-  font-size: 15px;
-  width: 71%;
+  background-color: #FF5500;
+  height: 40px;
+  width: 91%;
+  margin: 5px;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 4px;
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-user > p {
+  color: white;
+  font-family: 'Overpass', sans-serif;
   font-size: 17px;
-  font-family: "Montserrat", sans-serif;
 }
 
 .session-errors {
