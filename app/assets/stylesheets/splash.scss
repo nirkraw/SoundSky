@@ -47,15 +47,16 @@
   padding: 10px; 
 }
 
-.image-container > p {
+.splash-track-title {
   font-family: 'Overpass', sans-serif;
   font-weight: 300;
   font-size: 14px;
-  color: #000;
+  color: rgb(37, 37, 37);
   margin-left: 10px;
+  text-decoration: none;
 }
 
-.image-container > a {
+.splash-artist-link {
   color: rgb(141, 137, 137); 
   letter-spacing: 1px;
   font-size: 13px;

@@ -171,15 +171,17 @@ class TrackShow extends React.Component {
       });
     }
 
-    let relatedTrack;
+    let relatedTrack = this.props.tracks[Math.floor(Math.random() * this.props.tracks.length)];
     const relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
 
+    if(artist.tracks.length > 1) {
      for (let i = 0; i < this.props.tracks.length; i++) {
-      const ele = this.props.tracks[i];
-          if(ele.id === relatedTrackId) {
-            relatedTrack = ele;
-          }
-    } 
+        const ele = this.props.tracks[i];
+        if(ele.id === relatedTrackId) {
+          relatedTrack = ele;
+        }
+        } 
+      }
     
     return (
       <div className="outside-container">
@@ -299,8 +301,7 @@ class TrackShow extends React.Component {
                 </div>
               </div>
             </div>
-            {(artist.tracks.length !== 0)
-            ? <div className="track-show-related-tracks">
+            <div className="track-show-related-tracks">
               <div className="related-tracks-header-container">
                 <div className="related-track-header-and-icon">
                   <img
@@ -310,7 +311,10 @@ class TrackShow extends React.Component {
                   />
                   <h1 className="related-tracks-header">Related tracks</h1>
                 </div>
-                <NavLink to={`/users/${artist.id}`} className="view-all-header">
+                <NavLink
+                  to={`/users/${relatedTrack.artist.id}`}
+                  className="view-all-header"
+                >
                   View all
                 </NavLink>
               </div>
@@ -322,13 +326,13 @@ class TrackShow extends React.Component {
                 />
                 <div className="related-tracks-track-name-and-artist">
                   <NavLink
-                    to={`/users/${artist.id}`}
+                    to={`/users/${relatedTrack.artist.id}`}
                     className="related-track-artist-name"
                   >
-                    {artist.username}
+                    {relatedTrack.artist.username}
                   </NavLink>
                   <NavLink
-                    to={`/users/${artist.id}/${relatedTrack.id}`}
+                    to={`/users/${relatedTrack.artist.id}/${relatedTrack.id}`}
                     className="related-track-track-title"
                   >
                     {relatedTrack.title}
@@ -336,7 +340,6 @@ class TrackShow extends React.Component {
                 </div>
               </div>
             </div>
-            : null}
           </div>
         </div>
       </div>
