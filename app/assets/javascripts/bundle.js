@@ -1552,6 +1552,8 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   _createClass(AudioPlayer, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      var _this = this;
+
       var _this$props = this.props,
           track = _this$props.track,
           playing = _this$props.playing,
@@ -1560,7 +1562,6 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
       var audio = document.getElementById("audio");
 
       if (audio && changePlayerTrack) {
-        console.log("did we hit this");
         audio.src = track.trackUrl;
       }
 
@@ -1573,6 +1574,15 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
       }
 
       changeCurrentTrack(false);
+      setInterval(function () {
+        if (audio && audio.paused) {
+          _this.props.pauseTrack();
+        }
+
+        if (audio && !audio.paused) {
+          _this.props.playTrack();
+        }
+      }, 500);
     }
   }, {
     key: "render",
@@ -1656,6 +1666,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     changeCurrentTrack: function changeCurrentTrack(_boolean) {
       return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["changeTrack"])(_boolean));
+    },
+    pauseTrack: function pauseTrack() {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["pauseTrack"])());
+    },
+    playTrack: function playTrack() {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["playTrack"])());
     }
   };
 };
@@ -3400,6 +3416,7 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           currentUser = _this$props.currentUser,
           playing = _this$props.playing,
           currentTrack = _this$props.currentTrack;
+      console.log(playing);
       if (!currentTrack) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "track-index-with-buttons",
@@ -3606,27 +3623,23 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
           responsive: true,
           cursorWidth: 0
         });
-        this.wavesurfer.load(this.props.track.trackUrl); //    wavesurfer.on('ready', function () {
-        //         wavesurfer.play();
-        //     });
+        this.wavesurfer.load(this.props.track.trackUrl);
+        this.wavesurfer.setMute();
       }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      var _this = this;
+
       var _this$props = this.props,
-          playing = _this$props.playing,
           track = _this$props.track,
           currentTrack = _this$props.currentTrack;
 
-      if (playing && currentTrack.id === track.id) {
-        this.wavesurfer.setMute();
-        var audio = document.getElementById("audio");
-        console.log(audio.currentTime / this.wavesurfer.getDuration());
-        this.wavesurfer.seekTo(audio.currentTime / this.wavesurfer.getDuration());
-        this.wavesurfer.play();
-      } else {
-        this.wavesurfer.pause();
+      if (currentTrack.id === track.id) {
+        setInterval(function () {
+          _this.wavesurfer.seekTo(audio.currentTime / _this.wavesurfer.getDuration());
+        }, 500);
       }
     }
   }, {

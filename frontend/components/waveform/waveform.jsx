@@ -23,23 +23,18 @@ class Waveform extends React.Component {
               cursorWidth: 0,
             });
            this.wavesurfer.load(this.props.track.trackUrl);
-          
-        //    wavesurfer.on('ready', function () {
-        //         wavesurfer.play();
-        //     });
+           this.wavesurfer.setMute();
+           
         }
     }
-
+    
     componentDidUpdate() {
-         const { playing, track, currentTrack } = this.props;
-         if (playing && currentTrack.id === track.id) {
-           this.wavesurfer.setMute();
-           const audio = document.getElementById("audio");
-           console.log(audio.currentTime / this.wavesurfer.getDuration());
-           this.wavesurfer.seekTo((audio.currentTime/this.wavesurfer.getDuration()));
-           this.wavesurfer.play()
-         } else {
-           this.wavesurfer.pause();
+        const {track, currentTrack } = this.props;
+        if (currentTrack.id === track.id) {
+           setInterval(() => {
+               this.wavesurfer.seekTo(
+                   audio.currentTime / this.wavesurfer.getDuration()  )
+           }, 500);
          }
     }
 
