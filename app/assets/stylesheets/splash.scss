@@ -73,7 +73,7 @@
   position: absolute;
   width: 138px;
   height: 138px;
-  top: 31px;
+  top: 30px;
   left: 26px;
   display: flex;
   justify-content: center;
@@ -90,10 +90,17 @@
 }
 
 .splash-play-button, .splash-pause-button {
-    height: 55px;
-    width: 55px;
+    height: 65px;
+    width: 65px;
     display: none;
+    filter: brightness(.93);
+    
 }
+
+.splash-play-button:hover, .splash-pause-button:hover {
+  cursor: pointer;
+  filter: brightness(1);
+} 
 
 .join-in-container {
   margin-bottom: 150px;
