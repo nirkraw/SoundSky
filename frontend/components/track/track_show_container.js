@@ -35,12 +35,13 @@ const mapDispatchToProps = (dispatch) => ({
   fetchTracks: () => dispatch(fetchTracks()),
   fetchAllUsers: () => dispatch(fetchAllUsers()),
   changeTrack: (boolean) => dispatch(changeTrack(boolean)),
-  openModal: (modal, trackId, artistId) => dispatch(openModal(modal, trackId, artistId)),
+  openModal: (modal, trackId, artistId) =>
+    dispatch(openModal(modal, trackId, artistId)),
   likeTrack: (like) => dispatch(likeTrack(like)),
   unlikeTrack: (likeId) => dispatch(unlikeTrack(likeId)),
   createNewComment: (comment) => dispatch(createNewComment(comment)),
-  destroyNewComment: (commentId) => dispatch(destroyNewComment(commentId))
-
+  destroyNewComment: (commentId) => dispatch(destroyNewComment(commentId)),
+  openModal: (modal) => dispatch(openModal(modal)),
 });
 
 const TrackShowContainer = connect(mapStateToProps, mapDispatchToProps)(TrackShow)

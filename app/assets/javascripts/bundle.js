@@ -2251,6 +2251,11 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "likeTrack",
     value: function likeTrack(e) {
+      if (!this.props.currentUser) {
+        this.props.openModal("login");
+        return null;
+      }
+
       e.preventDefault();
       this.props.likeTrack({
         track_id: this.props.track.id,
@@ -2261,6 +2266,11 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "unlikeTrack",
     value: function unlikeTrack(e, likeId) {
+      if (!this.props.currentUser) {
+        this.props.openModal("login");
+        return null;
+      }
+
       e.preventDefault();
       this.props.unlikeTrack(likeId);
       this.props.fetchTracks();
@@ -2268,6 +2278,11 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleInput",
     value: function handleInput(e) {
+      if (!this.props.currentUser) {
+        this.props.openModal("login");
+        return null;
+      }
+
       e.preventDefault();
       this.setState({
         comment: e.target.value
@@ -2331,7 +2346,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       var _loop = function _loop(i) {
         var like = track.likes[i];
 
-        if (like.user_id === currentUser.id) {
+        if (currentUser && like.user_id === currentUser.id) {
           likeButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "track-show-liked-button",
             onClick: function onClick(e) {
@@ -2386,7 +2401,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
             className: "comment-section-time"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             className: "comment-uploaded-time"
-          }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))), _this2.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "comment-trash-icon-container"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             className: "comment-trash-icon",
@@ -2395,7 +2410,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
             },
             src: "/assets/trash.png",
             alt: "pencil"
-          })));
+          })) : null);
         });
       }
 
@@ -2466,7 +2481,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         placeholder: "Write a comment"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-buttons-container"
-      }, likeButton, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, likeButton, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-edit-button",
         onClick: function onClick() {
           return _this2.props.openModal("edit", track.id);
@@ -2475,7 +2490,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-pencil-icon",
         src: "/assets/pencil.png",
         alt: "pencil"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")) : null, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-delete-button",
         onClick: function onClick() {
           return _this2.props.openModal("delete", track.id, artist.id);
@@ -2484,7 +2499,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-trash-icon",
         src: "/assets/trash.png",
         alt: "pencil"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Delete"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Delete")) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track_info_and_comments_container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "artist-info-and-picture"
@@ -2568,6 +2583,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
 /* harmony import */ var _actions_comment_action__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/comment_action */ "./frontend/actions/comment_action.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2590,7 +2607,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
+  return _defineProperty({
     updatePlayerTrack: function updatePlayerTrack(track) {
       return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["updatePlayerTrack"])(track));
     },
@@ -2627,7 +2644,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     destroyNewComment: function destroyNewComment(commentId) {
       return dispatch(Object(_actions_comment_action__WEBPACK_IMPORTED_MODULE_7__["destroyNewComment"])(commentId));
     }
-  };
+  }, "openModal", function openModal(modal) {
+    return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["openModal"])(modal));
+  });
 };
 
 var TrackShowContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_track_show__WEBPACK_IMPORTED_MODULE_1__["default"]);

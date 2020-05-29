@@ -81,6 +81,10 @@
   justify-content: center;
 }
 
+.demo-user:hover {
+  cursor: pointer;
+}
+
 .demo-user > p {
   color: white;
   font-family: 'Overpass', sans-serif;

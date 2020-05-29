@@ -37,6 +37,10 @@ class TrackShow extends React.Component {
   }
 
   likeTrack(e) {
+    if (!this.props.currentUser) {
+      this.props.openModal("login");
+      return null;
+    }
     e.preventDefault();
     this.props.likeTrack({
       track_id: this.props.track.id,
@@ -46,12 +50,20 @@ class TrackShow extends React.Component {
   }
 
   unlikeTrack(e, likeId) {
+    if (!this.props.currentUser) {
+      this.props.openModal("login");
+      return null;
+    }
     e.preventDefault();
     this.props.unlikeTrack(likeId);
     this.props.fetchTracks();
   }
 
   handleInput(e) {
+     if (!this.props.currentUser) {
+       this.props.openModal("login");
+       return null;
+     }
     e.preventDefault();
     this.setState({ comment: e.target.value });
   }
@@ -102,7 +114,7 @@ class TrackShow extends React.Component {
     );
     for (let i = 0; i < track.likes.length; i++) {
       const like = track.likes[i];
-      if (like.user_id === currentUser.id) {
+      if (currentUser && like.user_id === currentUser.id) {
         likeButton = (
           <div
             className="track-show-liked-button"
@@ -158,14 +170,16 @@ class TrackShow extends React.Component {
                 {formatUploadTime(comment.created_at)}
               </p>
             </div>
-            <div className="comment-trash-icon-container">
-              <img
+              {this.props.currentUser
+            ? <div className="comment-trash-icon-container">
+               <img
                 className="comment-trash-icon"
                 onClick={(e) => this.deleteComment(e, comment.id)}
                 src="/assets/trash.png"
                 alt="pencil"
               />
             </div>
+              : null }
           </div>
         );
       });
@@ -237,30 +251,34 @@ class TrackShow extends React.Component {
               </div>
               <div className="track-show-buttons-container">
                 {likeButton}
-                <div
-                  className="track-show-edit-button"
-                  onClick={() => this.props.openModal("edit", track.id)}
-                >
-                  <img
-                    className="track-show-pencil-icon"
-                    src="/assets/pencil.png"
-                    alt="pencil"
-                  />
-                  <p>Edit</p>
-                </div>
-                <div
-                  className="track-show-delete-button"
-                  onClick={() =>
-                    this.props.openModal("delete", track.id, artist.id)
-                  }
-                >
-                  <img
-                    className="track-show-trash-icon"
-                    src="/assets/trash.png"
-                    alt="pencil"
-                  />
-                  <p>Delete</p>
-                </div>
+                {this.props.currentUser ? (
+                  <div
+                    className="track-show-edit-button"
+                    onClick={() => this.props.openModal("edit", track.id)}
+                  >
+                    <img
+                      className="track-show-pencil-icon"
+                      src="/assets/pencil.png"
+                      alt="pencil"
+                    />
+                    <p>Edit</p>
+                  </div>
+                ) : null}
+                {this.props.currentUser ? (
+                  <div
+                    className="track-show-delete-button"
+                    onClick={() =>
+                      this.props.openModal("delete", track.id, artist.id)
+                    }
+                  >
+                    <img
+                      className="track-show-trash-icon"
+                      src="/assets/trash.png"
+                      alt="pencil"
+                    />
+                    <p>Delete</p>
+                  </div>
+                ) : null}
               </div>
               <div className="track_info_and_comments_container">
                 <div className="artist-info-and-picture">
