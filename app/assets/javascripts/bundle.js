@@ -3175,39 +3175,40 @@ var TrackIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
-
-      if (this.props.tracks.length < 1) return null;
-      if (this.props.artist.length < 1) return null;
+      var _this$props = this.props,
+          tracks = _this$props.tracks,
+          artist = _this$props.artist,
+          currentUser = _this$props.currentUser;
+      if (!tracks || !artist) return null;
       var tracksMap = this.props.tracks.map(function (track) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_track_index_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: track.id,
-          artist: _this.props.artist,
+          artist: artist,
           track: track,
-          tracks: _this.props.tracks
+          tracks: tracks
         });
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "profile-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
         className: "artist-cover-pic",
-        src: this.props.artist.coverPhotoUrl,
+        src: artist.coverPhotoUrl,
         alt: "ArtistCoverPic"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "profile-picture-and-name"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
         className: "artist-profile-pic",
-        src: this.props.artist.profilePhotoUrl,
+        src: artist.profilePhotoUrl,
         alt: "ArtistProfilePic"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", {
         className: "profile-username"
-      }, this.props.artist.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+      }, artist.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "recent-tracks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h3", {
         className: "recent-header"
       }, "Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "tracks"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, tracksMap)), this.props.currentUser === this.props.artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", null, tracksMap)), currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "upload-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
         className: "upload-phrase"

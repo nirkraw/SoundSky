@@ -15,15 +15,16 @@ class TrackIndex extends React.Component {
 
 
     render() { 
-        if (this.props.tracks.length < 1) return null;
-        if (this.props.artist.length < 1) return null; 
+        const {tracks, artist, currentUser} = this.props;
+        if (!tracks || !artist) return null;
+
         const tracksMap = (
             this.props.tracks.map(track => (
                 <TrackIndexItemContainer 
                     key={track.id}
-                    artist={this.props.artist}
+                    artist={artist}
                     track={track}
-                    tracks={this.props.tracks}
+                    tracks={tracks}
                 />
             ))
         )
@@ -31,13 +32,13 @@ class TrackIndex extends React.Component {
             <div>
                 <div className="profile-header">
                     <img className="artist-cover-pic"
-                        src={this.props.artist.coverPhotoUrl}
+                        src={artist.coverPhotoUrl}
                         alt="ArtistCoverPic" />
                     <div className="profile-picture-and-name">
                         <img className="artist-profile-pic"
-                            src={this.props.artist.profilePhotoUrl}
+                            src={artist.profilePhotoUrl}
                             alt="ArtistProfilePic" />
-                        <h1 className="profile-username">{this.props.artist.username}</h1>
+                        <h1 className="profile-username">{artist.username}</h1>
                      </div>
                 </div>
                
@@ -46,7 +47,7 @@ class TrackIndex extends React.Component {
                     <div className="tracks">
                         <ul>{tracksMap}</ul>
                     </div>
-                    {this.props.currentUser === this.props.artist ?
+                    {currentUser === artist ?
                     <div className="upload-container">
                         <p className="upload-phrase">More uploads means more listeners.</p>
                         <NavLink to="/upload" className="user-show-upload">Upload more</NavLink>   

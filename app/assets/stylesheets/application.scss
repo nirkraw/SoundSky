@@ -34,6 +34,26 @@ button {
   left: 0;
   background: rgba(189, 181, 181, 0.7);
   z-index: 10;
+  animation-name: modal-background-fade-in;
+  animation-duration: 0.5s;
+}
+
+@keyframes modal-background-fade-in {
+  from {
+    background: transparent;
+  }
+  to {
+     background: rgba(189, 181, 181, 0.7);
+  }
+}
+
+@keyframes modal-slide-in {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 50%;
+  }
 }
 
 .modal-child {
@@ -41,6 +61,8 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  animation-name: modal-slide-in;
+  animation-duration: 0.5s;
 }
 
 .close-x {
