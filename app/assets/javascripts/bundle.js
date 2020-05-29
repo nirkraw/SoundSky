@@ -2263,8 +2263,13 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "findRelatedTrack",
     value: function findRelatedTrack(tracks, trackId) {
-      var randTrackId = Math.floor(Math.random() * tracks.length);
-      return tracks[randTrackId];
+      for (var i = 0; i < tracks.length; i++) {
+        var element = tracks[i];
+
+        if (element.id !== trackId) {
+          return element.id;
+        }
+      }
     }
   }, {
     key: "render",
@@ -2358,7 +2363,17 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      var relatedTrack = this.findRelatedTrack(artist.tracks, track.id);
+      var relatedTrack;
+      var relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
+
+      for (var _i = 0; _i < this.props.tracks.length; _i++) {
+        var ele = this.props.tracks[_i];
+
+        if (ele.id === relatedTrackId) {
+          relatedTrack = ele;
+        }
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "outside-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2477,7 +2492,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "related-tracks-track"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "related-tracks-album-pic",
-        src: artist.profilePhotoUrl,
+        src: relatedTrack.photoUrl,
         alt: "related-track-photo"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "related-tracks-track-name-and-artist"
@@ -2527,7 +2542,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     track: state.entities.tracks[ownProps.match.params.trackId],
-    tracks: state.entities.tracks,
+    tracks: Object.values(state.entities.tracks),
     artist: state.entities.users[ownProps.match.params.userId],
     users: state.entities.users,
     playing: state.ui.player.playing,

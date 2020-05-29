@@ -19,7 +19,7 @@ import {
 
 const mapStateToProps = (state, ownProps) => ({
   track: state.entities.tracks[ownProps.match.params.trackId],
-  tracks: state.entities.tracks,
+  tracks: Object.values(state.entities.tracks),
   artist: state.entities.users[ownProps.match.params.userId],
   users: state.entities.users,
   playing: state.ui.player.playing,

@@ -77,8 +77,13 @@ class TrackShow extends React.Component {
   }
 
   findRelatedTrack(tracks, trackId) {
-      const randTrackId = Math.floor(Math.random() * tracks.length);
-      return tracks[randTrackId];
+      for (let i = 0; i < tracks.length; i++) {
+        const element = tracks[i];
+          if(element.id !== trackId) {
+            return element.id
+          }
+        
+      }
   }
 
   render() {
@@ -166,7 +171,15 @@ class TrackShow extends React.Component {
       });
     }
 
-    const relatedTrack = this.findRelatedTrack(artist.tracks, track.id);
+    let relatedTrack;
+    const relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
+
+     for (let i = 0; i < this.props.tracks.length; i++) {
+      const ele = this.props.tracks[i];
+          if(ele.id === relatedTrackId) {
+            relatedTrack = ele;
+          }
+    } 
     
     return (
       <div className="outside-container">
@@ -304,7 +317,7 @@ class TrackShow extends React.Component {
               <div className="related-tracks-track">
                 <img
                   className="related-tracks-album-pic"
-                  src={artist.profilePhotoUrl}
+                  src={relatedTrack.photoUrl}
                   alt="related-track-photo"
                 />
                 <div className="related-tracks-track-name-and-artist">
