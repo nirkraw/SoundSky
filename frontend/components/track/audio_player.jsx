@@ -7,21 +7,28 @@ class AudioPlayer extends React.Component {
     
     }
 
-
+    componentDidUpdate() {
+      const { track, playing, changePlayerTrack, changeCurrentTrack } = this.props; 
+      
+      const audio = document.getElementById("audio");
+         if (audio && changePlayerTrack) { 
+           console.log("did we hit this")
+            audio.src = track.trackUrl;
+         }
+         if(audio) {
+            if (playing) {
+              audio.play();
+            } else {
+              audio.pause();
+            }
+          }
+         changeCurrentTrack(false); 
+    }
 
     render() {
-       const {track, artist} = this.props 
-       if (!track || !artist) return null; 
-         
-       const audio = document.getElementById("audio");
-         if (audio && this.props.changeTrack) {
-           audio.src = this.props.track.trackUrl;
-           if (this.props.playing) {
-             audio.play();
-           } else {
-             audio.pause();
-           }
-         }
+         const { track, artist } = this.props;
+          if (!track || !artist) return null; 
+
        return( 
        <footer className ="audio-player-container">
             <div className ="audio-player">

@@ -17,12 +17,14 @@ class Splash extends React.Component {
         this.props.updatePlayerTrack(track)
         this.props.updatePlayerArtist(artist)
         this.props.playTrack()
-        this.props.changeTrack(true);
+        if(this.props.currentTrack.id !== track.id) {
+          this.props.changeTrack(true);
+        }
     }
 
     pauseTrack() {
         this.props.pauseTrack();
-        this.props.changeTrack(true);
+        this.props.changeTrack(false);
     }
 
     render() {

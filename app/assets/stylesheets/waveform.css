@@ -1,0 +1,13 @@
+.test-wave {
+    border: 1px solid gold;
+    height: 100px;
+    width: 80%
+}
+
+
+.waveform-container {
+    z-index: -1;
+    height: 100px;
+    width: 100%;
+    margin-left: -40px;
+}

@@ -2,6 +2,7 @@ import { connect } from "react-redux"
 import AudioPlayer from './audio_player';
 import {fetchTracks} from "../../actions/track_actions";
 import {fetchAllUsers} from "../../actions/user_actions";
+import {changeTrack} from "../../actions/player_actions";
 
 
 const mapStateToProps = (state) => { 
@@ -9,13 +10,14 @@ const mapStateToProps = (state) => {
         { track: (state.entities.tracks)[state.ui.player.trackId],
           playing: state.ui.player.playing,
           artist: state.entities.users[state.ui.player.artistId],
-          changeTrack: state.ui.player.changeTrack
+          changePlayerTrack: state.ui.player.changeTrack
         }) 
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchTracks: () => dispatch(fetchTracks()),
-    fetchUsers: () => dispatch(fetchAllUsers())
-})
+  fetchTracks: () => dispatch(fetchTracks()),
+  fetchUsers: () => dispatch(fetchAllUsers()),
+  changeCurrentTrack: (boolean) => dispatch(changeTrack(boolean)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioPlayer);

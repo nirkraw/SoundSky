@@ -2,12 +2,12 @@ import { connect } from "react-redux"
 import Waveform from './waveform';
 
 const mapStateToProps = (state, ownProps) => {
-    return (
-        {
-            track: ownProps.track,
-            playing: state.ui.player.playing,
-            artist: state.entities.users[state.ui.player.artistId]
-        })
+    return {
+      track: ownProps.track,
+      playing: state.ui.player.playing,
+      artist: state.entities.users[state.ui.player.artistId],
+      currentTrack: state.entities.tracks[state.ui.player.trackId],
+    };
 }
 
 // const mapDispatchToProps = (dispatch) => ({

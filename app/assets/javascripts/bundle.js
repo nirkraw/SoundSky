@@ -1055,13 +1055,16 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       this.props.updatePlayerTrack(track);
       this.props.updatePlayerArtist(artist);
       this.props.playTrack();
-      this.props.changeTrack(true);
+
+      if (this.props.currentTrack.id !== track.id) {
+        this.props.changeTrack(true);
+      }
     }
   }, {
     key: "pauseTrack",
     value: function pauseTrack() {
       this.props.pauseTrack();
-      this.props.changeTrack(true);
+      this.props.changeTrack(false);
     }
   }, {
     key: "render",
@@ -1547,24 +1550,37 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(AudioPlayer, [{
-    key: "render",
-    value: function render() {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
       var _this$props = this.props,
           track = _this$props.track,
-          artist = _this$props.artist;
-      if (!track || !artist) return null;
+          playing = _this$props.playing,
+          changePlayerTrack = _this$props.changePlayerTrack,
+          changeCurrentTrack = _this$props.changeCurrentTrack;
       var audio = document.getElementById("audio");
 
-      if (audio && this.props.changeTrack) {
-        audio.src = this.props.track.trackUrl;
+      if (audio && changePlayerTrack) {
+        console.log("did we hit this");
+        audio.src = track.trackUrl;
+      }
 
-        if (this.props.playing) {
+      if (audio) {
+        if (playing) {
           audio.play();
         } else {
           audio.pause();
         }
       }
 
+      changeCurrentTrack(false);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props2 = this.props,
+          track = _this$props2.track,
+          artist = _this$props2.artist;
+      if (!track || !artist) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
         className: "audio-player-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1614,6 +1630,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _audio_player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./audio_player */ "./frontend/components/track/audio_player.jsx");
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+
 
 
 
@@ -1624,7 +1642,7 @@ var mapStateToProps = function mapStateToProps(state) {
     track: state.entities.tracks[state.ui.player.trackId],
     playing: state.ui.player.playing,
     artist: state.entities.users[state.ui.player.artistId],
-    changeTrack: state.ui.player.changeTrack
+    changePlayerTrack: state.ui.player.changeTrack
   };
 };
 
@@ -1635,6 +1653,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["fetchAllUsers"])());
+    },
+    changeCurrentTrack: function changeCurrentTrack(_boolean) {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["changeTrack"])(_boolean));
     }
   };
 };
@@ -3354,16 +3375,19 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "playTrack",
     value: function playTrack() {
+      if (this.props.currentTrack.id !== this.props.track.id) {
+        this.props.changeTrack(true);
+      }
+
       this.props.updatePlayerTrack(this.props.track);
       this.props.updatePlayerArtist(this.props.artist);
       this.props.playTrack();
-      this.props.changeTrack(true);
     }
   }, {
     key: "pauseTrack",
     value: function pauseTrack() {
       this.props.pauseTrack();
-      this.props.changeTrack(true);
+      this.props.changeTrack(false);
     }
   }, {
     key: "render",
@@ -3403,6 +3427,8 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         src: "/assets/play-button-2.png",
         alt: "play-button"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "track-info-and-waveform-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-info-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-info"
@@ -3418,7 +3444,9 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "uploaded-time"
       }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_2__["default"])(track.created_at)), track.genre ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "track-genre"
-      }, "#".concat(track.genre)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "#".concat(track.genre)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_waveform_waveform_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        track: track
+      }))), currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-delete-buttons-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-button",
@@ -3563,39 +3591,52 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
   _createClass(Waveform, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var xhr = {
-        cache: "default",
-        mode: "cors",
-        method: "GET",
-        credentials: "same-origin",
-        redirect: "follow",
-        referrer: "client"
-      };
-
       if (this.props.track) {
         this.wavesurfer = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create({
-          container: '#waveform',
+          container: "#waveform-".concat(this.props.track.id),
           fillParent: true,
-          barHeight: 1,
-          barWidth: 2,
-          backgroundColor: "#D2EDD4",
-          waveColor: "blue",
-          height: 200,
+          barHeight: 0.7,
+          barWidth: 3,
+          backgroundColor: "#ffffff",
+          waveColor: "#A9A9A9",
+          height: 100,
           partialRender: true,
-          xhr: xhr
+          interaction: false,
+          removeMediaElementOnDestroy: true,
+          responsive: true,
+          cursorWidth: 0
         });
-        this.wavesurfer.load(this.props.track.trackUrl);
-        this.wavesurfer.on('ready', function () {
-          wavesurfer.play();
-        });
+        this.wavesurfer.load(this.props.track.trackUrl); //    wavesurfer.on('ready', function () {
+        //         wavesurfer.play();
+        //     });
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var _this$props = this.props,
+          playing = _this$props.playing,
+          track = _this$props.track,
+          currentTrack = _this$props.currentTrack;
+
+      if (playing && currentTrack.id === track.id) {
+        this.wavesurfer.setMute();
+        var audio = document.getElementById("audio");
+        console.log(audio.currentTime / this.wavesurfer.getDuration());
+        this.wavesurfer.seekTo(audio.currentTime / this.wavesurfer.getDuration());
+        this.wavesurfer.play();
+      } else {
+        this.wavesurfer.pause();
       }
     }
   }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "waveform"
-      });
+        className: "waveform-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "waveform-".concat(this.props.track.id)
+      }));
     }
   }]);
 
@@ -3624,7 +3665,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     track: ownProps.track,
     playing: state.ui.player.playing,
-    artist: state.entities.users[state.ui.player.artistId]
+    artist: state.entities.users[state.ui.player.artistId],
+    currentTrack: state.entities.tracks[state.ui.player.trackId]
   };
 }; // const mapDispatchToProps = (dispatch) => ({
 // })

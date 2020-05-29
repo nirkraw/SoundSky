@@ -14,15 +14,17 @@ class TrackIndexItem extends React.Component {
     }
 
     playTrack() {
+      if (this.props.currentTrack.id !== this.props.track.id) {
+        this.props.changeTrack(true);
+      }
         this.props.updatePlayerTrack(this.props.track)
         this.props.updatePlayerArtist(this.props.artist)
         this.props.playTrack()
-        this.props.changeTrack(true)
     }
 
     pauseTrack() {
         this.props.pauseTrack();
-        this.props.changeTrack(true);
+        this.props.changeTrack(false);
     }
 
     render() {
@@ -53,33 +55,35 @@ class TrackIndexItem extends React.Component {
                  />
                )}
              </div>
-             <div className="track-info-container">
-               <div className="track-info">
-                 <NavLink
-                   to={`/users/${artist.id}`}
-                   className="track-artist-name"
-                 >
-                   {artist.username}
-                 </NavLink>
-                 <br/>
-                 <NavLink
-                   to={`/users/${artist.id}/${track.id}`}
-                   className="track-title"
-                 >
-                   {track.title}
-                 </NavLink>
+             <div className="track-info-and-waveform-container">
+               <div className="track-info-container">
+                 <div className="track-info">
+                   <NavLink
+                     to={`/users/${artist.id}`}
+                     className="track-artist-name"
+                   >
+                     {artist.username}
+                   </NavLink>
+                   <br />
+                   <NavLink
+                     to={`/users/${artist.id}/${track.id}`}
+                     className="track-title"
+                   >
+                     {track.title}
+                   </NavLink>
+                 </div>
+                 <div className="track-genre-time">
+                   <p className="uploaded-time">
+                     {formatUploadTime(track.created_at)}
+                   </p>
+                   {track.genre ? (
+                     <p className="track-genre">{`#${track.genre}`}</p>
+                     ) : (
+                       <p></p>
+                       )}
+                 </div>
                </div>
-               {/* <WaveFormContainer track={track}/> */}
-               <div className="track-genre-time">
-                 <p className="uploaded-time">
-                   {formatUploadTime(track.created_at)}
-                 </p>
-                 {track.genre ? (
-                   <p className="track-genre">{`#${track.genre}`}</p>
-                 ) : (
-                   <p></p>
-                 )}
-               </div>
+              <WaveFormContainer track={track}/>
              </div>
            </div>
            {currentUser === artist ? (
@@ -113,7 +117,7 @@ class TrackIndexItem extends React.Component {
              <div className="edit-delete-buttons-container"></div>
            )}
          </li>
-       );
+       )
     }
 }
 
