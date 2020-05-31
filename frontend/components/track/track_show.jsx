@@ -1,6 +1,7 @@
 import React from "react";
 import formatUploadTime from "../../utils/time_format_util";
 import { NavLink } from "react-router-dom";
+import WaveFormContainer from "../waveform/waveform_container";
 
 class TrackShow extends React.Component {
   constructor(props) {
@@ -233,6 +234,9 @@ class TrackShow extends React.Component {
               src={track.photoUrl}
               alt="album pic"
             />
+          </div>
+          <div className="waveform-track-show-container">
+            <WaveFormContainer track={track} />
           </div>
           <div className="main-content-and-related-tracks-container">
             <div className="track-show-main-content">

@@ -503,3 +503,11 @@
     letter-spacing: .2px;
     text-decoration: none;
 }
+
+.waveform-track-show-container {
+    width: 800px;
+    height: 150px;
+    position: absolute;
+    left: 100px;
+    top: 300px;
+}
