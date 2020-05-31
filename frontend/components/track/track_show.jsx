@@ -185,7 +185,7 @@ class TrackShow extends React.Component {
       });
     }
 
-    let relatedTrack = this.props.tracks[Math.floor(Math.random() * this.props.tracks.length)];
+    let relatedTrack = this.props.tracks[0];
     const relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
 
     if(artist.tracks.length > 1) {

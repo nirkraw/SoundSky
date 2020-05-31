@@ -2451,7 +2451,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      var relatedTrack = this.props.tracks[Math.floor(Math.random() * this.props.tracks.length)];
+      var relatedTrack = this.props.tracks[0];
       var relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
 
       if (artist.tracks.length > 1) {
