@@ -22,7 +22,9 @@ class TrackShow extends React.Component {
     this.props.fetchTracks();
     this.props.fetchAllUsers();
     this.props.changeTrack(false);
+  
   }
+
 
   playTrack() {
     this.props.updatePlayerTrack(this.props.track);
@@ -99,7 +101,7 @@ class TrackShow extends React.Component {
   }
 
   render() {
-    const { track, artist, playing, currentTrack, currentUser } = this.props;
+    const { track, artist, playing, currentTrack, currentUser, users } = this.props;
     if (!track) return null;
 
     let likeButton = (
@@ -146,7 +148,7 @@ class TrackShow extends React.Component {
       );
     } else {
       trackComments = track.comments.map((comment) => {
-        const commentUser = this.props.users[comment.user_id];
+        const commentUser = users[comment.user_id];
         return (
           <div key={comment.id} className="comment-section">
             <div className="comment-section-content">
@@ -170,7 +172,7 @@ class TrackShow extends React.Component {
                 {formatUploadTime(comment.created_at)}
               </p>
             </div>
-              {this.props.currentUser
+              {currentUser && (currentUser.id === commentUser.id || currentUser.id === track.artist_id) 
             ? <div className="comment-trash-icon-container">
                <img
                 className="comment-trash-icon"
@@ -185,7 +187,7 @@ class TrackShow extends React.Component {
       });
     }
 
-    let relatedTrack = this.props.tracks[0];
+    let relatedTrack = this.props.tracks[1];
     const relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
 
     if(artist.tracks.length > 1) {

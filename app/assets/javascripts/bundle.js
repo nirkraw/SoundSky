@@ -2369,7 +2369,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
           artist = _this$props.artist,
           playing = _this$props.playing,
           currentTrack = _this$props.currentTrack,
-          currentUser = _this$props.currentUser;
+          currentUser = _this$props.currentUser,
+          users = _this$props.users;
       if (!track) return null;
       var likeButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-like-button",
@@ -2417,7 +2418,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         }, "Be the first to comment on this track"));
       } else {
         trackComments = track.comments.map(function (comment) {
-          var commentUser = _this2.props.users[comment.user_id];
+          var commentUser = users[comment.user_id];
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: comment.id,
             className: "comment-section"
@@ -2438,7 +2439,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
             className: "comment-section-time"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             className: "comment-uploaded-time"
-          }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))), _this2.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, Object(_utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__["default"])(comment.created_at))), currentUser && (currentUser.id === commentUser.id || currentUser.id === track.artist_id) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "comment-trash-icon-container"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             className: "comment-trash-icon",
@@ -2451,7 +2452,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      var relatedTrack = this.props.tracks[0];
+      var relatedTrack = this.props.tracks[1];
       var relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
 
       if (artist.tracks.length > 1) {
