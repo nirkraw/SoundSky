@@ -120,3 +120,76 @@ touch_too_much = Track.create!(id: 18, title: "Touch Too Much", genre: "Rock", a
 love_never_felt_so_good = Track.create!(id: 19, title: "Love Never Felt So Good", genre: "Pop", artist_id: 15)
     love_never_felt_so_good.audio.attach(io: open("https://soundsky-audio.s3.amazonaws.com/Love+Never+Felt+So+Good.mp3"), filename: "love_never_felt_so_good_audio")
     # love_never_felt_so_good.photo.attach(io: open(""), filename: "love_never_felt_so_good_photo")
+
+Comment.delete_all    
+
+Comment.create!(body: "Yo this is a sick track! def post more tunes", user_id: 15, track_id: 4);
+Like.create!(user_id: 15, track_id: 4);
+Comment.create!(body: "The chorus oh man chills everytime", user_id: 16, track_id: 4);
+Like.create!(user_id: 16, track_id: 4);
+Comment.create!(body: "Dig this", user_id: 17, track_id: 4);
+Like.create!(user_id: 17, track_id: 4);
+
+
+Comment.create!(body: "dopeeeeeeeeee", user_id: 18, track_id: 5);
+Like.create!(user_id: 18, track_id: 5);
+Comment.create!(body: "check out my new single i think you're gonna like", user_id: 19, track_id: 5);
+Like.create!(user_id: 19, track_id: 5);
+
+
+Comment.create!(body: "production is awesome and the vocals hit the spot", user_id: 20, track_id: 6);
+Like.create!(user_id: 20, track_id: 6);
+
+
+Comment.create!(body: "YES", user_id: 21, track_id: 7 );
+Like.create!(user_id: 21, track_id: 7);
+Comment.create!(body: "^^^", user_id: 22, track_id: 7 );
+Like.create!(user_id: 22, track_id: 7);
+
+
+Comment.create!(body: "yooooooooo howwwwwww", user_id: 14, track_id: 8 );
+Like.create!(user_id: 14, track_id: 8);
+
+
+Comment.create!(body: "CHECK OUT MY NEW SONG!!!!", user_id: 14, track_id: 9 );
+Like.create!(user_id: 14, track_id: 9);
+Comment.create!(body: "I like the vibe and the guitar is oh so good", user_id: 15, track_id: 9 );
+Like.create!(user_id: 15, track_id: 9);
+Comment.create!(body: "The sweet power of music- keep up the great work", user_id: 22, track_id: 9 );
+Like.create!(user_id: 22, track_id: 9);
+Comment.create!(body: "beauts", user_id: 20, track_id: 9 );
+Like.create!(user_id: 20, track_id: 9);
+Comment.create!(body: "BRO (:", user_id: 17, track_id: 9 );
+Like.create!(user_id: 17, track_id: 9);
+
+Comment.create!(body: "good stuff doggy", user_id: 17, track_id: 10 );
+Like.create!(user_id: 17, track_id: 10);
+Comment.create!(body: "one of my favorite tracks for real- currently on repeat", user_id: 14, track_id: 10 );
+Like.create!(user_id: 14, track_id: 10);
+
+Comment.create!(body: "the verses fit so well into the choruses - inspiring stuff", user_id: 14, track_id: 13 );
+Like.create!(user_id: 14, track_id: 13);
+Comment.create!(body: "I totally agree ^^ smoothhh", user_id: 22, track_id: 13 );
+Like.create!(user_id: 22, track_id: 13);
+Comment.create!(body: "BADABOOM", user_id: 16, track_id: 13 );
+Like.create!(user_id: 16, track_id: 13);
+
+Comment.create!(body: "enjoyed this lots - check out some tunes of mine i think we have the same taste in songwriting", user_id: 17, track_id: 14 );
+Like.create!(user_id: 17, track_id: 14);
+Comment.create!(body: "Where did you record this?", user_id: 18, track_id: 14 );
+Like.create!(user_id: 18, track_id: 14);
+
+Comment.create!(body: "great track", user_id: 19, track_id: 15 );
+Like.create!(user_id: 19, track_id: 15);
+Comment.create!(body: "Do you have instagram- I know someone who could help grow your market", user_id: 20, track_id: 15 );
+Like.create!(user_id: 20, track_id: 15);
+
+Comment.create!(body: "follow me on fb and ig", user_id: 20, track_id: 16 );
+Like.create!(user_id: 20, track_id: 16);
+Comment.create!(body: "locked in rn", user_id: 14, track_id: 16 );
+Like.create!(user_id: 14, track_id: 16);
+Comment.create!(body: "is this on spotify", user_id: 14, track_id: 16 );
+
+
+
+
