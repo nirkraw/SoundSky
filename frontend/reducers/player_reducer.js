@@ -7,7 +7,7 @@ import {
 from '../actions/player_actions';
 
 let defaultState = {
-     trackId: 4,
+     trackId: 8,
      artistId: 14,
      playing: false,
      changeTrack: false 

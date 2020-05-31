@@ -1563,17 +1563,17 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
 
       if (audio && changePlayerTrack) {
         audio.src = track.trackUrl;
+        changeCurrentTrack(false);
       }
 
       if (audio) {
         if (playing) {
-          audio.play();
+          audio.play(); // changeCurrentTrack(false);
         } else {
           audio.pause();
         }
       }
 
-      changeCurrentTrack(false);
       setInterval(function () {
         if (audio && audio.paused) {
           _this.props.pauseTrack();
@@ -3416,7 +3416,6 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
           currentUser = _this$props.currentUser,
           playing = _this$props.playing,
           currentTrack = _this$props.currentTrack;
-      console.log(playing);
       if (!currentTrack) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "track-index-with-buttons",
@@ -3600,9 +3599,15 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Waveform);
 
   function Waveform(props) {
+    var _this;
+
     _classCallCheck(this, Waveform);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      id: null
+    };
+    return _this;
   }
 
   _createClass(Waveform, [{
@@ -3620,6 +3625,7 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
           partialRender: true,
           interaction: false,
           removeMediaElementOnDestroy: true,
+          closeAudioContext: true,
           responsive: true,
           cursorWidth: 0
         });
@@ -3630,15 +3636,45 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      var _this = this;
+      var _this2 = this;
 
       var _this$props = this.props,
           track = _this$props.track,
-          currentTrack = _this$props.currentTrack;
+          changeCurrentTrack = _this$props.changeCurrentTrack,
+          currentTrack = _this$props.currentTrack,
+          changePlayerTrack = _this$props.changePlayerTrack;
+      var audio = document.getElementById("audio"); // if(changePlayerTrack && currentTrack.id === track.id) {
+      //     // this.setState({id: currentTrack.id})
+      //     debugger
+      //     this.wavesurfer.destroy();
+      //     changeCurrentTrack(false);
+      //   this.wavesurfer = WaveSurfer.create({
+      //     container: `#waveform-${track.id}`,
+      //     fillParent: true,
+      //     barHeight: 0.7,
+      //     barWidth: 3,
+      //     closeAudioContext: true,
+      //     backgroundColor: "#ffffff",
+      //     waveColor: "#A9A9A9",
+      //     height: 100,
+      //     partialRender: true,
+      //     interaction: false,
+      //     removeMediaElementOnDestroy: true,
+      //     responsive: true,
+      //     cursorWidth: 0,
+      //   });
+      //   this.wavesurfer.load(track.trackUrl);
+      //   this.wavesurfer.setMute();
+      // }
 
-      if (currentTrack.id === track.id) {
+      if (currentTrack.id === track.id && this.wavesurfer.container.id === "waveform-".concat(currentTrack.id)) {
         setInterval(function () {
-          _this.wavesurfer.seekTo(audio.currentTime / _this.wavesurfer.getDuration());
+          _this2.wavesurfer.getDuration() + 0.01;
+
+          if (_this2.wavesurfer.getDuration() !== 0) {
+            // console.log(currentTrack.id)
+            _this2.wavesurfer.seekTo(audio.currentTime / _this2.wavesurfer.getDuration());
+          }
         }, 500);
       }
     }
@@ -3671,6 +3707,8 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _waveform__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./waveform */ "./frontend/components/waveform/waveform.jsx");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+
 
 
 
@@ -3679,13 +3717,20 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     track: ownProps.track,
     playing: state.ui.player.playing,
     artist: state.entities.users[state.ui.player.artistId],
-    currentTrack: state.entities.tracks[state.ui.player.trackId]
+    currentTrack: state.entities.tracks[state.ui.player.trackId],
+    changePlayerTrack: state.ui.player.changeTrack
   };
-}; // const mapDispatchToProps = (dispatch) => ({
-// })
+};
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    changeCurrentTrack: function changeCurrentTrack(_boolean) {
+      return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_2__["changeTrack"])(_boolean));
+    }
+  };
+};
 
-var WaveformContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_waveform__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var WaveformContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_waveform__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (WaveformContainer);
 
 /***/ }),
@@ -3791,7 +3836,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/player_actions */ "./frontend/actions/player_actions.js");
 
 var defaultState = {
-  trackId: 4,
+  trackId: 8,
   artistId: 14,
   playing: false,
   changeTrack: false

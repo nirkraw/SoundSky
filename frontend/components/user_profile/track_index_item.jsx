@@ -29,7 +29,6 @@ class TrackIndexItem extends React.Component {
 
     render() {
         const { track, artist, currentUser, playing, currentTrack } = this.props 
-        console.log(playing)
         if(!currentTrack) return null; 
        return (
          <li className="track-index-with-buttons" key={this.props.key}>

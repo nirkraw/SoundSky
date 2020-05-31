@@ -18,15 +18,16 @@ class AudioPlayer extends React.Component {
 
     if (audio && changePlayerTrack) {
       audio.src = track.trackUrl;
+      changeCurrentTrack(false);
     }
     if (audio) {
       if (playing) {
         audio.play();
+        // changeCurrentTrack(false);
       } else {
         audio.pause();
       }
     }
-    changeCurrentTrack(false);
 
     setInterval(() => {
       if(audio && audio.paused) {
