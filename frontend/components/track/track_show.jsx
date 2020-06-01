@@ -7,7 +7,12 @@ class TrackShow extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { comment: "" };
+    this.state = {
+      comment: "",
+      randNum: Math.floor(Math.random() * 11),
+      deleteContainer: false,
+      commentId: null
+    };
 
     this.playTrack = this.playTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
@@ -17,15 +22,15 @@ class TrackShow extends React.Component {
     this.createComment = this.createComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.findRelatedTrack = this.findRelatedTrack.bind(this);
+    this.confirmDelete = this.confirmDelete.bind(this);
+    this.closeDeleteConfirmation = this.closeDeleteConfirmation.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchTracks();
     this.props.fetchAllUsers();
     this.props.changeTrack(false);
-  
   }
-
 
   playTrack() {
     this.props.updatePlayerTrack(this.props.track);
@@ -63,10 +68,10 @@ class TrackShow extends React.Component {
   }
 
   handleInput(e) {
-     if (!this.props.currentUser) {
-       this.props.openModal("login");
-       return null;
-     }
+    if (!this.props.currentUser) {
+      this.props.openModal("login");
+      return null;
+    }
     e.preventDefault();
     this.setState({ comment: e.target.value });
   }
@@ -92,17 +97,42 @@ class TrackShow extends React.Component {
   }
 
   findRelatedTrack(tracks, trackId) {
-      for (let i = 0; i < tracks.length; i++) {
-        const element = tracks[i];
-          if(element.id !== trackId) {
-            return element.id
-          }
-        
+    for (let i = 0; i < tracks.length; i++) {
+      const element = tracks[i];
+      if (element.id !== trackId) {
+        return element.id;
       }
+    }
+  }
+
+  confirmDelete(e, commentId) {
+    e.preventDefault();
+    this.setState({ deleteContainer: true, commentId: commentId });
+    const deleteContainer = document.getElementsByClassName(
+      "delete-comment-confirmation-container"
+    )[0];
+    deleteContainer.classList.remove("delete-none");
+  }
+
+  closeDeleteConfirmation() {
+    if (this.state.deleteContainer) {
+      const deleteContainer = document.getElementsByClassName(
+        "delete-comment-confirmation-container"
+      )[0];
+      deleteContainer.classList.add("delete-none");
+      this.setState({ deleteContainer: false });
+    }
   }
 
   render() {
-    const { track, artist, playing, currentTrack, currentUser, users } = this.props;
+    const {
+      track,
+      artist,
+      playing,
+      currentTrack,
+      currentUser,
+      users,
+    } = this.props;
     if (!track) return null;
 
     let likeButton = (
@@ -144,7 +174,9 @@ class TrackShow extends React.Component {
             alt="comment-icon"
           />
           <h1 className="quiet-header-1">Seems a little quiet over here</h1>
-          <h1 className="quiet-header-2">Be the first to comment on this track</h1>
+          <h1 className="quiet-header-2">
+            Be the first to comment on this track
+          </h1>
         </div>
       );
     } else {
@@ -173,36 +205,63 @@ class TrackShow extends React.Component {
                 {formatUploadTime(comment.created_at)}
               </p>
             </div>
-              {currentUser && (currentUser.id === commentUser.id || currentUser.id === track.artist_id) 
-            ? <div className="comment-trash-icon-container">
-               <img
-                className="comment-trash-icon"
-                onClick={(e) => this.deleteComment(e, comment.id)}
-                src="/assets/trash.png"
-                alt="pencil"
-              />
-            </div>
-              : null }
+            {currentUser &&
+            (currentUser.id === commentUser.id ||
+              currentUser.id === track.artist_id) ? (
+              <div className="comment-trash-icon-container">
+                <img
+                  className="comment-trash-icon"
+                  onClick={(e) => this.confirmDelete(e, comment.id)}
+                  src="/assets/trash.png"
+                  alt="pencil"
+                />
+              </div>
+            ) : null}
+            {this.state.deleteContainer &&
+            comment.id === this.state.commentId ? (
+              <div className="delete-comment-confirmation-container">
+                <p>Do you really want to remove this comment?</p>
+                <div className="delete-comment-buttons-container">
+                  <div
+                    className="delete-comment-cancel-button"
+                    onClick={this.closeDeleteConfirmation}
+                  >
+                    <p>Cancel</p>
+                  </div>
+                  <div
+                    className="delete-comment-delete-button"
+                    onClick={(e) => this.deleteComment(e, comment.id)}
+                  >
+                    <p>Yes</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         );
       });
     }
 
-    let relatedTrack = this.props.tracks[1];
+    let relatedTrack = this.props.tracks[this.state.randNum];
     const relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
 
-    if(artist.tracks.length > 1) {
-     for (let i = 0; i < this.props.tracks.length; i++) {
+    if (artist.tracks.length > 1) {
+      for (let i = 0; i < this.props.tracks.length; i++) {
         const ele = this.props.tracks[i];
-        if(ele.id === relatedTrackId) {
+        if (ele.id === relatedTrackId) {
           relatedTrack = ele;
         }
-        } 
       }
-    
+    }
+
     return (
       <div className="outside-container">
-        <div className="track-show-main-container">
+        <div
+          className="track-show-main-container"
+          onClick={this.closeDeleteConfirmation}
+        >
           <div className="track-show-top-banner">
             <div className="track-show-play-pause-buttons-container">
               {playing && track.id === currentTrack.id ? (
@@ -241,18 +300,19 @@ class TrackShow extends React.Component {
           <div className="main-content-and-related-tracks-container">
             <div className="track-show-main-content">
               <div className="write-comment-container">
-                {currentUser
-                ?<img
-                  className="track-show-artist-pic"
-                  src={currentUser.profilePhotoUrl}
-                  alt="artist-pic"
-                />
-                : <img
-                  className="track-show-artist-pic"
-                  src="/assets/background.jpg"
-                  alt="artist-pic"
-                />
-                }
+                {currentUser ? (
+                  <img
+                    className="track-show-artist-pic"
+                    src={currentUser.profilePhotoUrl}
+                    alt="artist-pic"
+                  />
+                ) : (
+                  <img
+                    className="track-show-artist-pic"
+                    src="/assets/background.jpg"
+                    alt="artist-pic"
+                  />
+                )}
                 <input
                   onKeyDown={this.createComment}
                   onChange={this.handleInput}

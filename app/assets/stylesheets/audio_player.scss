@@ -53,6 +53,8 @@
 
 .audio-player-artist-info {
   margin-top: 3px;
+  display: flex;
+  flex-direction: column;
 }
 
 .audio-player-artist-name{
@@ -71,6 +73,7 @@
   font-size: 11px;
   font-family: sans-serif;
   color: rgb(70, 70, 70);
+  text-decoration: none;
 }
 
 .none {

@@ -329,6 +329,7 @@
     display: flex;
     justify-content: left;
     width: 85%;
+
 }
 
 .comment-section-time {
@@ -366,6 +367,64 @@
     right: 23px;
     top: 17px; 
 }
+
+.delete-comment-confirmation-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid rgb(197, 194, 194);
+    border-radius: 4px;
+    box-shadow: rgb(134,110,100);
+    background-color: white;
+    z-index: 3;
+    height: 70px;
+    width: 210px;
+    position: absolute;
+    top: 45px;
+    right: 27px;
+    
+}
+
+.delete-comment-confirmation-container > p {
+    font-size: 13px;
+    font-family: 'Overpass', sans-serif;
+    color: rgb(82, 80, 80);
+    padding: 5px;
+}
+
+.delete-comment-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    width: 100px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+.delete-comment-cancel-button, .delete-comment-delete-button {
+    width: 30px;
+    height: 8px;
+    border: 1px solid rgb(197, 194, 194);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    padding: 5px 10px 5px 10px;
+}
+
+.delete-comment-cancel-button:hover, .delete-comment-delete-button:hover {
+    cursor: pointer;
+    border-color: grey;
+}
+
+.delete-comment-cancel-button > p, .delete-comment-delete-button > p {
+    font-size: 13px;
+    font-family: 'Overpass', sans-serif;
+    color: rgb(82, 80, 80);
+}
+
+
 
 .comment-trash-icon-container:hover {
     cursor: pointer;
@@ -511,3 +570,4 @@
     left: 100px;
     top: 300px;
 }
+

@@ -1623,7 +1623,8 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         to: "/users/".concat(artist.id),
         className: "audio-player-artist-name"
-      }, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, artist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "/users/".concat(artist.id, "/").concat(track.id),
         className: "audio-player-track-title"
       }, track.title))));
     }
@@ -2262,7 +2263,10 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      comment: ""
+      comment: "",
+      randNum: Math.floor(Math.random() * 11),
+      deleteContainer: false,
+      commentId: null
     };
     _this.playTrack = _this.playTrack.bind(_assertThisInitialized(_this));
     _this.pauseTrack = _this.pauseTrack.bind(_assertThisInitialized(_this));
@@ -2272,6 +2276,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
     _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
     _this.deleteComment = _this.deleteComment.bind(_assertThisInitialized(_this));
     _this.findRelatedTrack = _this.findRelatedTrack.bind(_assertThisInitialized(_this));
+    _this.confirmDelete = _this.confirmDelete.bind(_assertThisInitialized(_this));
+    _this.closeDeleteConfirmation = _this.closeDeleteConfirmation.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2371,6 +2377,28 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "confirmDelete",
+    value: function confirmDelete(e, commentId) {
+      e.preventDefault();
+      this.setState({
+        deleteContainer: true,
+        commentId: commentId
+      });
+      var deleteContainer = document.getElementsByClassName("delete-comment-confirmation-container")[0];
+      deleteContainer.classList.remove("delete-none");
+    }
+  }, {
+    key: "closeDeleteConfirmation",
+    value: function closeDeleteConfirmation() {
+      if (this.state.deleteContainer) {
+        var deleteContainer = document.getElementsByClassName("delete-comment-confirmation-container")[0];
+        deleteContainer.classList.add("delete-none");
+        this.setState({
+          deleteContainer: false
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -2455,15 +2483,27 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             className: "comment-trash-icon",
             onClick: function onClick(e) {
-              return _this2.deleteComment(e, comment.id);
+              return _this2.confirmDelete(e, comment.id);
             },
             src: "/assets/trash.png",
             alt: "pencil"
-          })) : null);
+          })) : null, _this2.state.deleteContainer && comment.id === _this2.state.commentId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "delete-comment-confirmation-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Do you really want to remove this comment?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "delete-comment-buttons-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "delete-comment-cancel-button",
+            onClick: _this2.closeDeleteConfirmation
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Cancel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "delete-comment-delete-button",
+            onClick: function onClick(e) {
+              return _this2.deleteComment(e, comment.id);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Yes")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
         });
       }
 
-      var relatedTrack = this.props.tracks[1];
+      var relatedTrack = this.props.tracks[this.state.randNum];
       var relatedTrackId = this.findRelatedTrack(artist.tracks, track.id);
 
       if (artist.tracks.length > 1) {
@@ -2479,7 +2519,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "outside-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "track-show-main-container"
+        className: "track-show-main-container",
+        onClick: this.closeDeleteConfirmation
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-top-banner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
