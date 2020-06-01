@@ -160,7 +160,7 @@ class TrackShow extends React.Component {
               />
               <div className="comment-artist-info">
                 <NavLink
-                  to={`/users/${artist.id}`}
+                  to={`/users/${commentUser.id}`}
                   className="comment-username"
                 >
                   {commentUser.username}
@@ -243,7 +243,7 @@ class TrackShow extends React.Component {
               <div className="write-comment-container">
                 <img
                   className="track-show-artist-pic"
-                  src={artist.profilePhotoUrl}
+                  src={currentUser.profilePhotoUrl}
                   alt="artist-pic"
                 />
                 <input

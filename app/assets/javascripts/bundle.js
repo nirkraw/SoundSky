@@ -2433,7 +2433,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "comment-artist-info"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
-            to: "/users/".concat(artist.id),
+            to: "/users/".concat(commentUser.id),
             className: "comment-username"
           }, commentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             className: "comment-body"
@@ -2514,7 +2514,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "write-comment-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "track-show-artist-pic",
-        src: artist.profilePhotoUrl,
+        src: currentUser.profilePhotoUrl,
         alt: "artist-pic"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onKeyDown: this.createComment,
