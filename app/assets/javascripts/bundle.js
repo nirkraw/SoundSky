@@ -2512,9 +2512,13 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-main-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "write-comment-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "track-show-artist-pic",
         src: currentUser.profilePhotoUrl,
+        alt: "artist-pic"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "track-show-artist-pic",
+        src: "/assets/background.jpg",
         alt: "artist-pic"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onKeyDown: this.createComment,

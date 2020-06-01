@@ -241,11 +241,18 @@ class TrackShow extends React.Component {
           <div className="main-content-and-related-tracks-container">
             <div className="track-show-main-content">
               <div className="write-comment-container">
-                <img
+                {currentUser
+                ?<img
                   className="track-show-artist-pic"
                   src={currentUser.profilePhotoUrl}
                   alt="artist-pic"
                 />
+                : <img
+                  className="track-show-artist-pic"
+                  src="/assets/background.jpg"
+                  alt="artist-pic"
+                />
+                }
                 <input
                   onKeyDown={this.createComment}
                   onChange={this.handleInput}
