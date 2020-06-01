@@ -9,8 +9,18 @@
   width: 100%;
   border-top: 2px solid rgba(110, 110, 110, 0.233);
   background-color: white;
+  animation-name: player-slide-in;
+  animation-duration: 0.5s;
 }
 
+@keyframes player-slide-in {
+  from {
+    bottom: -100px;
+  }
+  to {
+    bottom: 0;
+  }
+}
 .audio-player {
   display: flex;
   align-items: center;
@@ -63,3 +73,6 @@
   color: rgb(70, 70, 70);
 }
 
+.none {
+  display: none;
+}

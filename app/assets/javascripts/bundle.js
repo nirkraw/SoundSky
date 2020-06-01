@@ -1544,15 +1544,21 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(AudioPlayer);
 
   function AudioPlayer(props) {
+    var _this;
+
     _classCallCheck(this, AudioPlayer);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      show: false
+    };
+    return _this;
   }
 
   _createClass(AudioPlayer, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      var _this = this;
+      var _this2 = this;
 
       var _this$props = this.props,
           track = _this$props.track,
@@ -1560,9 +1566,12 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
           changePlayerTrack = _this$props.changePlayerTrack,
           changeCurrentTrack = _this$props.changeCurrentTrack;
       var audio = document.getElementById("audio");
+      var audioContainer = document.getElementsByClassName("audio-player-container")[0];
 
       if (audio && changePlayerTrack) {
         audio.src = track.trackUrl;
+        debugger;
+        audioContainer.classList.remove("none");
         changeCurrentTrack(false);
       }
 
@@ -1576,11 +1585,11 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
 
       setInterval(function () {
         if (audio && audio.paused) {
-          _this.props.pauseTrack();
+          _this2.props.pauseTrack();
         }
 
         if (audio && !audio.paused) {
-          _this.props.playTrack();
+          _this2.props.playTrack();
         }
       }, 500);
     }
@@ -1592,7 +1601,7 @@ var AudioPlayer = /*#__PURE__*/function (_React$Component) {
           artist = _this$props2.artist;
       if (!track || !artist) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
-        className: "audio-player-container"
+        className: "audio-player-container none"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "audio-player"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
