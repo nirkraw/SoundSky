@@ -2902,7 +2902,7 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (this.state.submited) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-        to: "users/".concat(currentUser.id)
+        to: "users/".concat(this.props.currentUser.id)
       });
       var imagePreview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "image-preview",

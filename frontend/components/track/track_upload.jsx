@@ -68,7 +68,7 @@ class TrackUpload extends React.Component {
   }
 
   render() {
-    if (this.state.submited) return <Redirect to={`users/${currentUser.id}`} />;
+    if (this.state.submited) return <Redirect to={`users/${this.props.currentUser.id}`} />;
 
     const imagePreview = this.state.photoUrl ? (
       <img
