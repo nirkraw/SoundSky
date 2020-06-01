@@ -2335,7 +2335,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         this.props.createNewComment({
           body: this.state.comment,
           track_id: this.props.track.id,
-          user_id: this.props.artist.id
+          user_id: this.props.currentUser.id
         });
         this.props.fetchTracks();
         this.setState({
