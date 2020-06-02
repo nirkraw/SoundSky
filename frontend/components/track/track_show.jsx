@@ -52,7 +52,7 @@ class TrackShow extends React.Component {
     e.preventDefault();
     this.props.likeTrack({
       track_id: this.props.track.id,
-      user_id: this.props.artist.id,
+      user_id: this.props.currentUser.id,
     });
     this.props.fetchTracks();
   }
