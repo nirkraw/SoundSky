@@ -3641,7 +3641,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var wavesurfer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! wavesurfer.js */ "./node_modules/wavesurfer.js/dist/wavesurfer.min.js");
 /* harmony import */ var wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wavesurfer_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3667,22 +3666,15 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Waveform = /*#__PURE__*/function (_React$Component) {
   _inherits(Waveform, _React$Component);
 
   var _super = _createSuper(Waveform);
 
   function Waveform(props) {
-    var _this;
-
     _classCallCheck(this, Waveform);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      id: null
-    };
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(Waveform, [{
@@ -3694,7 +3686,6 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
           fillParent: true,
           barHeight: 0.7,
           barWidth: 3,
-          //   backgroundColor: "#ffffff",
           waveColor: "#A9A9A9",
           progressColor: "#FF5500",
           height: 100,
@@ -3711,62 +3702,27 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {//   const {track, changeCurrentTrack, currentTrack, changePlayerTrack } = this.props;
-      //   // if (prevProps.track.id !== track.id) {
-      //   //   this.wavesurfer.destroy();
-      //   //   this.wavesurfer = WaveSurfer.create({
-      //   //     container: `#waveform-${this.props.track.id}`,
-      //   //     fillParent: true,
-      //   //     barHeight: 0.7,
-      //   //     barWidth: 3,
-      //   //     //   backgroundColor: "#ffffff",
-      //   //     waveColor: "#A9A9A9",
-      //   //     progressColor: "#FF5500",
-      //   //     height: 100,
-      //   //     partialRender: true,
-      //   //     interaction: false,
-      //   //     removeMediaElementOnDestroy: true,
-      //   //     closeAudioContext: true,
-      //   //     responsive: true,
-      //   //     cursorWidth: 0,
-      //   //   });
-      //   //   this.wavesurfer.load(this.props.track.trackUrl);
-      //   //   this.wavesurfer.setMute();
-      //   // }
-      //   if (currentTrack.id === track.id) {
-      //     // console.log("waveform track");
-      //     // console.log(track.id)
-      //     // console.log("_________________________")
-      //     // setInterval(() => {
-      //       // console.log(this.wavesurfer.container);
-      //         this.wavesurfer.getDuration() + 0.01;
-      //       if (this.wavesurfer.getDuration() !== 0) {
-      //         this.wavesurfer.seekTo(
-      //           audio.currentTime / this.wavesurfer.getDuration()
-      //         );
-      //       }
-      //     // }, 1500);
-      // }
-    }
-  }, {
-    key: "render",
-    value: function render() {
+    value: function componentDidUpdate() {
       var _this$props = this.props,
           track = _this$props.track,
           currentTrack = _this$props.currentTrack,
           currentTrackTime = _this$props.currentTrackTime;
-      if (!track) return null; // const audio = document.getElementById("audio");
-
-      console.log(currentTrackTime);
 
       if (currentTrack.id === track.id) {
-        this.wavesurfer.getDuration() + 0.01;
-
-        if (this.wavesurfer.getDuration() !== 0) {
-          this.wavesurfer.seekTo(currentTrackTime / this.wavesurfer.getDuration());
-        }
+        this.wavesurfer.seekTo(currentTrackTime / this.wavesurfer.getDuration());
+      } else {
+        this.wavesurfer.stop();
       }
-
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.wavesurfer.seekTo(0);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (!this.props.track) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "waveform-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3778,7 +3734,7 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
   return Waveform;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Waveform));
+/* harmony default export */ __webpack_exports__["default"] = (Waveform);
 
 /***/ }),
 
@@ -4329,8 +4285,9 @@ var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var middleware = [redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a];
 
-  if (false // || process.env.NODE_ENV === "development"
-  ) {}
+  if (true) {
+    middleware = [redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]];
+  }
 
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"].apply(void 0, _toConsumableArray(middleware)));
 };
