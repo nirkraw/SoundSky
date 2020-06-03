@@ -3,14 +3,16 @@ import {
     PLAY_TRACK, 
     PAUSE_TRACK,
     UPDATE_PLAYER_ARTIST,
-    CHANGE_TRACK } 
+    CHANGE_TRACK,
+    CHANGE_TRACK_TIME } 
 from '../actions/player_actions';
 
 let defaultState = {
      trackId: 8,
      artistId: 14,
      playing: false,
-     changeTrack: false 
+     changeTrack: false,
+     currentTime: 0.0 
     }
 
 const playerReducer = (state = defaultState, action) => {
@@ -31,6 +33,9 @@ const playerReducer = (state = defaultState, action) => {
             return newState; 
         case CHANGE_TRACK:
             newState.changeTrack = action.changeTrack
+            return newState;
+        case CHANGE_TRACK_TIME:
+            newState.currentTime = action.time;
             return newState;
         default:
             return state

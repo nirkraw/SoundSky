@@ -22,7 +22,6 @@ class AudioPlayer extends React.Component {
       
       if (audio && changePlayerTrack) {
         audio.src = track.trackUrl;
-        debugger
         audioContainer.classList.remove("none");
         changeCurrentTrack(false);
       
@@ -38,11 +37,13 @@ class AudioPlayer extends React.Component {
 
     setInterval(() => {
       if (audio && audio.paused) {
-        this.props.pauseTrack();
+        // this.props.pauseTrack();
       }
       if (audio && !audio.paused) {
         this.props.playTrack();
+        this.props.changeTrackTime(audio.currentTime);
       }
+
     }, 500);
   }
 

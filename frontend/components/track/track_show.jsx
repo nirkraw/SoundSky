@@ -255,7 +255,7 @@ class TrackShow extends React.Component {
         }
       }
     }
-
+    
     return (
       <div className="outside-container">
         <div

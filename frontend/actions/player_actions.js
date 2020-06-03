@@ -3,6 +3,7 @@ export const PLAY_TRACK = "PLAY_TRACK";
 export const PAUSE_TRACK = "PAUSE_TRACK";
 export const UPDATE_PLAYER_ARTIST = "UPDATE_PLAYER_ARTIST";
 export const CHANGE_TRACK = 'CHANGE_TRACK'
+export const CHANGE_TRACK_TIME = "CHANGE_TRACK_TIME";
 
 export const updatePlayerTrack = (track) => {
     return({
@@ -29,4 +30,9 @@ export const pauseTrack = () => ({
 export const changeTrack = (boolean) => ({
   type: CHANGE_TRACK,
   changeTrack: boolean
+});
+
+export const changeTrackTime = (time) => ({
+  type: CHANGE_TRACK_TIME,
+  time: time
 });

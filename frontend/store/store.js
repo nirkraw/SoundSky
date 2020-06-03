@@ -8,7 +8,11 @@ import rootReducer from "../reducers/root_reducer";
 
 const configureStore = (preloadedState = {}) => {
   let middleware = [thunk, logger];
-  if (process.env.NODE_ENV === "production") {
+  if (
+    process.env.NODE_ENV === "production" 
+    // || process.env.NODE_ENV === "development"
+  ) {
+
     middleware = [thunk];
   }
   return createStore(

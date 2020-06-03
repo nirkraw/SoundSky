@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
       artist: state.entities.users[state.ui.player.artistId],
       currentTrack: state.entities.tracks[state.ui.player.trackId],
       changePlayerTrack: state.ui.player.changeTrack,
+      currentTrackTime: state.ui.player.currentTime
     };
 }
 
