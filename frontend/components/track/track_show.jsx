@@ -3,6 +3,7 @@ import formatUploadTime from "../../utils/time_format_util";
 import { NavLink } from "react-router-dom";
 import WaveFormContainer from "../waveform/waveform_container";
 
+
 class TrackShow extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,7 @@ class TrackShow extends React.Component {
       comment: "",
       randNum: Math.floor(Math.random() * 11),
       deleteContainer: false,
-      commentId: null
+      commentId: null 
     };
 
     this.playTrack = this.playTrack.bind(this);
@@ -24,6 +25,7 @@ class TrackShow extends React.Component {
     this.findRelatedTrack = this.findRelatedTrack.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
     this.closeDeleteConfirmation = this.closeDeleteConfirmation.bind(this);
+    this.deleteOrEdit = this.deleteOrEdit.bind(this);
   }
 
   componentDidMount() {
@@ -122,6 +124,11 @@ class TrackShow extends React.Component {
       deleteContainer.classList.add("delete-none");
       this.setState({ deleteContainer: false });
     }
+  }
+
+  deleteOrEdit(e, type) {
+    e.preventDefault();
+    this.props.openModal(type, this.props.track.id, this.props.currentUser.id);
   }
 
   render() {
@@ -255,7 +262,7 @@ class TrackShow extends React.Component {
         }
       }
     }
-    
+
     return (
       <div className="outside-container">
         <div
@@ -327,7 +334,7 @@ class TrackShow extends React.Component {
                 {this.props.currentUser ? (
                   <div
                     className="track-show-edit-button"
-                    onClick={() => this.props.openModal("edit", track.id)}
+                    onClick={(e)=> this.deleteOrEdit(e, "edit")}
                   >
                     <img
                       className="track-show-pencil-icon"
@@ -340,9 +347,7 @@ class TrackShow extends React.Component {
                 {this.props.currentUser ? (
                   <div
                     className="track-show-delete-button"
-                    onClick={() =>
-                      this.props.openModal("delete", track.id, artist.id)
-                    }
+                      onClick={(e)=> this.deleteOrEdit(e, "delete")}
                   >
                     <img
                       className="track-show-trash-icon"

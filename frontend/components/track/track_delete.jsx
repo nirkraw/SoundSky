@@ -1,11 +1,16 @@
 import React from 'react';
 import formatUploadTime from "../../utils/time_format_util";
 import WaveFormContainer from "../waveform/waveform_container";
+import { withRouter, Redirect } from "react-router-dom";
 
 class TrackDelete extends React.Component {
     constructor(props) {
         super(props)
+        this.state = { submited: false };
+
         this.handleDelete= this.handleDelete.bind(this);
+        this.playTrack = this.playTrack.bind(this);
+        this.pauseTrack = this.pauseTrack.bind(this);
     }
 
     componentDidMount() {
@@ -27,7 +32,9 @@ class TrackDelete extends React.Component {
 
     handleDelete(e) {
         e.preventDefault();
-        this.props.deleteTrack(this.props.track.id).then(this.props.closeModal())
+        this.props.deleteTrack(this.props.track.id);
+        this.props.history.push(`/users/${this.props.currentUser.id}/`);
+        location.reload();
     }
 
     render() { 
@@ -101,4 +108,4 @@ class TrackDelete extends React.Component {
     }
 }
 
-export default TrackDelete; 
+export default withRouter(TrackDelete); 

@@ -40,8 +40,7 @@ const mapDispatchToProps = (dispatch) => ({
   likeTrack: (like) => dispatch(likeTrack(like)),
   unlikeTrack: (likeId) => dispatch(unlikeTrack(likeId)),
   createNewComment: (comment) => dispatch(createNewComment(comment)),
-  destroyNewComment: (commentId) => dispatch(destroyNewComment(commentId)),
-  openModal: (modal) => dispatch(openModal(modal)),
+  destroyNewComment: (commentId) => dispatch(destroyNewComment(commentId))
 });
 
 const TrackShowContainer = connect(mapStateToProps, mapDispatchToProps)(TrackShow)

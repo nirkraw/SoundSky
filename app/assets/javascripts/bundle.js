@@ -1715,6 +1715,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils_time_format_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/time_format_util */ "./frontend/utils/time_format_util.js");
 /* harmony import */ var _waveform_waveform_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../waveform/waveform_container */ "./frontend/components/waveform/waveform_container.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1741,6 +1742,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var TrackDelete = /*#__PURE__*/function (_React$Component) {
   _inherits(TrackDelete, _React$Component);
 
@@ -1752,7 +1754,12 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, TrackDelete);
 
     _this = _super.call(this, props);
+    _this.state = {
+      submited: false
+    };
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    _this.playTrack = _this.playTrack.bind(_assertThisInitialized(_this));
+    _this.pauseTrack = _this.pauseTrack.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1780,7 +1787,9 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
     key: "handleDelete",
     value: function handleDelete(e) {
       e.preventDefault();
-      this.props.deleteTrack(this.props.track.id).then(this.props.closeModal());
+      this.props.deleteTrack(this.props.track.id);
+      this.props.history.push("/users/".concat(this.props.currentUser.id, "/"));
+      location.reload();
     }
   }, {
     key: "render",
@@ -1854,7 +1863,7 @@ var TrackDelete = /*#__PURE__*/function (_React$Component) {
   return TrackDelete;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (TrackDelete);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(TrackDelete));
 
 /***/ }),
 
@@ -2296,6 +2305,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
     _this.findRelatedTrack = _this.findRelatedTrack.bind(_assertThisInitialized(_this));
     _this.confirmDelete = _this.confirmDelete.bind(_assertThisInitialized(_this));
     _this.closeDeleteConfirmation = _this.closeDeleteConfirmation.bind(_assertThisInitialized(_this));
+    _this.deleteOrEdit = _this.deleteOrEdit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2415,6 +2425,12 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
           deleteContainer: false
         });
       }
+    }
+  }, {
+    key: "deleteOrEdit",
+    value: function deleteOrEdit(e, type) {
+      e.preventDefault();
+      this.props.openModal(type, this.props.track.id, this.props.currentUser.id);
     }
   }, {
     key: "render",
@@ -2599,8 +2615,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-buttons-container"
       }, likeButton, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-edit-button",
-        onClick: function onClick() {
-          return _this2.props.openModal("edit", track.id);
+        onClick: function onClick(e) {
+          return _this2.deleteOrEdit(e, "edit");
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "track-show-pencil-icon",
@@ -2608,8 +2624,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         alt: "pencil"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")) : null, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-delete-button",
-        onClick: function onClick() {
-          return _this2.props.openModal("delete", track.id, artist.id);
+        onClick: function onClick(e) {
+          return _this2.deleteOrEdit(e, "delete");
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "track-show-trash-icon",
@@ -2699,8 +2715,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
 /* harmony import */ var _actions_comment_action__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/comment_action */ "./frontend/actions/comment_action.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -2723,7 +2737,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return _defineProperty({
+  return {
     updatePlayerTrack: function updatePlayerTrack(track) {
       return dispatch(Object(_actions_player_actions__WEBPACK_IMPORTED_MODULE_4__["updatePlayerTrack"])(track));
     },
@@ -2760,9 +2774,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     destroyNewComment: function destroyNewComment(commentId) {
       return dispatch(Object(_actions_comment_action__WEBPACK_IMPORTED_MODULE_7__["destroyNewComment"])(commentId));
     }
-  }, "openModal", function openModal(modal) {
-    return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["openModal"])(modal));
-  });
+  };
 };
 
 var TrackShowContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_track_show__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -2920,7 +2932,7 @@ var TrackUpload = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (this.state.submited) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-        to: "users/".concat(this.props.currentUser.id)
+        to: "/users/".concat(this.props.currentUser.id)
       });
       var imagePreview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "image-preview",
@@ -3456,9 +3468,13 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(TrackIndexItem);
 
   function TrackIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, TrackIndexItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.deleteOrEdit = _this.deleteOrEdit.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(TrackIndexItem, [{
@@ -3485,9 +3501,15 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
       this.props.changeTrack(false);
     }
   }, {
+    key: "deleteOrEdit",
+    value: function deleteOrEdit(e, type) {
+      e.preventDefault();
+      this.props.openModal(type, this.props.track.id, this.props.currentUser.id);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var _this$props = this.props,
           track = _this$props.track,
@@ -3509,14 +3531,14 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "play-pause-buttons-container"
       }, playing && track.id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.pauseTrack();
+          return _this2.pauseTrack();
         },
         className: "pause-button",
         src: "/assets/pause-button-2.png",
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.playTrack();
+          return _this2.playTrack();
         },
         className: "play-button",
         src: "/assets/play-button-2.png",
@@ -3545,8 +3567,8 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "edit-delete-buttons-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-button",
-        onClick: function onClick() {
-          return _this.props.openModal("edit", track.id);
+        onClick: function onClick(e) {
+          return _this2.deleteOrEdit(e, "edit");
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "pencil-icon",
@@ -3554,8 +3576,8 @@ var TrackIndexItem = /*#__PURE__*/function (_React$Component) {
         alt: "pencil"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "delete-button",
-        onClick: function onClick() {
-          return _this.props.openModal("delete", track.id, artist.id);
+        onClick: function onClick(e) {
+          return _this2.deleteOrEdit(e, "delete");
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "trash-icon",
