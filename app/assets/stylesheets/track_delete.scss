@@ -70,3 +70,18 @@
  .delete-forever-button:hover {
      border-color: rgb(172, 168, 168);
  }
+
+ .waveform-track-delete-container {
+    width: 305px;
+    height: 125px;
+    position: absolute;
+    left: 205px;
+    top: 50px;
+}
+
+.play-pause-buttons-container-delete {
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+    margin-top: -5px;
+}
