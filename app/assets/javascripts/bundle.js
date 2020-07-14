@@ -1127,10 +1127,10 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       }, allUsers[allTracks[10].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[15].photoUrl
+        src: allTracks[4].photoUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash-play-pause-buttons-container"
-      }, playing && allTracks[15].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, playing && allTracks[4].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
           return _this.pauseTrack();
         },
@@ -1139,18 +1139,44 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.playTrack(allTracks[15], allUsers[allTracks[15].artist_id]);
+          return _this.playTrack(allTracks[4], allUsers[allTracks[4].artist_id]);
         },
         className: "splash-play-button",
         src: "/assets/play-button-2.png",
         alt: "play-button"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-track-title",
-        to: "users/".concat(allTracks[15].artist_id, "/").concat(allTracks[15].id)
-      }, allTracks[15].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "users/".concat(allTracks[4].artist_id, "/").concat(allTracks[4].id)
+      }, allTracks[4].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-artist-link",
-        to: "users/".concat(allTracks[15].artist_id)
-      }, allUsers[allTracks[15].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        to: "users/".concat(allTracks[4].artist_id)
+      }, allUsers[allTracks[4].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: allTracks[6].photoUrl
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash-play-pause-buttons-container"
+      }, playing && allTracks[6].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.pauseTrack();
+        },
+        className: "splash-pause-button",
+        src: "/assets/pause-button-2.png",
+        alt: "pause-button"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        onClick: function onClick() {
+          return _this.playTrack(allTracks[6], allUsers[allTracks[6].artist_id]);
+        },
+        className: "splash-play-button",
+        src: "/assets/play-button-2.png",
+        alt: "play-button"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-track-title",
+        to: "users/".concat(allTracks[6].artist_id, "/").concat(allTracks[6].id)
+      }, allTracks[6].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        className: "splash-artist-link",
+        to: "users/".concat(allTracks[6].artist_id)
+      }, allUsers[allTracks[6].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[2].photoUrl
@@ -1179,10 +1205,10 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       }, allUsers[allTracks[2].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[3].photoUrl
+        src: allTracks[7].photoUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash-play-pause-buttons-container"
-      }, playing && allTracks[3].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, playing && allTracks[7].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
           return _this.pauseTrack();
         },
@@ -1191,44 +1217,18 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.playTrack(allTracks[3], allUsers[allTracks[3].artist_id]);
+          return _this.playTrack(allTracks[7], allUsers[allTracks[7].artist_id]);
         },
         className: "splash-play-button",
         src: "/assets/play-button-2.png",
         alt: "play-button"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-track-title",
-        to: "users/".concat(allTracks[3].artist_id, "/").concat(allTracks[3].id)
-      }, allTracks[3].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "users/".concat(allTracks[7].artist_id, "/").concat(allTracks[7].id)
+      }, allTracks[7].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-artist-link",
-        to: "users/".concat(allTracks[3].artist_id)
-      }, allUsers[allTracks[3].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "image-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[4].photoUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "splash-play-pause-buttons-container"
-      }, playing && allTracks[4].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        onClick: function onClick() {
-          return _this.pauseTrack();
-        },
-        className: "splash-pause-button",
-        src: "/assets/pause-button-2.png",
-        alt: "pause-button"
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        onClick: function onClick() {
-          return _this.playTrack(allTracks[4], allUsers[allTracks[4].artist_id]);
-        },
-        className: "splash-play-button",
-        src: "/assets/play-button-2.png",
-        alt: "play-button"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        className: "splash-track-title",
-        to: "users/".concat(allTracks[4].artist_id, "/").concat(allTracks[4].id)
-      }, allTracks[4].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        className: "splash-artist-link",
-        to: "users/".concat(allTracks[4].artist_id)
-      }, allUsers[allTracks[4].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        to: "users/".concat(allTracks[7].artist_id)
+      }, allUsers[allTracks[7].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[8].photoUrl
@@ -1259,10 +1259,10 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[6].photoUrl
+        src: allTracks[11].photoUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash-play-pause-buttons-container"
-      }, playing && allTracks[6].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, playing && allTracks[11].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
           return _this.pauseTrack();
         },
@@ -1271,24 +1271,24 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.playTrack(allTracks[6], allUsers[allTracks[6].artist_id]);
+          return _this.playTrack(allTracks[11], allUsers[allTracks[11].artist_id]);
         },
         className: "splash-play-button",
         src: "/assets/play-button-2.png",
         alt: "play-button"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-track-title",
-        to: "users/".concat(allTracks[6].artist_id, "/").concat(allTracks[6].id)
-      }, allTracks[6].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "users/".concat(allTracks[11].artist_id, "/").concat(allTracks[11].id)
+      }, allTracks[11].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-artist-link",
-        to: "users/".concat(allTracks[6].artist_id)
-      }, allUsers[allTracks[6].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        to: "users/".concat(allTracks[11].artist_id)
+      }, allUsers[allTracks[11].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: allTracks[14].photoUrl
+        src: allTracks[13].photoUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash-play-pause-buttons-container"
-      }, playing && allTracks[14].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, playing && allTracks[13].id === currentTrack.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
           return _this.pauseTrack();
         },
@@ -1297,18 +1297,18 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         alt: "pause-button"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         onClick: function onClick() {
-          return _this.playTrack(allTracks[14], allUsers[allTracks[14].artist_id]);
+          return _this.playTrack(allTracks[13], allUsers[allTracks[13].artist_id]);
         },
         className: "splash-play-button",
         src: "/assets/play-button-2.png",
         alt: "play-button"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-track-title",
-        to: "users/".concat(allTracks[14].artist_id, "/").concat(allTracks[14].id)
-      }, allTracks[14].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "users/".concat(allTracks[13].artist_id, "/").concat(allTracks[13].id)
+      }, allTracks[13].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         className: "splash-artist-link",
-        to: "users/".concat(allTracks[14].artist_id)
-      }, allUsers[allTracks[14].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        to: "users/".concat(allTracks[13].artist_id)
+      }, allUsers[allTracks[13].artist_id].username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: allTracks[5].photoUrl
@@ -2613,7 +2613,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         placeholder: "Write a comment"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-buttons-container"
-      }, likeButton, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, likeButton, this.props.currentUser.id === artist.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-edit-button",
         onClick: function onClick(e) {
           return _this2.deleteOrEdit(e, "edit");
@@ -2622,7 +2622,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-pencil-icon",
         src: "/assets/pencil.png",
         alt: "pencil"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")) : null, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")) : null, this.props.currentUser.id === artist.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-delete-button",
         onClick: function onClick(e) {
           return _this2.deleteOrEdit(e, "delete");

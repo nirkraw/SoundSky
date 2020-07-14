@@ -110,7 +110,7 @@ sunday_morning = Track.create!(id: 16, title: "Sunday morning", genre: "Pop", ar
     # sunday_morning.photo.attach(io: open(""), filename: "sunday_morning_photo")
 
 rolling_in_the_deep = Track.create!(id: 17, title: "Rolling In The Deep", genre: "Pop", artist_id: 17)
-    rolling_in_the_deep.audio.attach(io: open("https://soundsky-audio.s3.amazonaws.com/01+Harder+To+Breathe.m4a"), filename: "rolling_in_the_deep_audio")
+    rolling_in_the_deep.audio.attach(io: open("https://soundsky-audio.s3.amazonaws.com/01+Rolling+In+the+Deep.m4a"), filename: "rolling_in_the_deep_audio")
     # rolling_in_the_deep.photo.attach(io: open(""), filename: "rolling_in_the_deep_photo")
 
 touch_too_much = Track.create!(id: 18, title: "Touch Too Much", genre: "Rock", artist_id: 16)

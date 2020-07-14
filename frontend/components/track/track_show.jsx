@@ -331,7 +331,7 @@ class TrackShow extends React.Component {
               </div>
               <div className="track-show-buttons-container">
                 {likeButton}
-                {this.props.currentUser ? (
+                {this.props.currentUser.id === artist.id ? (
                   <div
                     className="track-show-edit-button"
                     onClick={(e)=> this.deleteOrEdit(e, "edit")}
@@ -344,7 +344,7 @@ class TrackShow extends React.Component {
                     <p>Edit</p>
                   </div>
                 ) : null}
-                {this.props.currentUser ? (
+                {this.props.currentUser.id === artist.id ? (
                   <div
                     className="track-show-delete-button"
                       onClick={(e)=> this.deleteOrEdit(e, "delete")}

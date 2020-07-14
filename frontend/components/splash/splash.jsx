@@ -76,9 +76,9 @@ class Splash extends React.Component {
                     </NavLink>
                   </div>
                   <div className="image-container">
-                    <img src={allTracks[15].photoUrl} />
+                    <img src={allTracks[4].photoUrl} />
                     <div className="splash-play-pause-buttons-container">
-                      {playing && allTracks[15].id === currentTrack.id ? (
+                      {playing && allTracks[4].id === currentTrack.id ? (
                         <img
                           onClick={() => this.pauseTrack()}
                           className="splash-pause-button"
@@ -89,8 +89,8 @@ class Splash extends React.Component {
                         <img
                           onClick={() =>
                             this.playTrack(
-                              allTracks[15],
-                              allUsers[allTracks[15].artist_id]
+                              allTracks[4],
+                              allUsers[allTracks[4].artist_id]
                             )
                           }
                           className="splash-play-button"
@@ -101,15 +101,52 @@ class Splash extends React.Component {
                     </div>
                     <NavLink
                       className="splash-track-title"
-                      to={`users/${allTracks[15].artist_id}/${allTracks[15].id}`}
+                      to={`users/${allTracks[4].artist_id}/${allTracks[4].id}`}
                     >
-                      {allTracks[15].title}
+                      {allTracks[4].title}
                     </NavLink>
                     <NavLink
                       className="splash-artist-link"
-                      to={`users/${allTracks[15].artist_id}`}
+                      to={`users/${allTracks[4].artist_id}`}
                     >
-                      {allUsers[allTracks[15].artist_id].username}
+                      {allUsers[allTracks[4].artist_id].username}
+                    </NavLink>
+                  </div>
+                  <div className="image-container">
+                    <img src={allTracks[6].photoUrl} />
+                    <div className="splash-play-pause-buttons-container">
+                      {playing && allTracks[6].id === currentTrack.id ? (
+                        <img
+                          onClick={() => this.pauseTrack()}
+                          className="splash-pause-button"
+                          src="/assets/pause-button-2.png"
+                          alt="pause-button"
+                        />
+                      ) : (
+                        <img
+                          onClick={() =>
+                            this.playTrack(
+                              allTracks[6],
+                              allUsers[allTracks[6].artist_id]
+                            )
+                          }
+                          className="splash-play-button"
+                          src="/assets/play-button-2.png"
+                          alt="play-button"
+                        />
+                      )}
+                    </div>
+                    <NavLink
+                      className="splash-track-title"
+                      to={`users/${allTracks[6].artist_id}/${allTracks[6].id}`}
+                    >
+                      {allTracks[6].title}
+                    </NavLink>
+                    <NavLink
+                      className="splash-artist-link"
+                      to={`users/${allTracks[6].artist_id}`}
+                    >
+                      {allUsers[allTracks[6].artist_id].username}
                     </NavLink>
                   </div>
                   <div className="image-container">
@@ -150,9 +187,9 @@ class Splash extends React.Component {
                     </NavLink>
                   </div>
                   <div className="image-container">
-                    <img src={allTracks[3].photoUrl} />
+                    <img src={allTracks[7].photoUrl} />
                     <div className="splash-play-pause-buttons-container">
-                      {playing && allTracks[3].id === currentTrack.id ? (
+                      {playing && allTracks[7].id === currentTrack.id ? (
                         <img
                           onClick={() => this.pauseTrack()}
                           className="splash-pause-button"
@@ -163,8 +200,8 @@ class Splash extends React.Component {
                         <img
                           onClick={() =>
                             this.playTrack(
-                              allTracks[3],
-                              allUsers[allTracks[3].artist_id]
+                              allTracks[7],
+                              allUsers[allTracks[7].artist_id]
                             )
                           }
                           className="splash-play-button"
@@ -175,52 +212,15 @@ class Splash extends React.Component {
                     </div>
                     <NavLink
                       className="splash-track-title"
-                      to={`users/${allTracks[3].artist_id}/${allTracks[3].id}`}
+                      to={`users/${allTracks[7].artist_id}/${allTracks[7].id}`}
                     >
-                      {allTracks[3].title}
+                      {allTracks[7].title}
                     </NavLink>
                     <NavLink
                       className="splash-artist-link"
-                      to={`users/${allTracks[3].artist_id}`}
+                      to={`users/${allTracks[7].artist_id}`}
                     >
-                      {allUsers[allTracks[3].artist_id].username}
-                    </NavLink>
-                  </div>
-                  <div className="image-container">
-                    <img src={allTracks[4].photoUrl} />
-                    <div className="splash-play-pause-buttons-container">
-                      {playing && allTracks[4].id === currentTrack.id ? (
-                        <img
-                          onClick={() => this.pauseTrack()}
-                          className="splash-pause-button"
-                          src="/assets/pause-button-2.png"
-                          alt="pause-button"
-                        />
-                      ) : (
-                        <img
-                          onClick={() =>
-                            this.playTrack(
-                              allTracks[4],
-                              allUsers[allTracks[4].artist_id]
-                            )
-                          }
-                          className="splash-play-button"
-                          src="/assets/play-button-2.png"
-                          alt="play-button"
-                        />
-                      )}
-                    </div>
-                    <NavLink
-                      className="splash-track-title"
-                      to={`users/${allTracks[4].artist_id}/${allTracks[4].id}`}
-                    >
-                      {allTracks[4].title}
-                    </NavLink>
-                    <NavLink
-                      className="splash-artist-link"
-                      to={`users/${allTracks[4].artist_id}`}
-                    >
-                      {allUsers[allTracks[4].artist_id].username}
+                      {allUsers[allTracks[7].artist_id].username}
                     </NavLink>
                   </div>
                   <div className="image-container">
@@ -263,9 +263,9 @@ class Splash extends React.Component {
                 </div>
                 <div className="track-row-container2">
                   <div className="image-container">
-                    <img src={allTracks[6].photoUrl} />
+                    <img src={allTracks[11].photoUrl} />
                     <div className="splash-play-pause-buttons-container">
-                      {playing && allTracks[6].id === currentTrack.id ? (
+                      {playing && allTracks[11].id === currentTrack.id ? (
                         <img
                           onClick={() => this.pauseTrack()}
                           className="splash-pause-button"
@@ -276,8 +276,8 @@ class Splash extends React.Component {
                         <img
                           onClick={() =>
                             this.playTrack(
-                              allTracks[6],
-                              allUsers[allTracks[6].artist_id]
+                              allTracks[11],
+                              allUsers[allTracks[11].artist_id]
                             )
                           }
                           className="splash-play-button"
@@ -288,21 +288,21 @@ class Splash extends React.Component {
                     </div>
                     <NavLink
                       className="splash-track-title"
-                      to={`users/${allTracks[6].artist_id}/${allTracks[6].id}`}
+                      to={`users/${allTracks[11].artist_id}/${allTracks[11].id}`}
                     >
-                      {allTracks[6].title}
+                      {allTracks[11].title}
                     </NavLink>
                     <NavLink
                       className="splash-artist-link"
-                      to={`users/${allTracks[6].artist_id}`}
+                      to={`users/${allTracks[11].artist_id}`}
                     >
-                      {allUsers[allTracks[6].artist_id].username}
+                      {allUsers[allTracks[11].artist_id].username}
                     </NavLink>
                   </div>
                   <div className="image-container">
-                    <img src={allTracks[14].photoUrl} />
+                    <img src={allTracks[13].photoUrl} />
                     <div className="splash-play-pause-buttons-container">
-                      {playing && allTracks[14].id === currentTrack.id ? (
+                      {playing && allTracks[13].id === currentTrack.id ? (
                         <img
                           onClick={() => this.pauseTrack()}
                           className="splash-pause-button"
@@ -313,8 +313,8 @@ class Splash extends React.Component {
                         <img
                           onClick={() =>
                             this.playTrack(
-                              allTracks[14],
-                              allUsers[allTracks[14].artist_id]
+                              allTracks[13],
+                              allUsers[allTracks[13].artist_id]
                             )
                           }
                           className="splash-play-button"
@@ -325,15 +325,15 @@ class Splash extends React.Component {
                     </div>
                     <NavLink
                       className="splash-track-title"
-                      to={`users/${allTracks[14].artist_id}/${allTracks[14].id}`}
+                      to={`users/${allTracks[13].artist_id}/${allTracks[13].id}`}
                     >
-                      {allTracks[14].title}
+                      {allTracks[13].title}
                     </NavLink>
                     <NavLink
                       className="splash-artist-link"
-                      to={`users/${allTracks[14].artist_id}`}
+                      to={`users/${allTracks[13].artist_id}`}
                     >
-                      {allUsers[allTracks[14].artist_id].username}
+                      {allUsers[allTracks[13].artist_id].username}
                     </NavLink>
                   </div>
                   <div className="image-container">
