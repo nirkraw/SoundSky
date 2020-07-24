@@ -2613,7 +2613,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         placeholder: "Write a comment"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-buttons-container"
-      }, likeButton, this.props.currentUser.id === artist.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, likeButton, this.props.currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-edit-button",
         onClick: function onClick(e) {
           return _this2.deleteOrEdit(e, "edit");
@@ -2622,7 +2622,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         className: "track-show-pencil-icon",
         src: "/assets/pencil.png",
         alt: "pencil"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")) : null, this.props.currentUser.id === artist.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit")) : null, this.props.currentUser === artist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "track-show-delete-button",
         onClick: function onClick(e) {
           return _this2.deleteOrEdit(e, "delete");
